@@ -17,6 +17,11 @@ export type IForm = {
   email: string;
   avatar: FileList;
 };
+export type IUser = {
+  name: string;
+  login: string;
+  password: string;
+};
 
 const SignUpPage = () => {
   const dispatch = useDispatch<any>();
