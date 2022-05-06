@@ -8,13 +8,21 @@ import { BoardPage } from './pages/BoardPage/BoardPage';
 import { Page404 } from './pages/Page404/Page404';
 
 import { Layout } from './components/Layout/Layout';
+import { RequireAuth } from './hoc/RequireAuth';
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<MainPage />} />
+          <Route
+            index
+            element={
+              <RequireAuth>
+                <MainPage />
+              </RequireAuth>
+            }
+          />
           <Route path=":boardId" element={<BoardPage />} />
           <Route path="welcome" element={<WelcomePage />} />
           <Route path="signin" element={<SignInPage />} />
