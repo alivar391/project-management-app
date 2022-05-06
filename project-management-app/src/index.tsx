@@ -1,10 +1,11 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
+
 import setupStore from './store';
 import reportWebVitals from './reportWebVitals';
 import App from './App';
-import SignUpPage from './pages/RegisterPage/SignUpPage';
+import SignUpPage from './pages/SignUpPage/SignUpPage';
 import './index.css';
 
 const container = document.getElementById('root')!;
