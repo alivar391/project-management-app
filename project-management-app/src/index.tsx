@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 
@@ -14,8 +15,14 @@ const store = setupStore();
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      {/* <App /> */}
-      <SignUpPage />
+
+//      {/* <App /> */}
+//      <SignUpPage />
+
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+
     </Provider>
   </React.StrictMode>
 );
