@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../store/hooks';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ToastContainer } from 'react-toastify';
 import { registerUser } from '../../thunks/user';
@@ -24,7 +23,7 @@ export type IUser = {
 };
 
 const SignUpPage = () => {
-  const dispatch = useDispatch<any>();
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
