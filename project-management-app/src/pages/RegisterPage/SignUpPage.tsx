@@ -7,7 +7,7 @@ import { registerUser } from '../../thunks/user';
 import Input from '../../components/Input/Input';
 import InputFile from '../../components/InputFile/InputFile';
 import 'react-toastify/dist/ReactToastify.css';
-import './registerPage.css';
+import './signUpPage.css';
 
 export type IForm = {
   name: string;
@@ -18,7 +18,7 @@ export type IForm = {
   avatar: FileList;
 };
 
-const RegisterPage = () => {
+const SignUpPage = () => {
   const dispatch = useDispatch<any>();
   const {
     register,
@@ -129,4 +129,4 @@ const RegisterPage = () => {
   );
 };
 
-export default RegisterPage;
+export default SignUpPage;

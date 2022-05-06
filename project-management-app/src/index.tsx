@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import setupStore from './store';
 import reportWebVitals from './reportWebVitals';
 import App from './App';
-import RegisterPage from './pages/RegisterPage/RegisterPage';
+import SignUpPage from './pages/RegisterPage/SignUpPage';
 import './index.css';
 
 const container = document.getElementById('root')!;
@@ -14,7 +14,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       {/* <App /> */}
-      <RegisterPage />
+      <SignUpPage />
     </Provider>
   </React.StrictMode>
 );
