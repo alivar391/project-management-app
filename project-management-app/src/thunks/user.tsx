@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { BASE_URL } from '../constants/constants';
-import { IUser } from '../pages/AutorisationPage/AutorisationPage';
+import { IUser } from '../pages/SignInPage/SignInPage';
 
 export const registerUser = createAsyncThunk('user/register', async (user: IUser) => {
   const response = await fetch(`${BASE_URL}/signup`, {
