@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useRef } from 'react';
-import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { ToastContainer } from 'react-toastify';
+import { registerUser } from '../../thunks/user';
 import Input from '../../components/Input/Input';
 import InputFile from '../../components/InputFile/InputFile';
 import 'react-toastify/dist/ReactToastify.css';
@@ -16,19 +19,27 @@ export type IForm = {
 };
 
 const RegisterPage = () => {
+  const dispatch = useDispatch<any>();
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
-  } = useForm({
+  } = useForm<IForm>({
     mode: 'onChange',
   });
 
-  const password = useRef();
+  const password = useRef('');
   password.current = watch('password');
 
-  const onSubmit = (data) => {};
+  const onSubmit: SubmitHandler<IForm> = (data) => {
+    const newUser = {
+      name: data.name,
+      login: data.login,
+      password: data.password,
+    };
+    dispatch(registerUser(newUser));
+  };
 
   return (
     <div className="container-form">
@@ -62,10 +73,10 @@ const RegisterPage = () => {
         <Input
           register={register('password', {
             required: 'Requered',
-            /*   pattern: {
-              value: /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}/g,
-              message: 'Must be contain numbers, special, latin, lowercase and uppercase letters',
-            }, */
+            pattern: {
+              value: /^(?=.{8,}$)(?=(?:.*?[A-Z]){2})(?=.*?[a-z])(?=(?:.*?[0-9]){2}).*$/,
+              message: 'Must be contain 2numbers, 2lowercase, 2uppercase letters, min 8',
+            },
           })}
           nameInput={'password'}
           textLabel={'Password'}
