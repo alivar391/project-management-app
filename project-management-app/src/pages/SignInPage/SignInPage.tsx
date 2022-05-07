@@ -3,11 +3,11 @@ import { ToastContainer } from 'react-toastify';
 import { useAppDispatch } from '../../store/hooks';
 import { authUser } from '../../thunks/user';
 import { setUserInfo } from '../../reducers/userReducer';
+import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../components/Input/Input';
 import './../SignUpPage/signUpPage.css';
 import './signinPage.css';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link } from 'react-router-dom';
 
 export type IUser = {
   login: string;
@@ -16,6 +16,7 @@ export type IUser = {
 
 export const SignInPage = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { register, handleSubmit } = useForm<IUser>({
     mode: 'onChange',
   });
@@ -27,6 +28,7 @@ export const SignInPage = () => {
     };
     dispatch(authUser(login));
     dispatch(setUserInfo(login));
+    navigate('/', { replace: true });
   };
 
   return (
