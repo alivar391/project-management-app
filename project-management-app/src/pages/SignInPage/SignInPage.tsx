@@ -7,6 +7,7 @@ import Input from '../../components/Input/Input';
 import './../SignUpPage/signUpPage.css';
 import './signinPage.css';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom';
 
 export type IUser = {
   login: string;
@@ -49,7 +50,10 @@ export const SignInPage = () => {
           autoComplete="off"
         />
         <div className="redirect">
-          New User? <a>Sign Up</a>
+          New User?{' '}
+          <Link to="/signup" className="redirect-link">
+            Sign Up
+          </Link>
         </div>
         <button
           data-testid="button-submit-form"

@@ -81,7 +81,10 @@
 }
 .redirect {
   font-family: monospace;
-  margin-bottom: 20px;
+  margin: 20px 0;
   font-size: 16px;
+}
+.redirect-link {
   cursor: pointer;
+  color: rgba(65, 132, 234, 0.75);
 }

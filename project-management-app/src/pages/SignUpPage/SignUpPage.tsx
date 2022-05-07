@@ -3,6 +3,7 @@ import { useAppDispatch } from '../../store/hooks';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ToastContainer } from 'react-toastify';
 import { registerUser } from '../../thunks/user';
+import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../components/Input/Input';
 import InputFile from '../../components/InputFile/InputFile';
 import 'react-toastify/dist/ReactToastify.css';
@@ -22,8 +23,9 @@ export type IUser = {
   password: string;
 };
 
-const SignUpPage = () => {
+export const SignUpPage = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -43,6 +45,7 @@ const SignUpPage = () => {
       password: data.password,
     };
     dispatch(registerUser(newUser));
+    navigate('/signin', { replace: true });
   };
 
   return (
@@ -118,7 +121,10 @@ const SignUpPage = () => {
         ></Input>
         <InputFile register={register('avatar')} />
         <div className="redirect">
-          Already have an account? <a>Log In</a>
+          Already have an account?{' '}
+          <Link to="/signin" className="redirect-link">
+            Log In
+          </Link>
         </div>
         <button
           data-testid="button-submit-form"
@@ -132,5 +138,3 @@ const SignUpPage = () => {
     </div>
   );
 };
-
-export default SignUpPage;
