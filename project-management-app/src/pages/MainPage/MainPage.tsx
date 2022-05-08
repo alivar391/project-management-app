@@ -10,7 +10,9 @@ export function MainPage() {
   const dispatch = useAppDispatch();
   const { boards } = useAppSelector((store) => store.boards);
   const [visible, setVisible] = useState(false);
-  const [value, setValue] = useState('');
+  const [visibleU, setVisibleU] = useState(false);
+  const [inputValue, setinputValue] = useState('');
+  const [changingBoardId, setChangingBoardId] = useState('');
   // useEffect(() => {
   //   registerUser();
   // }, []);
@@ -19,6 +21,10 @@ export function MainPage() {
     dispatch(getBoards());
   }, []);
 
+  useEffect(() => {
+    console.log(boards);
+  }, [boards]);
+
   function makeBoards(boards: Array<IBoard>) {
     return boards.map((board: IBoard) => {
       return (
@@ -26,7 +32,11 @@ export function MainPage() {
           <div className="board__view">{board.title}</div>
           <div className="board__buttns">
             <span className="icon-button">
-              <img src="./../assets/jpg/pencil.png" alt="icon-file" />
+              <img
+                src="./../assets/jpg/pencil.png"
+                alt="icon-file"
+                onClick={() => openUpdateBoard(board)}
+              />
             </span>
             <span className="icon-button">
               <img
@@ -43,11 +53,26 @@ export function MainPage() {
 
   function addNewBoard() {
     const board = {
-      title: value,
+      title: inputValue,
     };
     dispatch(createBoard(board));
     setVisible(false);
-    setValue('');
+    setinputValue('');
+  }
+
+  function openUpdateBoard(board: IBoard) {
+    setVisibleU(true);
+    setChangingBoardId(board.id);
+    setinputValue(board.title);
+  }
+  function changeBoard() {
+    const board = {
+      title: inputValue,
+      id: changingBoardId,
+    };
+    dispatch(updateBoard(board));
+    setinputValue('');
+    setVisibleU(false);
   }
 
   return (
@@ -55,8 +80,26 @@ export function MainPage() {
       <Header />
       {visible ? (
         <p>
-          <input type="text" value={value} onChange={(e) => setValue(e.target.value)}></input>
+          <input
+            type="text"
+            value={inputValue}
+            onChange={(e) => setinputValue(e.target.value)}
+          ></input>
           <button onClick={() => addNewBoard()}>Set</button>
+          <button onClick={() => setVisible(false)}>Back</button>
+        </p>
+      ) : (
+        ''
+      )}
+      {visibleU ? (
+        <p>
+          <input
+            type="text"
+            value={inputValue}
+            onChange={(e) => setinputValue(e.target.value)}
+          ></input>
+          <button onClick={() => changeBoard()}>Set</button>
+          <button onClick={() => setVisibleU(false)}>Back</button>
         </p>
       ) : (
         ''
@@ -68,7 +111,7 @@ export function MainPage() {
             Create board
           </button>
         </div>
-        <div className="main__cont">{makeBoards(boards) || 'none'}</div>
+        <div className="main__cont">{makeBoards(boards)}</div>
       </div>
     </div>
   );

@@ -5,7 +5,6 @@ import { IBoard, INewBoard } from '../reducers/boardsReducer';
 export const getBoards = createAsyncThunk('boards/getBoards', async () => {
   const response = await fetch(`${BASE_URL}/boards`, {
     headers: {
-      'Content-Type': 'application/json',
       Authorization:
         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3N2FkY2RlOS1iZTA3LTRkMGUtYTU0OS02MTkyNjgyMDFlMDEiLCJsb2dpbiI6ImRpYW5hIiwiaWF0IjoxNjUyMDA3MzY2fQ.zho8oKpVE2dsknpK900VhOJ49qam_WwU_kE1DjE5Tkg',
     },
@@ -40,7 +39,7 @@ export const createBoard = createAsyncThunk('boards/createBoard', async (board: 
 export const updateBoard = createAsyncThunk('boards/updateBoard', async (board: IBoard) => {
   const response = await fetch(`${BASE_URL}/boards/${board.id}`, {
     method: 'PUT',
-    body: JSON.stringify(board.title),
+    body: JSON.stringify({ title: board.title }),
     headers: {
       'Content-Type': 'application/json',
       Authorization:
@@ -55,17 +54,19 @@ export const updateBoard = createAsyncThunk('boards/updateBoard', async (board: 
 });
 
 export const deleteBoard = createAsyncThunk('boards/deleteBoard', async (id: string) => {
+  console.log(id);
   const response = await fetch(`${BASE_URL}/boards/${id}`, {
     method: 'DELETE',
     headers: {
-      'Content-Type': 'application/json',
       Authorization:
         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3N2FkY2RlOS1iZTA3LTRkMGUtYTU0OS02MTkyNjgyMDFlMDEiLCJsb2dpbiI6ImRpYW5hIiwiaWF0IjoxNjUyMDA3MzY2fQ.zho8oKpVE2dsknpK900VhOJ49qam_WwU_kE1DjE5Tkg',
     },
   });
+  console.log(response);
   if (response.status === 404) {
     throw new Error(`Board was not founded!`);
   }
   const data = await response.json();
+  console.log(data);
   return data;
 });

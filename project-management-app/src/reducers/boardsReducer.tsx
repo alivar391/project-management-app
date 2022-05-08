@@ -24,17 +24,17 @@ const boardReduser = createSlice({
   reducers: {},
   extraReducers: {
     [getBoards.fulfilled.type]: (state: StateType, action) => {
-      console.log(action.payload);
       state.boards = [...action.payload];
     },
     [createBoard.fulfilled.type]: (state: StateType, action) => {
       state.boards.push(action.payload);
     },
     [updateBoard.fulfilled.type]: (state: StateType, action) => {
-      const boardIndex = state.boards.findIndex((board) => board === action.payload);
+      const boardIndex = state.boards.findIndex((board) => board.id === action.payload.id);
       if (boardIndex !== -1) state.boards[boardIndex] = action.payload;
     },
     [deleteBoard.fulfilled.type]: (state: StateType, action) => {
+      console.log('delete', state.boards);
       state.boards = [...state.boards.filter((board) => board.id !== action.payload)];
     },
   },
