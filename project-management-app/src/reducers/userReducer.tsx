@@ -1,23 +1,29 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { registerUser } from '../thunks/user';
+import { authUser, registerUser } from '../thunks/user';
 
-export type StoreType = {
-  token: string;
-  userInfo: {
-    id: string;
-    login: string;
-    password: string;
+export type UserState = {
+  token: {
+    token: string | null;
   };
+  userInfo: {
+    id: string | null;
+    login: string | null;
+    password: string | null;
+  };
+  users: [];
 };
 
-const initialState = {
-  token: '',
-  userInfo: {
-    id: '',
-    login: '',
-    password: '',
+const initialState: UserState = {
+  token: {
+    token: null,
   },
+  userInfo: {
+    id: null,
+    login: null,
+    password: null,
+  },
+  users: [],
 };
 
 const messagesForUser = {
@@ -27,7 +33,7 @@ const messagesForUser = {
   updateUser: 'User update successfully', */
 };
 
-export const userReducer = createSlice({
+const userReducer = createSlice({
   name: 'user',
   initialState,
   reducers: {
@@ -43,6 +49,13 @@ export const userReducer = createSlice({
         state.userInfo = action.payload;
       })
       .addCase(registerUser.rejected, (state, action) => {
+        toast.error(action.error.message);
+      })
+      .addCase(authUser.fulfilled, (state, action) => {
+        toast.success(messagesForUser.auth);
+        state.token = action.payload;
+      })
+      .addCase(authUser.rejected, (state, action) => {
         toast.error(action.error.message);
       });
   },
