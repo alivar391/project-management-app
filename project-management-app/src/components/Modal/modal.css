@@ -13,7 +13,6 @@
 
 .modal__cont {
     width: 500px;
-    height: 200px;
     padding: 20px;
     background-color: rgb(184, 215, 238);
     border-radius: 5px;
@@ -22,4 +21,8 @@
 .modal-not_active {
     opacity: 0;
     display: none;
+}
+
+.modal__cont .btn__form-board {
+    margin: 15px auto;
 }

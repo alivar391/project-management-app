@@ -5,7 +5,7 @@ interface IModalState {
   name: string;
   text: string;
   title: string;
-  confirmFunction?: undefined | (() => JSX.Element);
+  confirmFunction: (x: string) => void;
   changingInfo: {
     id: string;
     title: string;
@@ -14,10 +14,10 @@ interface IModalState {
 
 const initialState: IModalState = {
   activeModal: false,
-  name: '',
+  name: 'ConfirmModal',
   text: '',
   title: '',
-  confirmFunction: undefined,
+  confirmFunction: () => {},
   changingInfo: {
     id: '',
     title: '',

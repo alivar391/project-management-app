@@ -4,8 +4,10 @@ import { Modal } from '../../components/Modal/Modal';
 import { BASE_URL } from '../../constants/constants';
 import { IBoard } from '../../reducers/boardsReducer';
 import {
+  changeModalFunction,
   changeModalName,
   changeModalText,
+  changeModalTitle,
   setModalInfo,
   toggleActive,
 } from '../../reducers/modalReducer';
@@ -46,11 +48,13 @@ export function MainPage() {
     dispatch(toggleActive());
     dispatch(changeModalName('CreateBoardModal'));
     dispatch(changeModalText('Create'));
+    dispatch(changeModalTitle('Create a board'));
   }
 
   function openUpdateBoard(board: IBoard) {
     dispatch(changeModalText('Update'));
     dispatch(changeModalName('UpdateBoardModal'));
+    dispatch(changeModalTitle('Change a board'));
     dispatch(setModalInfo(board));
     dispatch(toggleActive());
   }
@@ -58,6 +62,7 @@ export function MainPage() {
   function openConfirmModal(board: IBoard) {
     dispatch(changeModalText('Ok'));
     dispatch(changeModalName('ConfirmModal'));
+    dispatch(changeModalTitle('Do you realy want to delete board?'));
     dispatch(setModalInfo(board));
     dispatch(toggleActive());
   }
