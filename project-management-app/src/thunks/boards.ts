@@ -54,7 +54,6 @@ export const updateBoard = createAsyncThunk('boards/updateBoard', async (board: 
 });
 
 export const deleteBoard = createAsyncThunk('boards/deleteBoard', async (id: string) => {
-  console.log(id);
   const response = await fetch(`${BASE_URL}/boards/${id}`, {
     method: 'DELETE',
     headers: {
@@ -62,11 +61,17 @@ export const deleteBoard = createAsyncThunk('boards/deleteBoard', async (id: str
         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3N2FkY2RlOS1iZTA3LTRkMGUtYTU0OS02MTkyNjgyMDFlMDEiLCJsb2dpbiI6ImRpYW5hIiwiaWF0IjoxNjUyMDA3MzY2fQ.zho8oKpVE2dsknpK900VhOJ49qam_WwU_kE1DjE5Tkg',
     },
   });
-  console.log(response);
   if (response.status === 404) {
     throw new Error(`Board was not founded!`);
   }
-  const data = await response.json();
-  console.log(data);
-  return data;
+  if (response.status === 204) {
+    const response = await fetch(`${BASE_URL}/boards`, {
+      headers: {
+        Authorization:
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3N2FkY2RlOS1iZTA3LTRkMGUtYTU0OS02MTkyNjgyMDFlMDEiLCJsb2dpbiI6ImRpYW5hIiwiaWF0IjoxNjUyMDA3MzY2fQ.zho8oKpVE2dsknpK900VhOJ49qam_WwU_kE1DjE5Tkg',
+      },
+    });
+    const data = await response.json();
+    return data;
+  }
 });

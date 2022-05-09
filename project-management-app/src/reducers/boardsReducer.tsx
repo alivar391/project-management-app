@@ -34,8 +34,7 @@ const boardReduser = createSlice({
       if (boardIndex !== -1) state.boards[boardIndex] = action.payload;
     },
     [deleteBoard.fulfilled.type]: (state: StateType, action) => {
-      console.log('delete', state.boards);
-      state.boards = [...state.boards.filter((board) => board.id !== action.payload)];
+      state.boards = [...action.payload];
     },
   },
 });
