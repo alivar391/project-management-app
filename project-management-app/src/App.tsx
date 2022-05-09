@@ -4,6 +4,7 @@ import { MainPage } from './pages/MainPage/MainPage';
 import { WelcomePage } from './pages/WelcomePage/WelcomePage';
 import { SignInPage } from './pages/SignInPage/SignInPage';
 import { SignUpPage } from './pages/SignUpPage/SignUpPage';
+import { UpdateUserPage } from './pages/UpdateUserPage/UpdateUserPage';
 import { BoardPage } from './pages/BoardPage/BoardPage';
 import { Page404 } from './pages/Page404/Page404';
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="welcome" element={<WelcomePage />} />
           <Route path="signin" element={<SignInPage />} />
           <Route path="signup" element={<SignUpPage />} />
+          <Route path="update-user" element={<UpdateUserPage />} />
           <Route path="*" element={<Page404 />} />
         </Route>
       </Routes>

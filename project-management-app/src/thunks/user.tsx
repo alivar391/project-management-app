@@ -39,3 +39,40 @@ export const authUser = createAsyncThunk('user/auth', async (login: ILogin) => {
   const data = await response.json();
   return data;
 });
+
+export const updateUser = createAsyncThunk(
+  'user/update',
+  async (params: { userId: string; newUser: IUser; token: string }) => {
+    const response = await fetch(`${BASE_URL}/users/${params.userId}`, {
+      method: 'PUT',
+      body: JSON.stringify(params.newUser),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${params.token}`,
+      },
+    });
+    if (response.status === 404) {
+      throw new Error('User was not founded!');
+    }
+    if (!response.ok) {
+      throw new Error('Error, please try again later');
+    }
+    const data = await response.json();
+    return data;
+  }
+);
+
+export const deleteUser = createAsyncThunk(
+  'user/delete',
+  async (params: { userId: string; token: string }) => {
+    const response = await fetch(`${BASE_URL}/users/${params.userId}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${params.token}`,
+      },
+    });
+    if (!response.ok) {
+      throw new Error('Error, please try again later');
+    }
+  }
+);

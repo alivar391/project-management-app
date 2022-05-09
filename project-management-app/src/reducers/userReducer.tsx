@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { authUser, registerUser } from '../thunks/user';
+import { IUser } from '../pages/UpdateUserPage/UpdateUserPage';
+import { authUser, registerUser, updateUser, deleteUser } from '../thunks/user';
 
 export type UserState = {
   token: {
@@ -10,8 +11,9 @@ export type UserState = {
     id: string | null;
     login: string | null;
     password: string | null;
+    name?: string | null;
   };
-  users: [];
+  users: IUser[];
 };
 
 const initialState: UserState = {
@@ -22,6 +24,7 @@ const initialState: UserState = {
     id: null,
     login: null,
     password: null,
+    name: null,
   },
   users: [],
 };
@@ -29,8 +32,8 @@ const initialState: UserState = {
 const messagesForUser = {
   register: 'User registered successfully',
   auth: 'User authorisation successfully',
-  /* deleteUser: 'User deleted successfully',
-  updateUser: 'User update successfully', */
+  updateUser: 'User update successfully',
+  deleteUser: 'User deleted successfully',
 };
 
 const userReducer = createSlice({
@@ -40,6 +43,7 @@ const userReducer = createSlice({
     setUserInfo(state, action) {
       state.userInfo.login = action.payload.login;
       state.userInfo.password = action.payload.password;
+      state.userInfo.id = action.payload.id;
     },
   },
   extraReducers: (builder) => {
@@ -56,6 +60,21 @@ const userReducer = createSlice({
         state.token = action.payload;
       })
       .addCase(authUser.rejected, (state, action) => {
+        toast.error(action.error.message);
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.userInfo = action.payload;
+        toast.success(messagesForUser.updateUser);
+      })
+      .addCase(updateUser.rejected, (state, action) => {
+        toast.error(action.error.message);
+      })
+      .addCase(deleteUser.fulfilled, (state, action) => {
+        toast.success(messagesForUser.deleteUser);
+        state.token.token = null;
+        state.userInfo = { id: null, login: null, password: null, name: null };
+      })
+      .addCase(deleteUser.rejected, (state, action) => {
         toast.error(action.error.message);
       });
   },

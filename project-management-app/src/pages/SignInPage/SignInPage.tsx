@@ -28,7 +28,7 @@ export const SignInPage = () => {
     };
     dispatch(authUser(login));
     dispatch(setUserInfo(login));
-    navigate('/', { replace: true });
+    //navigate('/', { replace: true });
   };
 
   return (
