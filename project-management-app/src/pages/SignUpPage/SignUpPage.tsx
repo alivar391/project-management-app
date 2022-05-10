@@ -8,6 +8,7 @@ import Input from '../../components/Input/Input';
 import InputFile from '../../components/InputFile/InputFile';
 import 'react-toastify/dist/ReactToastify.css';
 import './signUpPage.css';
+import { Button } from '../../components/Button/Button';
 
 export type IForm = {
   name: string;
@@ -126,13 +127,7 @@ export const SignUpPage = () => {
             Log In
           </Link>
         </div>
-        <button
-          data-testid="button-submit-form"
-          className="form__btn-submit"
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          Register
-        </button>
+        <Button onClick={handleSubmit(onSubmit)}>Register</Button>
       </form>
       <ToastContainer position="top-right" />
     </div>

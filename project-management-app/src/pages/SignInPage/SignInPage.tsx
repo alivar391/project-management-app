@@ -1,6 +1,6 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ToastContainer } from 'react-toastify';
-import { useAppDispatch } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { authUser } from '../../thunks/user';
 import { setUserInfo } from '../../reducers/userReducer';
 import { Link, useNavigate } from 'react-router-dom';
@@ -8,6 +8,8 @@ import Input from '../../components/Input/Input';
 import './../SignUpPage/signUpPage.css';
 import './signinPage.css';
 import 'react-toastify/dist/ReactToastify.css';
+import { Button } from '../../components/Button/Button';
+import { useEffect } from 'react';
 
 export type IUser = {
   login: string;
@@ -16,6 +18,7 @@ export type IUser = {
 
 export const SignInPage = () => {
   const dispatch = useAppDispatch();
+  const token = useAppSelector((state) => state.userInfo.token.token);
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm<IUser>({
     mode: 'onChange',
@@ -28,8 +31,14 @@ export const SignInPage = () => {
     };
     dispatch(authUser(login));
     dispatch(setUserInfo(login));
-    //navigate('/', { replace: true });
   };
+
+  useEffect(() => {
+    if (token) {
+      localStorage.setItem('token', token);
+      navigate('/', { replace: true });
+    }
+  }, [token]);
 
   return (
     <div className="container-form">
@@ -57,13 +66,7 @@ export const SignInPage = () => {
             Sign Up
           </Link>
         </div>
-        <button
-          data-testid="button-submit-form"
-          className="form__btn-submit"
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          Log In
-        </button>
+        <Button onClick={handleSubmit(onSubmit)}>Log In</Button>
       </form>
       <ToastContainer position="top-right" />
     </div>

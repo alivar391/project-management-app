@@ -6,6 +6,7 @@ import { deleteUser, updateUser } from '../../thunks/user';
 import './updateUserPage.css';
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router';
+import { Button } from '../../components/Button/Button';
 
 export type IForm = {
   name: string;
@@ -29,7 +30,6 @@ export type IUserFromToken = {
 
 export const UpdateUserPage = () => {
   const tokenUser = useAppSelector((state) => state.userInfo.token.token);
-  console.log('токен', tokenUser);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const {
@@ -56,7 +56,8 @@ export const UpdateUserPage = () => {
     }
   };
 
-  const onDelete = () => {
+  const onDelete = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
     const token = tokenUser as string;
     if (token) {
       const decodedToken: IUserFromToken = jwt_decode(token as string);
@@ -70,7 +71,7 @@ export const UpdateUserPage = () => {
   return (
     <div className="container-form form-update">
       <div className="container-img-update"></div>
-      <form className="form" onSubmit={handleSubmit(onSubmit)}>
+      <form className="form">
         <h2>Update User Info</h2>
         <div className="namesUser">
           <Input
@@ -112,16 +113,10 @@ export const UpdateUserPage = () => {
           autoComplete="off"
         />
         <div className="buttons-form-update">
-          <div className="form__btn-delete" onClick={onDelete}>
+          <Button className={'btn-warn'} onClick={onDelete}>
             Delete User
-          </div>
-          <button
-            data-testid="button-submit-form"
-            className="form__btn-submit"
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            Update info
-          </button>
+          </Button>
+          <Button onClick={handleSubmit(onSubmit)}>Update info</Button>
         </div>
       </form>
       <ToastContainer position="top-right" />
