@@ -13,7 +13,16 @@ import {
 } from '../../reducers/modalReducer';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { createBoard, deleteBoard, getBoards, updateBoard } from '../../thunks/boards';
+import { Board } from './Board';
 import './main-page.css';
+
+export type IOpenModalFunction = (
+  modalName: string,
+  modalTitle: string,
+  confirmFunction: (title: string, id: string) => void,
+  modalButtonTxt: string,
+  info: IBoard | null
+) => void;
 
 export function MainPage() {
   const dispatch = useAppDispatch();
@@ -27,41 +36,9 @@ export function MainPage() {
   }, []);
 
   function makeBoards(boards: Array<IBoard>) {
-    return boards.map((board: IBoard) => {
-      return (
-        <div className="board" key={board.id}>
-          <div className="board__view">{board.title}</div>
-          <div className="board__buttns">
-            <span
-              className="icon-button"
-              onClick={() =>
-                openModal('FormModal', 'Change a board', updateNewBoard, 'Update', board)
-              }
-            >
-              <img src="./../assets/jpg/pencil.png" alt="icon-file" />
-            </span>
-            <span
-              className="icon-button"
-              onClick={() =>
-                openModal(
-                  'ConfirmModal',
-                  'Do you realy want to delete a board?',
-                  deleteNewBoard,
-                  'Ok',
-                  board
-                )
-              }
-            >
-              <img src="./../assets/jpg/trash.png" alt="icon-file" />
-            </span>
-          </div>
-        </div>
-      );
-    });
-  }
-
-  function deleteNewBoard(title = '', id: string) {
-    dispatch(deleteBoard(id));
+    return boards.map((board: IBoard) => (
+      <Board board={board} openModal={openModal} key={board.id} />
+    ));
   }
 
   function openModal(
@@ -84,13 +61,6 @@ export function MainPage() {
       title,
     };
     dispatch(createBoard(board));
-  }
-  function updateNewBoard(title: string, id: string) {
-    const board = {
-      title,
-      id,
-    };
-    dispatch(updateBoard(board));
   }
 
   return (
