@@ -2,6 +2,7 @@ import { IBoard } from '../../reducers/boardsReducer';
 import { useAppDispatch } from '../../store/hooks';
 import { deleteBoard, updateBoard } from '../../thunks/boards';
 import { IOpenModalFunction } from './MainPage';
+import { Link } from 'react-router-dom';
 
 interface IProps {
   board: IBoard;
@@ -25,7 +26,9 @@ export function Board({ board, openModal }: IProps) {
 
   return (
     <div className="board">
-      <div className="board__view">{board.title}</div>
+      <Link to={`/${board.id}`} className="board__view">
+        {board.title}
+      </Link>
       <div className="board__buttns">
         <span
           className="icon-button"

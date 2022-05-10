@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { Header } from '../../components/Header/Header';
 import { Modal } from '../../components/Modal/Modal';
-import { BASE_URL } from '../../constants/constants';
 import { IBoard } from '../../reducers/boardsReducer';
 import {
   changeModalFunction,
@@ -12,7 +11,7 @@ import {
   toggleActive,
 } from '../../reducers/modalReducer';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { createBoard, deleteBoard, getBoards, updateBoard } from '../../thunks/boards';
+import { createBoard, getBoards } from '../../thunks/boards';
 import { Board } from './Board';
 import './main-page.css';
 
@@ -27,9 +26,6 @@ export type IOpenModalFunction = (
 export function MainPage() {
   const dispatch = useAppDispatch();
   const { boards } = useAppSelector((store) => store.boards);
-  // useEffect(() => {
-  //   registerUser();
-  // }, []);
 
   useEffect(() => {
     dispatch(getBoards());
@@ -82,19 +78,3 @@ export function MainPage() {
     </div>
   );
 }
-
-// const registerUser = async () => {
-//   const response = await fetch(`${BASE_URL}/signin`, {
-//     method: 'POST',
-//     body: JSON.stringify({
-//       login: 'diana',
-//       password: 'qwerty',
-//     }),
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   });
-//   const data = await response.json();
-//   console.log(data);
-//   return data;
-// };

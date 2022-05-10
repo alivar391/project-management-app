@@ -61,7 +61,10 @@
     width: 250px;
     height: 200px;
     border-radius: 5px;
-    background-color: rgb(242, 245, 60);
+    background-color: rgb(238, 255, 255);
+    color:rgb(72, 72, 72);
+    text-decoration: none;
+    font-size: 20px;
   }
 
   .board__buttns {
