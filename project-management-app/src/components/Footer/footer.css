@@ -1,0 +1,55 @@
+.anastasia-link,
+.diana-link,
+.anton-link {
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-size: cover;
+}
+
+.anastasia-link {
+  background-image: url('../../../public/assets/jpg/anastasia-png.png');
+}
+.diana-link {
+  background-image: url('../../../public/assets/jpg/diana-png.png');
+}
+.anton-link {
+  background-image: url('../../../public/assets/jpg/anton-png.png');
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  height: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5 0 5px 0;
+  z-index: 2;
+  margin: 0 auto;
+  background-color: rgb(230, 244, 245);
+}
+.footer-team {
+  width: 150px;
+  height: 30px;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  margin-right: 25px;
+}
+.footer-logo {
+  display: block;
+  width: 90px;
+  height: 30px;
+  background-size: 90px 30px;
+  background-image: url('../../../public/assets/svg/rs_school.svg');
+  background-repeat: no-repeat;
+  margin-left: 25px;
+}
+.year {
+  font-size: 22px;
+  font-weight: 700;
+  color: #000000;
+  margin: 0 10px 0 10px;
+}
