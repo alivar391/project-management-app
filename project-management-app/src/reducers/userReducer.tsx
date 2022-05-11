@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
+import { RootState } from '../store/store';
 import { authUser, registerUser } from '../thunks/user';
 
 export type UserState = {
