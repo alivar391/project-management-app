@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 import { IUser } from '../pages/UpdateUserPage/UpdateUserPage';
 import { authUser, registerUser, updateUser, deleteUser } from '../thunks/user';
@@ -14,6 +15,7 @@ export type UserState = {
     name?: string | null;
   };
   users: IUser[];
+  succesRegister: boolean;
 };
 
 const initialState: UserState = {
@@ -27,6 +29,7 @@ const initialState: UserState = {
     name: null,
   },
   users: [],
+  succesRegister: false,
 };
 
 const messagesForUser = {
@@ -45,12 +48,16 @@ const userReducer = createSlice({
       state.userInfo.password = action.payload.password;
       state.userInfo.id = action.payload.id;
     },
+    setSuccesRegister(state, action) {
+      state.succesRegister = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.fulfilled, (state, action) => {
         toast.success(messagesForUser.register);
         state.userInfo = action.payload;
+        state.succesRegister = true;
       })
       .addCase(registerUser.rejected, (state, action) => {
         toast.error(action.error.message);
@@ -81,4 +88,4 @@ const userReducer = createSlice({
 });
 
 export default userReducer.reducer;
-export const { setUserInfo } = userReducer.actions;
+export const { setUserInfo, setSuccesRegister } = userReducer.actions;
