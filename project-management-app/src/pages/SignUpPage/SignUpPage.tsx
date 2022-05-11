@@ -1,5 +1,5 @@
-import { useRef } from 'react';
-import { useAppDispatch } from '../../store/hooks';
+import { useEffect, useRef } from 'react';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ToastContainer } from 'react-toastify';
 import { registerUser } from '../../thunks/user';
@@ -8,6 +8,8 @@ import Input from '../../components/Input/Input';
 import InputFile from '../../components/InputFile/InputFile';
 import 'react-toastify/dist/ReactToastify.css';
 import './signUpPage.css';
+import { Button } from '../../components/Button/Button';
+import { setSuccesRegister } from '../../reducers/userReducer';
 
 export type IForm = {
   name: string;
@@ -25,6 +27,7 @@ export type IUser = {
 
 export const SignUpPage = () => {
   const dispatch = useAppDispatch();
+  const succesRegister = useAppSelector((state) => state.userInfo.succesRegister);
   const navigate = useNavigate();
   const {
     register,
@@ -38,14 +41,20 @@ export const SignUpPage = () => {
   const password = useRef('');
   password.current = watch('password');
 
-  const onSubmit: SubmitHandler<IForm> = (data) => {
+  useEffect(() => {
+    if (succesRegister) {
+      navigate('/signin', { replace: true });
+    }
+  }, [succesRegister]);
+
+  const onSubmit: SubmitHandler<IForm> = async (data) => {
     const newUser = {
       name: data.name,
       login: data.login,
       password: data.password,
     };
-    dispatch(registerUser(newUser));
-    navigate('/signin', { replace: true });
+    await dispatch(registerUser(newUser));
+    dispatch(setSuccesRegister(false));
   };
 
   return (
@@ -126,13 +135,7 @@ export const SignUpPage = () => {
             Log In
           </Link>
         </div>
-        <button
-          data-testid="button-submit-form"
-          className="form__btn-submit"
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          Register
-        </button>
+        <Button onClick={handleSubmit(onSubmit)}>Register</Button>
       </form>
       <ToastContainer position="top-right" />
     </div>
