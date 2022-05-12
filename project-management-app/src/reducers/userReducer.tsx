@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 
 import { IUser } from '../pages/UpdateUserPage/UpdateUserPage';
@@ -52,6 +51,9 @@ const userReducer = createSlice({
     setSuccesRegister(state, action) {
       state.succesRegister = action.payload;
     },
+    setToken(state, action) {
+      state.token = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -89,4 +91,4 @@ const userReducer = createSlice({
 });
 
 export default userReducer.reducer;
-export const { setUserInfo, setSuccesRegister } = userReducer.actions;
+export const { setUserInfo, setSuccesRegister, setToken } = userReducer.actions;

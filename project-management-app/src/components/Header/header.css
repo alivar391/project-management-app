@@ -18,7 +18,7 @@
 .header__button-block {
   display: flex;
   flex-direction: row;
-  width: 200px;
+  width: 250px;
   justify-content: space-between;
   align-items: flex-start;
   height: 40px;

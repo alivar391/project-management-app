@@ -1,20 +1,32 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../store/hooks';
+import { Link, useNavigate } from 'react-router-dom';
+import { setToken } from '../../reducers/userReducer';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import './header.css';
+import { useTranslation } from 'react-i18next';
 
 export function Header() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const token = useAppSelector((state) => state.userInfo.token.token);
   const userName = useAppSelector((state) => state.userInfo.userInfo.login);
   const [scroll, setScroll] = useState(false);
-
   const changeStyle = () => {
-    console.log(window.scrollY);
     if (window.scrollY >= 70) {
       setScroll(true);
     } else if (window.scrollY < 40) {
       setScroll(false);
     }
+  };
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = (language: string) => {
+    i18n.changeLanguage(language);
+  };
+
+  const logoutUser = () => {
+    dispatch(setToken({ token: null }));
+    navigate('/welcome', { replace: true });
   };
 
   window.addEventListener('scroll', changeStyle);
@@ -30,7 +42,6 @@ export function Header() {
           />
         </span>
       </Link>
-      {/* <Link to="/welcome">Welcome</Link> */}
       {!token && (
         <div className="header__button-block">
           <Link to="/signin">
@@ -40,17 +51,17 @@ export function Header() {
                 alt="login-button"
                 className="header__icon-small"
               />
-              Log in
+              {t('header.login')}
             </span>
           </Link>
           <Link to="/signup">
-            <span className="header__action-button header__signup"> Sign up </span>
+            <span className="header__action-button header__signup">{t('header.signup')}</span>
           </Link>
         </div>
       )}
       {token && (
         <div className="header__button-block">
-          <Link to="/editProfile">
+          <Link to="/update-user">
             <span className="header__action-button">
               <img
                 src="./../assets/png/user-profile.png"
@@ -60,17 +71,20 @@ export function Header() {
               {userName}
             </span>
           </Link>
-          <span className="header__action-button header__logout">
+          <span className="header__action-button header__logout" onClick={logoutUser}>
             <img
               src="./../assets/png/logout.png"
               alt="login-button"
               className="header__icon-small"
             />
-            Logout
+            {t('header.logout')}
           </span>
         </div>
       )}
-      {/* <Link to="/board">Board</Link> */}
+      <select onChange={(e) => changeLanguage(e.target.value)}>
+        <option value="en">EN</option>
+        <option value="ru">РУС</option>
+      </select>
     </header>
   );
 }

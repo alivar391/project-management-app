@@ -6,6 +6,7 @@ import { store } from './store/store';
 
 import reportWebVitals from './reportWebVitals';
 import App from './App';
+import './i18n';
 import './index.css';
 
 const container = document.getElementById('root')!;
