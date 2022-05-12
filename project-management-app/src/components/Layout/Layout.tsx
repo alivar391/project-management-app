@@ -1,10 +1,13 @@
 import { Outlet } from 'react-router';
 import { Footer } from '../Footer/Footer';
+import './layout.css';
 
 export const Layout = () => {
   return (
-    <div>
-      <Outlet />
+    <div className="app-contain">
+      <div className="content-container">
+        <Outlet />
+      </div>
       <Footer />
     </div>
   );

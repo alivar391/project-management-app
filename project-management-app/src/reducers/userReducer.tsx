@@ -1,39 +1,55 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
-import { registerUser } from '../thunks/user';
+import { IUser } from '../pages/UpdateUserPage/UpdateUserPage';
+import { authUser, registerUser, updateUser, deleteUser } from '../thunks/user';
 
-export type StoreType = {
-  token: string;
-  userInfo: {
-    id: string;
-    login: string;
-    password: string;
+export type UserState = {
+  token: {
+    token: string | null;
   };
+  userInfo: {
+    id: string | null;
+    login: string | null;
+    password: string | null;
+    name?: string | null;
+  };
+  users: IUser[];
+  succesRegister: boolean;
 };
 
-const initialState = {
-  token: '',
-  userInfo: {
-    id: '',
-    login: '',
-    password: '',
+const initialState: UserState = {
+  token: {
+    token: null,
   },
+  userInfo: {
+    id: null,
+    login: null,
+    password: null,
+    name: null,
+  },
+  users: [],
+  succesRegister: false,
 };
 
 const messagesForUser = {
   register: 'User registered successfully',
   auth: 'User authorisation successfully',
-  /* deleteUser: 'User deleted successfully',
-  updateUser: 'User update successfully', */
+  updateUser: 'User update successfully',
+  deleteUser: 'User deleted successfully',
 };
 
-export const userReducer = createSlice({
+const userReducer = createSlice({
   name: 'user',
   initialState,
   reducers: {
     setUserInfo(state, action) {
       state.userInfo.login = action.payload.login;
       state.userInfo.password = action.payload.password;
+      state.userInfo.id = action.payload.id;
+    },
+    setSuccesRegister(state, action) {
+      state.succesRegister = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -41,12 +57,35 @@ export const userReducer = createSlice({
       .addCase(registerUser.fulfilled, (state, action) => {
         toast.success(messagesForUser.register);
         state.userInfo = action.payload;
+        state.succesRegister = true;
       })
       .addCase(registerUser.rejected, (state, action) => {
+        toast.error(action.error.message);
+      })
+      .addCase(authUser.fulfilled, (state, action) => {
+        toast.success(messagesForUser.auth);
+        state.token = action.payload;
+      })
+      .addCase(authUser.rejected, (state, action) => {
+        toast.error(action.error.message);
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.userInfo = action.payload;
+        toast.success(messagesForUser.updateUser);
+      })
+      .addCase(updateUser.rejected, (state, action) => {
+        toast.error(action.error.message);
+      })
+      .addCase(deleteUser.fulfilled, (state, action) => {
+        toast.success(messagesForUser.deleteUser);
+        state.token.token = null;
+        state.userInfo = { id: null, login: null, password: null, name: null };
+      })
+      .addCase(deleteUser.rejected, (state, action) => {
         toast.error(action.error.message);
       });
   },
 });
 
 export default userReducer.reducer;
-export const { setUserInfo } = userReducer.actions;
+export const { setUserInfo, setSuccesRegister } = userReducer.actions;

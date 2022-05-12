@@ -1,0 +1,15 @@
+.container-img-autorisation {
+  width: 600px;
+  height: 639px;
+  background-image: url('./../../../public/assets/jpg/autorisation.jpg');
+  border-radius: 5px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+}
+@media (max-width: 500px) {
+  .container-img-autorisation {
+    width: 400px;
+    height: 439px;
+  }
+}

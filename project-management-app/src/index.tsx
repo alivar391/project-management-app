@@ -2,11 +2,9 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-
 import { store } from './store/store';
 import reportWebVitals from './reportWebVitals';
 import App from './App';
-import SignUpPage from './pages/SignUpPage/SignUpPage';
 import './index.css';
 
 const container = document.getElementById('root')!;
@@ -14,8 +12,6 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      // {/* <App /> */}
-      // <SignUpPage />
       <BrowserRouter>
         <App />
       </BrowserRouter>
