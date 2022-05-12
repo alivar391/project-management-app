@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from 'react';
 import { useParams } from 'react-router';
 import { Button } from '../../components/Button/Button';
@@ -6,7 +5,7 @@ import { Column } from '../../components/Column/Column';
 import { IColumn } from '../../reducers/boardReducer';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getBoard } from '../../thunks/board';
-import { addColumn, deleteColumn } from '../../thunks/column';
+import { addColumn } from '../../thunks/column';
 import './boardPage.css';
 
 export function BoardPage() {
@@ -20,9 +19,9 @@ export function BoardPage() {
       dispatch(getBoard({ boardId, token }));
     }
   }, []);
-  let max = 0;
 
   const onAddColumn = async () => {
+    let max = 0;
     if (board.columns.length > 0) {
       const maxOrder = board.columns.reduce((acc, curr) => (acc.order > curr.order ? acc : curr));
       max = maxOrder.order;
@@ -37,13 +36,6 @@ export function BoardPage() {
     }
   };
 
-  const onDeleteColumn = async (columnId: string) => {
-    if (token && boardId) {
-      await dispatch(deleteColumn({ boardId, columnId, token }));
-      dispatch(getBoard({ boardId, token }));
-    }
-  };
-
   const Board = () => {
     if (boardId && board.columns.length > 0) {
       return (
@@ -51,11 +43,14 @@ export function BoardPage() {
           <ul className="columns">
             {board.columns.map((column: IColumn) => {
               return (
-                <li key={column.id} className="column">
-                  <h3>{column.title}</h3>
-                  <div className="delete-column" onClick={() => onDeleteColumn(column.id)}></div>
-                  <Column boardId={boardId} columnId={column.id} tasks={column.tasks} />
-                </li>
+                <Column
+                  key={column.id}
+                  title={column.title}
+                  boardId={boardId}
+                  columnId={column.id}
+                  tasks={column.tasks}
+                  order={column.order}
+                />
               );
             })}
           </ul>
