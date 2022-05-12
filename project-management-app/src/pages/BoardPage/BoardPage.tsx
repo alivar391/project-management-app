@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from 'react';
 import { useParams } from 'react-router';
 import { Button } from '../../components/Button/Button';
+import { Column } from '../../components/Column/Column';
 import { IColumn } from '../../reducers/boardReducer';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getBoard } from '../../thunks/board';
-import { addColumn } from '../../thunks/column';
+import { addColumn, deleteColumn } from '../../thunks/column';
 import './boardPage.css';
 
 export function BoardPage() {
@@ -35,12 +37,12 @@ export function BoardPage() {
     }
   };
 
-  /* const onDeleteColumn = async (columnId: string) => {
+  const onDeleteColumn = async (columnId: string) => {
     if (token && boardId) {
       await dispatch(deleteColumn({ boardId, columnId, token }));
       dispatch(getBoard({ boardId, token }));
     }
-  }; */
+  };
 
   const Board = () => {
     if (boardId && board.columns.length > 0) {
@@ -49,12 +51,10 @@ export function BoardPage() {
           <ul className="columns">
             {board.columns.map((column: IColumn) => {
               return (
-                <li key={column.id} className="column" id={`column-${column.order}`}>
+                <li key={column.id} className="column">
                   <h3>{column.title}</h3>
-                  <div
-                    className="delete-column" /* onClick={() => onDeleteColumn(column.id) }*/
-                  ></div>
-                  {/* <Column boardId={boardId} columnId={column.id} tasks={column.tasks} /> */}
+                  <div className="delete-column" onClick={() => onDeleteColumn(column.id)}></div>
+                  <Column boardId={boardId} columnId={column.id} tasks={column.tasks} />
                 </li>
               );
             })}

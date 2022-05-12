@@ -1,0 +1,13 @@
+.column {
+  list-style: none;
+  border-radius: 5px;
+  background: #a7d1f8;
+  color: black;
+  padding: 10px;
+  min-width: 250px;
+  height: 100%;
+  /*  overflow-y: scroll; */
+}
+.tasks {
+  padding: 0;
+}
