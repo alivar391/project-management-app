@@ -11,6 +11,10 @@ export const store = configureStore({
     boards: boardReduser,
     modal: modalReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export type AppDispatch = typeof store.dispatch;

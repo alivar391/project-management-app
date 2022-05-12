@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import { MainPage } from './pages/MainPage/MainPage';
 import { WelcomePage } from './pages/WelcomePage/WelcomePage';
 import { SignInPage } from './pages/SignInPage/SignInPage';
-import SignUpPage from './pages/SignUpPage/SignUpPage';
+import { SignUpPage } from './pages/SignUpPage/SignUpPage';
 import { BoardPage } from './pages/BoardPage/BoardPage';
 import { Page404 } from './pages/Page404/Page404';
 
