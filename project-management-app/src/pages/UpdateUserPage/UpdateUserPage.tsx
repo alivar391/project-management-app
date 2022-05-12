@@ -7,6 +7,7 @@ import './updateUserPage.css';
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router';
 import { Button } from '../../components/Button/Button';
+import { useTranslation } from 'react-i18next';
 
 export type IForm = {
   name: string;
@@ -39,6 +40,7 @@ export const UpdateUserPage = () => {
   } = useForm<IForm>({
     mode: 'onChange',
   });
+  const { t } = useTranslation();
 
   const onSubmit: SubmitHandler<IForm> = (data) => {
     const newUser = {
@@ -72,7 +74,7 @@ export const UpdateUserPage = () => {
     <div className="container-form form-update">
       <div className="container-img-update"></div>
       <form className="form">
-        <h2>Update User Info</h2>
+        <h2>{t('updateUserPage.Update User Info')}</h2>
         <div className="namesUser">
           <Input
             register={register('login', {
@@ -80,7 +82,7 @@ export const UpdateUserPage = () => {
               minLength: { value: 3, message: 'Too short name' },
             })}
             nameInput={'login'}
-            textLabel={'Login'}
+            textLabel={t('updateUserPage.Login')}
             datatestId={'input-login'}
             type={'text'}
             errors={errors}
@@ -91,7 +93,7 @@ export const UpdateUserPage = () => {
               minLength: { value: 3, message: 'Too short name' },
             })}
             nameInput={'name'}
-            textLabel={'Name'}
+            textLabel={t('updateUserPage.Name')}
             datatestId={'input-name'}
             type={'text'}
             errors={errors}
@@ -106,7 +108,7 @@ export const UpdateUserPage = () => {
             },
           })}
           nameInput={'password'}
-          textLabel={'Password'}
+          textLabel={t('updateUserPage.Password')}
           datatestId={'input-password'}
           type="password"
           errors={errors}
@@ -114,9 +116,9 @@ export const UpdateUserPage = () => {
         />
         <div className="buttons-form-update">
           <Button className={'btn-warn'} onClick={onDelete}>
-            Delete User
+            {t('updateUserPage.Delete User')}
           </Button>
-          <Button onClick={handleSubmit(onSubmit)}>Update info</Button>
+          <Button onClick={handleSubmit(onSubmit)}>{t('updateUserPage.Update info')}</Button>
         </div>
       </form>
       <ToastContainer position="top-right" />

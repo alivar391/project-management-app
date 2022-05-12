@@ -10,6 +10,7 @@ import './signinPage.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { Button } from '../../components/Button/Button';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export type IUser = {
   login: string;
@@ -23,6 +24,7 @@ export const SignInPage = () => {
   const { register, handleSubmit } = useForm<IUser>({
     mode: 'onChange',
   });
+  const { t } = useTranslation();
 
   const onSubmit: SubmitHandler<IUser> = (data) => {
     const login = {
@@ -44,29 +46,29 @@ export const SignInPage = () => {
     <div className="container-form">
       <div className="container-img-autorisation"></div>
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
-        <h2>Log In</h2>
+        <h2>{t('signInPage.Log In')}</h2>
         <Input
           register={register('login')}
           nameInput={'login'}
-          textLabel={'Login'}
+          textLabel={t('signInPage.Login')}
           datatestId={'input-login'}
           type={'text'}
         />
         <Input
           register={register('password')}
           nameInput={'password'}
-          textLabel={'Password'}
+          textLabel={t('signInPage.Password')}
           datatestId={'input-password'}
           type="password"
           autoComplete="off"
         />
         <div className="redirect">
-          New User?{' '}
+          {t('signInPage.New User? ')}
           <Link to="/signup" className="redirect-link">
-            Sign Up
+            {t('signInPage.Sign Up')}
           </Link>
         </div>
-        <Button onClick={handleSubmit(onSubmit)}>Log In</Button>
+        <Button onClick={handleSubmit(onSubmit)}>{t('signInPage.Log In')}</Button>
       </form>
       <ToastContainer position="top-right" />
     </div>

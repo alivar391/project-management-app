@@ -3,5 +3,31 @@
     "login": "Вход",
     "signup": "Регистрация",
     "logout": "Выход"
+  },
+  "signInPage" : {
+    "Log In": "Вход",
+    "Login": "Логин",
+    "Password": "Пароль",
+    "New User? ": "Новый пользователь? ",
+    "Sign Up": "Регистрация"
+  },
+  "signUpPage" : {
+    "Create account": "Регистрация",
+    "Login": "Логин",
+    "Name": "Имя",
+    "Password": "Пароль",
+    "Confirm Password": "Подтвердите пароль",
+    "Email": "Почта",
+    "Already have an account?": "Уже есть аккаунт?",
+    "Log In": "Войти",
+    "Register": "Регистрация"
+  },
+  "updateUserPage" : {
+    "Update User Info": "Редактировать профиль",
+    "Login": "Логин",
+    "Name": "Имя",
+    "Password": "Пароль",
+    "Delete User": "Удалить",
+    "Update info": "Обновить"
   }
 }
