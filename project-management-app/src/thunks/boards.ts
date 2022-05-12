@@ -23,70 +23,86 @@ const TOKEN =
 // TOKEN = registerUser();
 
 export const getBoards = createAsyncThunk('boards/getBoards', async () => {
-  const response = await fetch(`${BASE_URL}/boards`, {
-    headers: {
-      Authorization: `Bearer ${TOKEN}`,
-    },
-  });
-  if (response.status === 404) {
-    throw new Error(`Board was not founded!`);
-  }
-  if (response.status === 401) {
-    throw new Error(`Unauthorized!`);
-  }
-  const data = await response.json();
-  return data;
-});
-
-export const createBoard = createAsyncThunk('boards/createBoard', async (board: INewBoard) => {
-  const response = await fetch(`${BASE_URL}/boards`, {
-    method: 'POST',
-    body: JSON.stringify(board),
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${TOKEN}`,
-    },
-  });
-  if (response.status === 404) {
-    throw new Error(`Board was not founded!`);
-  }
-  const data = await response.json();
-  return data;
-});
-
-export const updateBoard = createAsyncThunk('boards/updateBoard', async (board: IBoard) => {
-  const response = await fetch(`${BASE_URL}/boards/${board.id}`, {
-    method: 'PUT',
-    body: JSON.stringify({ title: board.title }),
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${TOKEN}`,
-    },
-  });
-  if (response.status === 404) {
-    throw new Error(`Board was not founded!`);
-  }
-  const data = await response.json();
-  return data;
-});
-
-export const deleteBoard = createAsyncThunk('boards/deleteBoard', async (id: string) => {
-  const response = await fetch(`${BASE_URL}/boards/${id}`, {
-    method: 'DELETE',
-    headers: {
-      Authorization: `Bearer ${TOKEN}`,
-    },
-  });
-  if (response.status === 404) {
-    throw new Error(`Board was not founded!`);
-  }
-  if (response.status === 204) {
+  try {
     const response = await fetch(`${BASE_URL}/boards`, {
       headers: {
         Authorization: `Bearer ${TOKEN}`,
       },
     });
+    if (response.status === 404) {
+      throw new Error(`Board was not founded!`);
+    }
+    if (response.status === 401) {
+      throw new Error(`Unauthorized!`);
+    }
     const data = await response.json();
     return data;
+  } catch (err) {
+    throw new Error('Something go wrong');
+  }
+});
+
+export const createBoard = createAsyncThunk('boards/createBoard', async (board: INewBoard) => {
+  try {
+    const response = await fetch(`${BASE_URL}/boards`, {
+      method: 'POST',
+      body: JSON.stringify(board),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${TOKEN}`,
+      },
+    });
+    if (response.status === 404) {
+      throw new Error(`Board was not founded!`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    throw new Error('Something go wrong');
+  }
+});
+
+export const updateBoard = createAsyncThunk('boards/updateBoard', async (board: IBoard) => {
+  try {
+    const response = await fetch(`${BASE_URL}/boards/${board.id}`, {
+      method: 'PUT',
+      body: JSON.stringify({ title: board.title }),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${TOKEN}`,
+      },
+    });
+    if (response.status === 404) {
+      throw new Error(`Board was not founded!`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    throw new Error('Something go wrong');
+  }
+});
+
+export const deleteBoard = createAsyncThunk('boards/deleteBoard', async (id: string) => {
+  try {
+    const response = await fetch(`${BASE_URL}/boards/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+      },
+    });
+    if (response.status === 404) {
+      throw new Error(`Board was not founded!`);
+    }
+    if (response.status === 204) {
+      const response = await fetch(`${BASE_URL}/boards`, {
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+        },
+      });
+      const data = await response.json();
+      return data;
+    }
+  } catch (err) {
+    throw new Error('Something go wrong');
   }
 });

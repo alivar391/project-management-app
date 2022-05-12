@@ -73,7 +73,9 @@ export function MainPage() {
             Create board
           </button>
         </div>
-        <div className="main__cont">{makeBoards(boards)}</div>
+        <div className="main__cont">
+          {makeBoards(boards).length ? makeBoards(boards) : 'No boards yet, create new one?'}
+        </div>
       </div>
     </div>
   );
