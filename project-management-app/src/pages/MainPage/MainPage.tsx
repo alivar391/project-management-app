@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Button } from '../../components/Button/Button';
 import { Header } from '../../components/Header/Header';
 import { Modal } from '../../components/Modal/Modal';
+import { Spinner } from '../../components/Spinner/Spinner';
 import { IBoard } from '../../reducers/boardsReducer';
 import {
   changeModalFunction,
@@ -26,7 +27,7 @@ export type IOpenModalFunction = (
 
 export function MainPage() {
   const dispatch = useAppDispatch();
-  const { boards } = useAppSelector((store) => store.boards);
+  const { boards, isLoading } = useAppSelector((store) => store.boards);
 
   useEffect(() => {
     dispatch(getBoards());
@@ -75,7 +76,13 @@ export function MainPage() {
           </Button>
         </div>
         <div className="main__cont">
-          {makeBoards(boards).length ? makeBoards(boards) : 'No boards yet, create new one?'}
+          {isLoading ? (
+            <Spinner />
+          ) : makeBoards(boards).length ? (
+            makeBoards(boards)
+          ) : (
+            'No boards yet, create new one?'
+          )}
         </div>
       </div>
     </div>
