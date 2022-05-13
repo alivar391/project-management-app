@@ -5,7 +5,6 @@ import { ToastContainer } from 'react-toastify';
 import { registerUser } from '../../thunks/user';
 import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../components/Input/Input';
-import InputFile from '../../components/InputFile/InputFile';
 import 'react-toastify/dist/ReactToastify.css';
 import './signUpPage.css';
 import { Button } from '../../components/Button/Button';
@@ -17,7 +16,6 @@ export type IForm = {
   password: string;
   confirm: string;
   email: string;
-  avatar: FileList;
 };
 export type IUser = {
   name: string;
@@ -128,7 +126,6 @@ export const SignUpPage = () => {
           errors={errors}
           autoComplete="off"
         ></Input>
-        <InputFile register={register('avatar')} />
         <div className="redirect">
           Already have an account?{' '}
           <Link to="/signin" className="redirect-link">

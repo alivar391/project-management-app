@@ -14,7 +14,6 @@ export type IForm = {
   password: string;
   confirm: string;
   email: string;
-  avatar: FileList;
 };
 export type IUser = {
   name: string;
