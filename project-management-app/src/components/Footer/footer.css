@@ -1,3 +1,7 @@
+.footer {
+  background-color: rgb(230, 244, 245);
+  height: 60px;
+}
 .anastasia-link,
 .diana-link,
 .anton-link {
@@ -5,6 +9,7 @@
   width: 30px;
   height: 30px;
   background-size: cover;
+  border-radius: 50%;
 }
 
 .anastasia-link {
@@ -17,18 +22,15 @@
   background-image: url('../../../public/assets/jpg/anton-png.png');
 }
 
-.footer {
-  position: fixed;
+.footer__inner{
   bottom: 0;
-  height: 40px;
-  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 5 0 5px 0;
-  z-index: 2;
   margin: 0 auto;
-  background-color: rgb(230, 244, 245);
+  max-width: 1600px;
+  padding-top: 15px;
 }
 .footer-team {
   width: 150px;

@@ -26,7 +26,7 @@ export function WelcomePage() {
             <div className="card__team">
               <img className="card__team-img" src="./assets/jpg/diana-png.png" alt="team-diana" />
               <div className="team__info">
-                <h6>Diana</h6>
+                <h6>Diana Byben</h6>
                 <p>Frontend Developer</p>
                 <a href="./">More in CV</a>
               </div>

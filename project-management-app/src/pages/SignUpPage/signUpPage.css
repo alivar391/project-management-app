@@ -1,16 +1,18 @@
 .container-form h2 {
   color: #003f95;
 }
-.container-form{
+.container-form {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   max-width: 1200px;
-  margin: 50px auto;
+  margin: 0px auto;
   text-align: left;
+  min-height: calc(100vh - 60px);
 }
+
 .container-img-register{
-  width: 600px;
+  width: 50%;
   height: 639px;
   background-image: url('./../../../public/assets/jpg/register.jpg');
   border-radius: 5px;
@@ -18,10 +20,9 @@
   background-repeat: no-repeat;
   margin: 0 auto;
 }
-@media (max-width: 500px) {
+@media (max-width: 1000px) {
   .container-img-register {
-    width: 350px;
-    height: 389px;
+    display: none;
   }
 }
 .form {

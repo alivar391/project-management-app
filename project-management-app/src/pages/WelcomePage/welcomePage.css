@@ -1,5 +1,5 @@
 .welcome__page-bg {
-    background-image: url('./../../../public/assets/jpg/task1.png');
+    background-image: url('./../../../public/assets/jpg/task.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position-y: -50px;
@@ -38,7 +38,9 @@
 .cards__teams {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
+
 .card__team {
     display: flex;
     justify-content: space-around;
@@ -92,6 +94,9 @@
     }
     .welcome__desc {
         font-size: 24px;
+    }
+    .card__team {
+        width: 100%;
     }
 }
 @media (max-width: 500px) {
