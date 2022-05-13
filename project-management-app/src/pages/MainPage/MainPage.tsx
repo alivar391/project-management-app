@@ -3,6 +3,7 @@ import { Button } from '../../components/Button/Button';
 import { Header } from '../../components/Header/Header';
 import { Modal } from '../../components/Modal/Modal';
 import { Spinner } from '../../components/Spinner/Spinner';
+import { getTimeOfDay } from '../../helpers/helpers';
 import { IBoard } from '../../reducers/boardsReducer';
 import {
   changeModalFunction,
@@ -28,6 +29,7 @@ export type IOpenModalFunction = (
 export function MainPage() {
   const dispatch = useAppDispatch();
   const { boards, isLoading } = useAppSelector((store) => store.boards);
+  const { name } = useAppSelector((store) => store.userInfo.userInfo);
 
   useEffect(() => {
     dispatch(getBoards());
@@ -67,7 +69,9 @@ export function MainPage() {
       <Modal />
       <div className="main">
         <div className="main__header">
-          <span className="main__title">Good day, Diana!</span>
+          <span className="main__title">
+            {getTimeOfDay(new Date().getHours())}, {name || 'user'}!
+          </span>
           <Button
             className="main__btn"
             onClick={() => openModal('FormModal', 'Create a board', createNewBoard, 'Create')}
