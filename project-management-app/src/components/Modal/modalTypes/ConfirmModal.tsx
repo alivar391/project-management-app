@@ -12,14 +12,14 @@ export const ConfirmModal = () => {
   };
 
   return (
-    <p className="modal__cont">
-      {title}
+    <div className="modal__cont" onClick={(e) => e.stopPropagation()}>
+      <h2 className="modal__title">{title}</h2>
       <Button className="btn__modal" onClick={() => closingModal()}>
         {text}
       </Button>
       <Button className="btn__modal" onClick={() => dispatch(toggleActive())}>
         Back
       </Button>
-    </p>
+    </div>
   );
 };

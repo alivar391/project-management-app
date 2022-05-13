@@ -81,7 +81,15 @@ export function MainPage() {
           ) : makeBoards(boards).length ? (
             makeBoards(boards)
           ) : (
-            'No boards yet, create new one?'
+            <p>
+              No boards yet,
+              <span
+                onClick={() => openModal('FormModal', 'Create a board', createNewBoard, 'Create')}
+              >
+                create a new one
+              </span>
+              ?
+            </p>
           )}
         </div>
       </div>

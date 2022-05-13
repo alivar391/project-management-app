@@ -36,9 +36,9 @@ export const FormModal = () => {
   };
 
   return (
-    <div className="modal__cont container-form">
+    <div className="modal__cont container-form" onClick={(e) => e.stopPropagation()}>
+      <h2 className="modal__title">{title}</h2>
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
-        <h2>{title}</h2>
         <Input
           register={register('title', {
             required: 'Requered',
