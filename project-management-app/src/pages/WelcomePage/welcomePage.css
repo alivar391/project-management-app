@@ -20,6 +20,7 @@
 .welcome__subtitle {
     font-size: 60px;
     font-family: 'Shadows Into Light Two', handwriting;
+    margin-top: 40px;
 }
 .welcome__desc {
     display: flex;
