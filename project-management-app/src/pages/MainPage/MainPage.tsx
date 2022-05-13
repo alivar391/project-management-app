@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Button } from '../../components/Button/Button';
 import { Header } from '../../components/Header/Header';
 import { Modal } from '../../components/Modal/Modal';
 import { IBoard } from '../../reducers/boardsReducer';
@@ -66,12 +67,12 @@ export function MainPage() {
       <div className="main">
         <div className="main__header">
           <span className="main__title">Good day, Diana!</span>
-          <button
+          <Button
             className="main__btn"
             onClick={() => openModal('FormModal', 'Create a board', createNewBoard, 'Create')}
           >
             Create board
-          </button>
+          </Button>
         </div>
         <div className="main__cont">
           {makeBoards(boards).length ? makeBoards(boards) : 'No boards yet, create new one?'}
