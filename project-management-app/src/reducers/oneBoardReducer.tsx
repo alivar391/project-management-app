@@ -40,8 +40,8 @@ const initialState: BoardState = {
   },
 };
 
-const boardReducer = createSlice({
-  name: 'board',
+const oneBoardReducer = createSlice({
+  name: 'oneBoard',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -57,4 +57,4 @@ const boardReducer = createSlice({
   },
 });
 
-export default boardReducer.reducer;
+export default oneBoardReducer.reducer;

@@ -1,4 +1,4 @@
-import { ITask } from '../../reducers/boardReducer';
+import { ITask } from '../../reducers/oneBoardReducer';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getBoard } from '../../thunks/board';
 import { addTask } from '../../thunks/task';
@@ -21,7 +21,7 @@ export const Column = ({ boardId, columnId, tasks, title, order }: IColumnProps)
   const token = localStorage.getItem('token') as string;
   const decodedToken: IUserFromToken = jwt_decode(token as string);
   const userId = decodedToken.userId;
-  const boards = useAppSelector((state) => state.board.board);
+  const boards = useAppSelector((state) => state.oneBoard.board);
 
   const getMaxOrderTask = (columnId: string) => {
     let max = 0;

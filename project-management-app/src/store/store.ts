@@ -1,14 +1,22 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
-import boardReducer from '../reducers/boardReducer';
 import userReducer from '../reducers/userReducer';
+import boardReduser from '../reducers/boardsReducer';
+import modalReducer from '../reducers/modalReducer';
+import oneBoardReducer from '../reducers/oneBoardReducer';
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
     userInfo: userReducer,
-    board: boardReducer,
+    oneBoard: oneBoardReducer,
+    boards: boardReduser,
+    modal: modalReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export type AppDispatch = typeof store.dispatch;

@@ -1,4 +1,4 @@
-import { ITask } from '../../reducers/boardReducer';
+import { ITask } from '../../reducers/oneBoardReducer';
 import { useAppDispatch } from '../../store/hooks';
 import { getBoard } from '../../thunks/board';
 import { deleteTask } from '../../thunks/task';

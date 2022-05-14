@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router';
 import { Button } from '../../components/Button/Button';
 import { Column } from '../../components/Column/Column';
-import { IColumn } from '../../reducers/boardReducer';
+import { IColumn } from '../../reducers/oneBoardReducer';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getBoard } from '../../thunks/board';
 import { addColumn } from '../../thunks/column';
@@ -12,7 +12,7 @@ export function BoardPage() {
   const { boardId } = useParams();
   const token = localStorage.getItem('token') as string;
   const dispatch = useAppDispatch();
-  const board = useAppSelector((state) => state.board.board);
+  const board = useAppSelector((state) => state.oneBoard.board);
 
   useEffect(() => {
     if (token && boardId) {
