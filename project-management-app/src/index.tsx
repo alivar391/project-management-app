@@ -6,6 +6,7 @@ import { store } from './store/store';
 import reportWebVitals from './reportWebVitals';
 import App from './App';
 import './index.css';
+import { Modal } from './components/Modal/Modal';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -13,6 +14,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
+        <Modal />
         <App />
       </BrowserRouter>
     </Provider>
