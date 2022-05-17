@@ -2,25 +2,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { BASE_URL } from '../constants/constants';
 import { IBoard, INewBoard } from '../reducers/boardsReducer';
 
-const TOKEN =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3N2FkY2RlOS1iZTA3LTRkMGUtYTU0OS02MTkyNjgyMDFlMDEiLCJsb2dpbiI6ImRpYW5hIiwiaWF0IjoxNjUyMDA3MzY2fQ.zho8oKpVE2dsknpK900VhOJ49qam_WwU_kE1DjE5Tkg';
+// const TOKEN =
+//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3N2FkY2RlOS1iZTA3LTRkMGUtYTU0OS02MTkyNjgyMDFlMDEiLCJsb2dpbiI6ImRpYW5hIiwiaWF0IjoxNjUyMDA3MzY2fQ.zho8oKpVE2dsknpK900VhOJ49qam_WwU_kE1DjE5Tkg';
 
-// const registerUser = async () => {
-//   const response = await fetch(`${BASE_URL}/signin`, {
-//     method: 'POST',
-//     body: JSON.stringify({
-//       login: 'diana',
-//       password: 'qwerty',
-//     }),
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   });
-//   const data = await response.json();
-//   console.log(data);
-//   return data;
-// };
-// TOKEN = registerUser();
+const TOKEN = localStorage.getItem('token');
 
 export const getBoards = createAsyncThunk('boards/getBoards', async () => {
   try {

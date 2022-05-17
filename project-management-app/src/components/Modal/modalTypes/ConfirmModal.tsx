@@ -1,5 +1,6 @@
 import { toggleActive } from '../../../reducers/modalReducer';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { Button } from '../../Button/Button';
 
 export const ConfirmModal = () => {
   const { title, text, changingInfo, confirmFunction } = useAppSelector((state) => state.modal);
@@ -11,14 +12,14 @@ export const ConfirmModal = () => {
   };
 
   return (
-    <p className="modal__cont">
-      {title}
-      <button className="btn__form-board form__btn-submit" onClick={() => closingModal()}>
+    <div className="modal__cont" onClick={(e) => e.stopPropagation()}>
+      <h2 className="modal__title">{title}</h2>
+      <Button className="btn__modal" onClick={() => closingModal()}>
         {text}
-      </button>
-      <button className="btn__form-board form__btn-submit" onClick={() => dispatch(toggleActive())}>
+      </Button>
+      <Button className="btn__modal" onClick={() => dispatch(toggleActive())}>
         Back
-      </button>
-    </p>
+      </Button>
+    </div>
   );
 };

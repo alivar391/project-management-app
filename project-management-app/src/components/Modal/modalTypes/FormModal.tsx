@@ -8,6 +8,7 @@ import {
   toggleActive,
 } from '../../../reducers/modalReducer';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { Button } from '../../Button/Button';
 import Input from '../../Input/Input';
 
 export const FormModal = () => {
@@ -35,9 +36,9 @@ export const FormModal = () => {
   };
 
   return (
-    <div className="modal__cont container-form">
+    <div className="modal__cont container-form" onClick={(e) => e.stopPropagation()}>
+      <h2 className="modal__title">{title}</h2>
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
-        <h2>{title}</h2>
         <Input
           register={register('title', {
             required: 'Requered',
@@ -49,21 +50,17 @@ export const FormModal = () => {
           type={'text'}
           errors={errors}
         />
-        <button
+        <Button
           data-testid="button-submit-form"
-          className="btn__form-board form__btn-submit"
-          onSubmit={handleSubmit(onSubmit)}
+          className="btn__modal"
+          onClick={handleSubmit(onSubmit)}
         >
           {text}
-        </button>
+        </Button>
       </form>
-      <button
-        data-testid="button-close-form"
-        className="btn__form-board form__btn-submit"
-        onClick={() => closingModal()}
-      >
+      <Button data-testid="button-close-form" className="btn__modal" onClick={() => closingModal()}>
         Back
-      </button>
+      </Button>
     </div>
   );
 };
