@@ -3,11 +3,13 @@ import counterReducer from '../features/counter/counterSlice';
 import userReducer from '../reducers/userReducer';
 import boardReduser from '../reducers/boardsReducer';
 import modalReducer from '../reducers/modalReducer';
+import oneBoardReducer from '../reducers/oneBoardReducer';
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
     userInfo: userReducer,
+    oneBoard: oneBoardReducer,
     boards: boardReduser,
     modal: modalReducer,
   },

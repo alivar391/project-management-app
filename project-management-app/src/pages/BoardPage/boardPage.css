@@ -1,0 +1,10 @@
+.content-board {
+    max-width: 1600px;
+    margin: 0 auto;
+    margin-top: 50px;
+    overflow: auto;
+}
+.columns {
+    display: flex;
+    justify-content: space-between;
+}
