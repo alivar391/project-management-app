@@ -28,18 +28,18 @@
 .btn-add-column {
   margin-top: 50px;
 }
-::-webkit-scrollbar {
+.columns::-webkit-scrollbar {
   height: 15px;
 }
-::-webkit-scrollbar-track {
+.columns::-webkit-scrollbar-track {
   background: #30c5ff;
   border-radius: 10px;
 }
-::-webkit-scrollbar-thumb {
+.columns::-webkit-scrollbar-thumb {
   background: rgb(0, 75, 119);
   border: 3px solid rgb(0, 75, 119);
   border-radius: 15px;
 }
-::-webkit-scrollbar-thumb:hover {
+.columns::-webkit-scrollbar-thumb:hover {
   background: rgb(132, 215, 248);
 }

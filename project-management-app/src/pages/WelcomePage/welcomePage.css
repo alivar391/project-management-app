@@ -1,0 +1,113 @@
+.welcome__page-bg {
+    background-image: url('./../../../public/assets/jpg/task.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-y: -50px;
+    background-position-x: -300px;
+    background-attachment: fixed;
+}
+.welcome__page {
+    margin: 0 auto;
+    min-height: calc(100vh - 60px);
+    max-width: 70%;
+    padding-top: 90px;
+}
+.welcome__title {
+    font-size: 72px;
+    font-family: 'Shadows Into Light Two', handwriting;
+    letter-spacing: 10px;
+}
+.welcome__subtitle {
+    font-size: 60px;
+    font-family: 'Shadows Into Light Two', handwriting;
+    margin-top: 40px;
+}
+.welcome__desc {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    font-size: 40px;
+    font-weight: 500;
+}
+.welcome__desc {
+    padding-top: 50px;
+    font-size:30px;
+}
+.welcome__about h6 {
+    margin-top: 20px;
+}
+.cards__teams {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.card__team {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 15px auto;
+    padding: 30px;
+    width: 30%;
+    background-color: rgb(249, 252, 252);
+    border-radius: 10px;
+    box-shadow: 6px 6px 16px rgb(83 86 90 / 50%);
+}
+.card__team-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.team__info {
+    display: flex;
+    flex-direction: column;
+}
+.team__info h6 {
+    font-size: 20px;
+    font-family: Forum;
+    margin-bottom: 10px;
+}
+.team__info p {
+    font-size: 18px;  
+}
+.team__info a {
+    display: block;
+    width: 110px;
+    height: 30px;
+    font-size: 18px;
+    color: #fff;
+    margin: 0px auto;
+    text-align:center;
+    border-radius: 5px;
+    transition: all .4s ease-in-out;
+    background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+    box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
+    text-decoration: none;
+    margin-top: 10px;
+} 
+@media (max-width: 768px) {
+    .welcome__title{
+        font-size: 50px;  
+    } 
+    .welcome__subtitle {
+        font-size: 36px;   
+    }
+    .welcome__desc {
+        font-size: 24px;
+    }
+    .card__team {
+        width: 100%;
+    }
+}
+@media (max-width: 500px) {
+    .welcome__title{
+        font-size: 40px;  
+    } 
+    .welcome__subtitle {
+        font-size: 24px;   
+    }
+    .welcome__desc {
+        font-size: 16px;
+    }
+}
