@@ -20,7 +20,7 @@ import './main-page.css';
 export type IOpenModalFunction = (
   modalName: string,
   modalTitle: string,
-  confirmFunction: (title: string, id: string) => void,
+  confirmFunction: (title: string, description: string, id: string) => void,
   modalButtonTxt: string,
   info: IBoard | null
 ) => void;
@@ -43,7 +43,7 @@ export function MainPage() {
   function openModal(
     modalName: string,
     modalTitle: string,
-    confirmFunction: (title: string, id: string) => void,
+    confirmFunction: (title: string, description: string, id: string) => void,
     modalButtonTxt = 'Ok',
     info: IBoard | null = null
   ) {
@@ -55,9 +55,10 @@ export function MainPage() {
     if (info) dispatch(setModalInfo(info));
   }
 
-  function createNewBoard(title: string) {
+  function createNewBoard(title: string, description: string) {
     const board = {
       title,
+      description,
     };
     dispatch(createBoard(board));
   }

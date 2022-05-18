@@ -10,7 +10,7 @@ export type INewTask = {
 
 export const addTask = createAsyncThunk(
   'tasks/add',
-  async (params: { boardId?: string; columnId: string; token: string; newTask: INewTask }) => {
+  async (params: { boardId: string; columnId: string; token: string; newTask: INewTask }) => {
     try {
       const response = await fetch(
         `${BASE_URL}/boards/${params.boardId}/columns/${params.columnId}/tasks`,

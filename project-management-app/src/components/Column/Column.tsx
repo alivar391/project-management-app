@@ -48,6 +48,7 @@ export const Column = ({ boardId, columnId, tasks, title, order }: IColumnProps)
         order: maxOrder + 1,
         description: 'desc1',
         userId: userId,
+        done: false,
       };
       await dispatch(addTask({ boardId, columnId, token, newTask }));
       dispatch(getBoard({ boardId, token }));
