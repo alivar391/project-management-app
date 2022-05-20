@@ -42,49 +42,51 @@ export function Header() {
           />
         </span>
       </Link>
-      {!token && (
-        <div className="header__button-block">
-          <Link to="/signin">
-            <span className="header__action-button">
+      <div className="header__button-block">
+        {!token && (
+          <div>
+            <Link to="/signin">
+              <span className="header__action-button">
+                <img
+                  src="./../assets/png/enter.png"
+                  alt="login-button"
+                  className="header__icon-small"
+                />
+                {t('header.login')}
+              </span>
+            </Link>
+            <Link to="/signup">
+              <span className="header__action-button">{t('header.signup')}</span>
+            </Link>
+          </div>
+        )}
+        {token && (
+          <div className="header__user-name-block">
+            <Link to="/update-user">
+              <span className="header__action-button  header__username">
+                <img
+                  src="./../assets/png/user-profile.png"
+                  alt="login-button"
+                  className="header__icon-small"
+                />
+                {userName}
+              </span>
+            </Link>
+            <span className="header__action-button" onClick={logoutUser}>
               <img
-                src="./../assets/png/enter.png"
+                src="./../assets/png/logout.png"
                 alt="login-button"
                 className="header__icon-small"
               />
-              {t('header.login')}
+              {t('header.logout')}
             </span>
-          </Link>
-          <Link to="/signup">
-            <span className="header__action-button header__signup">{t('header.signup')}</span>
-          </Link>
-        </div>
-      )}
-      {token && (
-        <div className="header__button-block">
-          <Link to="/update-user">
-            <span className="header__action-button">
-              <img
-                src="./../assets/png/user-profile.png"
-                alt="login-button"
-                className="header__icon-small"
-              />
-              {userName}
-            </span>
-          </Link>
-          <span className="header__action-button header__logout" onClick={logoutUser}>
-            <img
-              src="./../assets/png/logout.png"
-              alt="login-button"
-              className="header__icon-small"
-            />
-            {t('header.logout')}
-          </span>
-        </div>
-      )}
-      <select onChange={(e) => changeLanguage(e.target.value)}>
-        <option value="en">EN</option>
-        <option value="ru">РУС</option>
-      </select>
+          </div>
+        )}
+        <select className="header__change-lang" onChange={(e) => changeLanguage(e.target.value)}>
+          <option value="en">EN</option>
+          <option value="ru">РУС</option>
+        </select>
+      </div>
     </header>
   );
 }
