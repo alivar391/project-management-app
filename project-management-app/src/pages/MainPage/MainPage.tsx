@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { Button } from '../../components/Button/Button';
-import { Header } from '../../components/Header/Header';
 import { Spinner } from '../../components/Spinner/Spinner';
 import { getTimeOfDay } from '../../helpers/helpers';
 import { IBoard } from '../../reducers/boardsReducer';
@@ -64,7 +63,6 @@ export function MainPage() {
 
   return (
     <div>
-      <Header />
       <div className="main">
         <div className="main__header">
           <span className="main__title">
