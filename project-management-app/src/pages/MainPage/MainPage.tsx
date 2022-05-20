@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 import { useEffect } from 'react';
 import { Button } from '../../components/Button/Button';
 import { Header } from '../../components/Header/Header';
@@ -27,7 +25,6 @@ export type IOpenModalFunction = (
   info: IBoard | null
 ) => void;
 
->>>>>>> 2514510bbb2f11f5212cbffd1d65b53846cb2a64
 export function MainPage() {
   const dispatch = useAppDispatch();
   const { boards, isLoading } = useAppSelector((store) => store.boards);
@@ -67,9 +64,6 @@ export function MainPage() {
 
   return (
     <div>
-<<<<<<< HEAD
-      <p>Main Page</p>
-=======
       <Header />
       <div className="main">
         <div className="main__header">
@@ -101,7 +95,6 @@ export function MainPage() {
           )}
         </div>
       </div>
->>>>>>> 2514510bbb2f11f5212cbffd1d65b53846cb2a64
     </div>
   );
 }
