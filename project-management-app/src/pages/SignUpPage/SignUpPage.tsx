@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './signUpPage.css';
 import { Button } from '../../components/Button/Button';
 import { setSuccesRegister } from '../../reducers/userReducer';
+import { useTranslation } from 'react-i18next';
 
 export type IForm = {
   name: string;
@@ -54,12 +55,13 @@ export const SignUpPage = () => {
     await dispatch(registerUser(newUser));
     dispatch(setSuccesRegister(false));
   };
+  const { t } = useTranslation();
 
   return (
     <div className="container-form">
       <div className="container-img-register"></div>
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
-        <h2>Create account</h2>
+        <h2>{t('signUpPage.Create account')}</h2>
         <div className="namesUser">
           <Input
             register={register('login', {
@@ -67,7 +69,7 @@ export const SignUpPage = () => {
               minLength: { value: 3, message: 'Too short name' },
             })}
             nameInput={'login'}
-            textLabel={'Login'}
+            textLabel={t('signUpPage.Login')}
             datatestId={'input-login'}
             type={'text'}
             errors={errors}
@@ -78,7 +80,7 @@ export const SignUpPage = () => {
               minLength: { value: 3, message: 'Too short name' },
             })}
             nameInput={'name'}
-            textLabel={'Name'}
+            textLabel={t('signUpPage.Name')}
             datatestId={'input-name'}
             type={'text'}
             errors={errors}
@@ -93,7 +95,7 @@ export const SignUpPage = () => {
             },
           })}
           nameInput={'password'}
-          textLabel={'Password'}
+          textLabel={t('signUpPage.Password')}
           datatestId={'input-password'}
           type="password"
           errors={errors}
@@ -105,7 +107,7 @@ export const SignUpPage = () => {
             validate: (value) => value === password.current,
           })}
           nameInput={'confirm'}
-          textLabel={'Confirm Password'}
+          textLabel={t('signUpPage.Confirm Password')}
           datatestId={'input-confirm'}
           type="password"
           errors={errors}
@@ -120,19 +122,19 @@ export const SignUpPage = () => {
             },
           })}
           nameInput={'email'}
-          textLabel={'Email'}
+          textLabel={t('signUpPage.Email')}
           datatestId={'input-email'}
           type="email"
           errors={errors}
           autoComplete="off"
         ></Input>
         <div className="redirect">
-          Already have an account?{' '}
+          {t('signUpPage.Already have an account?')}
           <Link to="/signin" className="redirect-link">
-            Log In
+            {t('signUpPage.Log In')}
           </Link>
         </div>
-        <Button onClick={handleSubmit(onSubmit)}>Register</Button>
+        <Button onClick={handleSubmit(onSubmit)}>{t('signUpPage.Register')}</Button>
       </form>
       <ToastContainer position="top-right" />
     </div>

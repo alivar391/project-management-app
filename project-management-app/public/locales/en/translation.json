@@ -1,0 +1,33 @@
+{
+  "header": {
+    "login": "Log in",
+    "signup": "Sign up",
+    "logout": "Log out"
+  },
+  "signInPage" : {
+    "Log In": "Log in",
+    "Login": "Login",
+    "Password": "Password",
+    "New User? ": "New User? ",
+    "Sign Up": "Sign Up"
+  },
+  "signUpPage" : {
+    "Create account": "Create account",
+    "Login": "Login",
+    "Name": "Name",
+    "Password": "Password",
+    "Confirm Password": "Confirm Password",
+    "Email": "Email",
+    "Already have an account?": "Already have an account?",
+    "Log In": "Log in",
+    "Register": "Register"
+  },
+  "updateUserPage" : {
+    "Update User Info": "Update User Info",
+    "Login": "Login",
+    "Name": "Name",
+    "Password": "Password",
+    "Delete User": "Delete User",
+    "Update info": "Update info"
+  }
+}
