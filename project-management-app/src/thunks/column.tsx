@@ -46,3 +46,24 @@ export const deleteColumn = createAsyncThunk(
     }
   }
 );
+
+export const getColumn = createAsyncThunk(
+  'column/get',
+  async (params: { boardId: string; columnId: string; token: string }) => {
+    try {
+      const response = await fetch(
+        `${BASE_URL}/boards/${params.boardId}/columns/${params.columnId}`,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${params.token}`,
+          },
+        }
+      );
+      const data = await response.json();
+      return data;
+    } catch {
+      throw new Error('Error, please try again later');
+    }
+  }
+);

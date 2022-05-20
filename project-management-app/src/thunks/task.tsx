@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { BASE_URL } from '../constants/constants';
+import { ITask } from '../reducers/oneBoardReducer';
 
 export type INewTask = {
   title: string;
@@ -47,64 +48,85 @@ export const deleteTask = createAsyncThunk(
       const data = await response.json();
       return data;
     } catch {
-      console.log('catch');
       throw new Error('Error, please try again later');
     }
-  }
-);
-/* 
-export const authUser = createAsyncThunk('user/auth', async (login: ILogin) => {
-  const response = await fetch(`${BASE_URL}/signin`, {
-    method: 'POST',
-    body: JSON.stringify(login),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  if (response.status === 403) {
-    throw new Error('User was not founded or incorrect password!');
-  }
-  if (!response.ok) {
-    throw new Error('Error, please try again later');
-  }
-  const data = await response.json();
-  return data;
-});
-
-export const updateUser = createAsyncThunk(
-  'user/update',
-  async (params: { userId: string; newUser: IUser; token: string }) => {
-    const response = await fetch(`${BASE_URL}/users/${params.userId}`, {
-      method: 'PUT',
-      body: JSON.stringify(params.newUser),
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${params.token}`,
-      },
-    });
-    if (response.status === 404) {
-      throw new Error('User was not founded!');
-    }
-    if (!response.ok) {
-      throw new Error('Error, please try again later');
-    }
-    const data = await response.json();
-    return data;
   }
 );
 
-export const deleteUser = createAsyncThunk(
-  'user/delete',
-  async (params: { userId: string; token: string }) => {
-    const response = await fetch(`${BASE_URL}/users/${params.userId}`, {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${params.token}`,
-      },
-    });
-    if (!response.ok) {
+export const changedOrderTask = createAsyncThunk(
+  'tasks/put',
+  async (params: {
+    boardId: string;
+    columnId: string;
+    direction: string;
+    task: ITask;
+    token: string;
+    userId: string;
+  }) => {
+    const updatedTask = {
+      title: params.task.title,
+      done: params.task.done,
+      order: params.direction === 'minus' ? params.task.order - 1 : params.task.order + 1,
+      description: params.task.description,
+      userId: params.userId,
+      boardId: params.boardId,
+      columnId: params.columnId,
+    };
+    try {
+      const response = await fetch(
+        `${BASE_URL}/boards/${params.boardId}/columns/${params.columnId}/tasks/${params.task.id}`,
+        {
+          method: 'PUT',
+          body: JSON.stringify(updatedTask),
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${params.token}`,
+          },
+        }
+      );
+      const data = await response.json();
+      return data;
+    } catch {
       throw new Error('Error, please try again later');
     }
   }
 );
- */
+
+export const changedOrderOneTask = createAsyncThunk(
+  'tasks/put',
+  async (params: {
+    boardId: string;
+    columnId: string;
+    order: number;
+    task: ITask;
+    token: string;
+    userId: string;
+  }) => {
+    const updatedTask = {
+      title: params.task.title,
+      done: params.task.done,
+      order: params.order,
+      description: params.task.description,
+      userId: params.userId,
+      boardId: params.boardId,
+      columnId: params.columnId,
+    };
+    try {
+      const response = await fetch(
+        `${BASE_URL}/boards/${params.boardId}/columns/${params.columnId}/tasks/${params.task.id}`,
+        {
+          method: 'PUT',
+          body: JSON.stringify(updatedTask),
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${params.token}`,
+          },
+        }
+      );
+      const data = await response.json();
+      return data;
+    } catch {
+      throw new Error('Error, please try again later');
+    }
+  }
+);

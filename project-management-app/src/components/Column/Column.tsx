@@ -44,7 +44,7 @@ export const Column = ({ boardId, columnId, tasks, title, order }: IColumnProps)
     const maxOrder = getMaxOrderTask(columnId);
     if (token && boardId) {
       const newTask = {
-        title: 'task1',
+        title: `task - ${maxOrder + 1}`,
         order: maxOrder + 1,
         description: 'desc1',
         userId: userId,
