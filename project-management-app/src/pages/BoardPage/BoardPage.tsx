@@ -56,13 +56,13 @@ export function BoardPage() {
   };
 
   return (
-    <>
+    <div className="board-page__inner">
       <div className="content-board">
         <Board />
       </div>
       <Button onClick={onAddColumn} className={'btn-add-column'}>
         Add Column
       </Button>
-    </>
+    </div>
   );
 }

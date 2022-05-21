@@ -1,3 +1,6 @@
+.board-page__inner {
+    min-height: calc(100vh - 170px);
+}
 .content-board {
     max-width: 1600px;
     margin: 0 auto;
