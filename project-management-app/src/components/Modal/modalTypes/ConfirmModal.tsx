@@ -7,7 +7,7 @@ export const ConfirmModal = () => {
   const dispatch = useAppDispatch();
 
   const closingModal = () => {
-    confirmFunction('', changingInfo.id);
+    confirmFunction('', '', changingInfo.id);
     dispatch(toggleActive());
   };
 

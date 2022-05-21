@@ -5,7 +5,7 @@ interface IModalState {
   name: string;
   text: string;
   title: string;
-  confirmFunction: (title: string, id: string) => void;
+  confirmFunction: (title: string, description: string, id: string) => void;
   changingInfo: {
     id: string;
     title: string;
