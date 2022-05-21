@@ -66,15 +66,17 @@ export function MainPage() {
     <div>
       <div className="main">
         <div className="main__header">
-          <span className="main__title">
-            {getTimeOfDay(new Date().getHours())}, {name || 'user'}!
-          </span>
-          <Button
-            className="main__btn"
-            onClick={() => openModal('FormModal', 'Create a board', createNewBoard, 'Create')}
-          >
-            Create board
-          </Button>
+          <div className="main__header-inner">
+            <span className="main__title">
+              {getTimeOfDay(new Date().getHours())}, {name || 'user'}!
+            </span>
+            <Button
+              className="main__btn"
+              onClick={() => openModal('FormModal', 'Create a board', createNewBoard, 'Create')}
+            >
+              Create board
+            </Button>
+          </div>
         </div>
         <div className="main__cont">
           {isLoading ? (

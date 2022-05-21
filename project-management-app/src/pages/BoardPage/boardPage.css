@@ -1,10 +1,11 @@
 .board-page__inner {
-    min-height: calc(100vh - 170px);
+    min-height: calc(100vh - 120px);
+    background: linear-gradient(to top, #eaf3ff, #5f9fee);
 }
 .content-board {
     max-width: 1600px;
     margin: 0 auto;
-    margin-top: 50px;
+    padding-top: 50px;
     overflow: auto;
 }
 .columns {

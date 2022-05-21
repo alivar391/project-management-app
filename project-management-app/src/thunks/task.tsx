@@ -46,7 +46,6 @@ export const deleteTask = createAsyncThunk(
       const data = await response.json();
       return data;
     } catch {
-      console.log('catch');
       throw new Error('Error, please try again later');
     }
   }
