@@ -21,17 +21,11 @@ export function BoardPage() {
   }, []);
 
   const onAddColumn = async () => {
-    let max = 0;
-    if (board.columns.length > 0) {
-      const maxOrder = board.columns.reduce((acc, curr) => (acc.order > curr.order ? acc : curr));
-      max = maxOrder.order;
-    }
     const newColumn = {
       title: 'Done1',
-      order: max + 1,
     };
-    await dispatch(addColumn({ boardId, token, newColumn }));
     if (token && boardId) {
+      await dispatch(addColumn({ boardId, token, newColumn }));
       await dispatch(getBoard({ boardId, token }));
     }
   };

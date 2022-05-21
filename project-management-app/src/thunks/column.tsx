@@ -3,12 +3,11 @@ import { BASE_URL } from '../constants/constants';
 
 export type INewColumn = {
   title: string;
-  order: number;
 };
 
 export const addColumn = createAsyncThunk(
   'column/add',
-  async (params: { boardId?: string; token: string; newColumn: INewColumn }) => {
+  async (params: { boardId: string; token: string; newColumn: INewColumn }) => {
     try {
       const response = await fetch(`${BASE_URL}/boards/${params.boardId}/columns`, {
         method: 'POST',

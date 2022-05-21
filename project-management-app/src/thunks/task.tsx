@@ -3,7 +3,6 @@ import { BASE_URL } from '../constants/constants';
 
 export type INewTask = {
   title: string;
-  order: number;
   description: string;
   userId: string;
 };

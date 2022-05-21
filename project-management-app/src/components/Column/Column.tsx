@@ -1,5 +1,5 @@
 import { ITask } from '../../reducers/oneBoardReducer';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { useAppDispatch } from '../../store/hooks';
 import { getBoard } from '../../thunks/board';
 import { addTask } from '../../thunks/task';
 import jwt_decode from 'jwt-decode';
@@ -21,17 +21,6 @@ export const Column = ({ boardId, columnId, tasks, title, order }: IColumnProps)
   const token = localStorage.getItem('token') as string;
   const decodedToken: IUserFromToken = jwt_decode(token as string);
   const userId = decodedToken.userId;
-  const boards = useAppSelector((state) => state.oneBoard.board);
-
-  const getMaxOrderTask = (columnId: string) => {
-    let max = 0;
-    const needsCol = boards.columns.find((column) => column.id === columnId);
-    if (needsCol && needsCol.tasks.length > 0) {
-      const maxTask = needsCol.tasks.reduce((acc, curr) => (acc.order > curr.order ? acc : curr));
-      max = maxTask.order;
-    }
-    return max;
-  };
 
   const onDeleteColumn = async (columnId: string) => {
     if (token && boardId) {
@@ -41,11 +30,9 @@ export const Column = ({ boardId, columnId, tasks, title, order }: IColumnProps)
   };
 
   const onAddTask = async (boardId: string, columnId: string) => {
-    const maxOrder = getMaxOrderTask(columnId);
     if (token && boardId) {
       const newTask = {
         title: 'task1',
-        order: maxOrder + 1,
         description: 'desc1',
         userId: userId,
       };
