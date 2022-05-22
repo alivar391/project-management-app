@@ -29,5 +29,17 @@
     "Password": "Password",
     "Delete User": "Delete User",
     "Update info": "Update info"
+  },
+  "welcomePage" : {
+    "Productivity Planner": "Productivity Planner",
+    "Set goals and actually conquer them": "Set goals and actually conquer them",
+    "description": "The key to achieving your goals is to break them down into bite-sized action steps. Want to make $5k/month… what products or services are you going to offer? Want 1000 Instagram followers… how are you going to connect with them? Start with your yearly goals and then break them down into quarters, months, weeks, and days, all with checklists to keep you on track.",
+    "About us": "About us",
+    "Anton Tananka": "Anton Tananka",
+    "Team-lead": "Team-lead",
+    "More in CV": "More in CV",
+    "Diana Byben": "Diana Byben",
+    "Frontend Developer": "Frontend Developer",
+    "Anastasia Arzhanik": "Anastasia Arzhanik"
   }
 }
