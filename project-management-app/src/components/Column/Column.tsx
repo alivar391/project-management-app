@@ -1,23 +1,24 @@
-import { ITask } from '../../reducers/oneBoardReducer';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { IColumn, ITask } from '../../reducers/oneBoardReducer';
 import { useAppDispatch } from '../../store/hooks';
 import { getBoard } from '../../thunks/board';
 import { addTask } from '../../thunks/task';
 import jwt_decode from 'jwt-decode';
 import { Task } from '../Task/Task';
-import './column.css';
 import { IUserFromToken } from '../../pages/UpdateUserPage/UpdateUserPage';
-import { deleteColumn } from '../../thunks/column';
+import { deleteColumn, updateColumn } from '../../thunks/column';
+import { useRef } from 'react';
+import { DragSourceMonitor, useDrag, useDrop } from 'react-dnd';
+import './column.css';
 
 type IColumnProps = {
   boardId: string;
-  columnId: string;
-  title: string;
-  tasks: ITask[];
-  order: number;
+  column: IColumn;
 };
 
-export const Column = ({ boardId, columnId, tasks, title, order }: IColumnProps) => {
+export const Column = ({ boardId, column }: IColumnProps) => {
   const dispatch = useAppDispatch();
+  const { id, title, order, tasks } = column;
   const token = localStorage.getItem('token') as string;
   const decodedToken: IUserFromToken = jwt_decode(token as string);
   const userId = decodedToken.userId;
@@ -28,6 +29,35 @@ export const Column = ({ boardId, columnId, tasks, title, order }: IColumnProps)
       dispatch(getBoard({ boardId, token }));
     }
   };
+
+  const ref = useRef<HTMLLIElement>(null);
+
+  const [{ opacity }, dragRef] = useDrag({
+    type: 'column',
+    item: { column, boardId },
+    collect: (monitor: DragSourceMonitor) => ({
+      opacity: monitor.isDragging() ? 0.5 : 1,
+    }),
+  });
+
+  const [, dropRef] = useDrop({
+    accept: 'column',
+    async drop(item: IColumnProps) {
+      if (item.column.id === column.id) {
+        return;
+      } else {
+        const newColumn = {
+          title: item.column.title,
+          order: column.order,
+        };
+        const { id } = item.column;
+        await dispatch(updateColumn({ boardId, id, token, newColumn }));
+        await dispatch(getBoard({ boardId, token }));
+      }
+    },
+  });
+
+  dragRef(dropRef(ref));
 
   const onAddTask = async (boardId: string, columnId: string) => {
     if (token && boardId) {
@@ -43,17 +73,17 @@ export const Column = ({ boardId, columnId, tasks, title, order }: IColumnProps)
 
   return (
     <>
-      <li key={columnId} className="column" id={`column-${order}`}>
+      <li key={id} className="column" id={`column-${order}`} ref={ref} style={{ opacity }}>
         <h3>{title}</h3>
-        <div className="delete-column" onClick={() => onDeleteColumn(columnId)}></div>
+        <div className="delete-column" onClick={() => onDeleteColumn(id)}></div>
         <ul className="tasks">
           {tasks.length > 0
             ? tasks.map((task: ITask) => {
-                return <Task key={task.id} boardId={boardId} columnId={columnId} task={task} />;
+                return <Task key={task.id} boardId={boardId} columnId={id} task={task} />;
               })
             : null}
         </ul>
-        <div onClick={() => onAddTask(boardId, columnId)}>Add Task</div>
+        <div onClick={() => onAddTask(boardId, id)}>Add Task</div>
       </li>
     </>
   );

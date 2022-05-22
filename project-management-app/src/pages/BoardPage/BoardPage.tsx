@@ -38,16 +38,7 @@ export function BoardPage() {
         <DndProvider backend={HTML5Backend}>
           <ul className="columns">
             {board.columns.map((column: IColumn) => {
-              return (
-                <Column
-                  key={column.id}
-                  title={column.title}
-                  boardId={boardId}
-                  columnId={column.id}
-                  tasks={column.tasks}
-                  order={column.order}
-                />
-              );
+              return <Column key={column.id} boardId={boardId} column={column} />;
             })}
           </ul>
         </DndProvider>

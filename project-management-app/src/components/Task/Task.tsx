@@ -11,7 +11,6 @@ export type ITaskProps = {
   boardId: string;
   columnId: string;
   task: ITask;
-  order?: number;
 };
 
 export const Task = ({ boardId, columnId, task }: ITaskProps) => {
@@ -44,6 +43,7 @@ export const Task = ({ boardId, columnId, task }: ITaskProps) => {
         };
         const { id } = item.task;
         await dispatch(updateTask({ boardId, columnId, id, token, newTask }));
+        await dispatch(getBoard({ boardId, token }));
       }
     },
   });
