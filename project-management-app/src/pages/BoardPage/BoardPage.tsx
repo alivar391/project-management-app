@@ -1,4 +1,6 @@
 import { useEffect } from 'react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useParams } from 'react-router';
 import { Button } from '../../components/Button/Button';
 import { Column } from '../../components/Column/Column';
@@ -33,7 +35,7 @@ export function BoardPage() {
   const Board = () => {
     if (boardId && board.columns.length > 0) {
       return (
-        <>
+        <DndProvider backend={HTML5Backend}>
           <ul className="columns">
             {board.columns.map((column: IColumn) => {
               return (
@@ -48,7 +50,7 @@ export function BoardPage() {
               );
             })}
           </ul>
-        </>
+        </DndProvider>
       );
     } else {
       return null;

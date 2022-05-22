@@ -5,6 +5,9 @@ export type INewTask = {
   title: string;
   description: string;
   userId: string;
+  order?: number;
+  boardId?: string;
+  columnId?: string;
 };
 
 export const addTask = createAsyncThunk(
@@ -18,6 +21,33 @@ export const addTask = createAsyncThunk(
           body: JSON.stringify(params.newTask),
           headers: {
             'Content-Type': 'application/json',
+            Authorization: `Bearer ${params.token}`,
+          },
+        }
+      );
+      const data = await response.json();
+      return data;
+    } catch {
+      throw new Error('Error, please try again later');
+    }
+  }
+);
+export const updateTask = createAsyncThunk(
+  'tasks/update',
+  async (params: {
+    boardId: string;
+    columnId: string;
+    id: string;
+    token: string;
+    newTask: INewTask;
+  }) => {
+    try {
+      const response = await fetch(
+        `${BASE_URL}/boards/${params.boardId}/columns/${params.columnId}/tasks/${params.id}`,
+        {
+          method: 'PUT',
+          headers: {
+            body: JSON.stringify(params.newTask),
             Authorization: `Bearer ${params.token}`,
           },
         }

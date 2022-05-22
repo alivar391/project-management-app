@@ -2,11 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 import { getBoard } from '../thunks/board';
 import { addTask, deleteTask } from '../thunks/task';
 
-export type IFiles = {
-  filename: string;
-  fileSize: number;
-};
-
 export type ITask = {
   id: string;
   title: string;
@@ -14,7 +9,6 @@ export type ITask = {
   done: boolean;
   description: string;
   userId: string;
-  files: IFiles[];
 };
 
 export type IColumn = {
