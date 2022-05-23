@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { IColumn, ITask } from '../../reducers/oneBoardReducer';
 import { useAppDispatch } from '../../store/hooks';
 import { getBoard } from '../../thunks/board';
-import { addTask } from '../../thunks/task';
+import { addTask, updateTask } from '../../thunks/task';
 import jwt_decode from 'jwt-decode';
-import { Task } from '../Task/Task';
+import { ITaskProps, Task } from '../Task/Task';
 import { IUserFromToken } from '../../pages/UpdateUserPage/UpdateUserPage';
 import { deleteColumn, updateColumn } from '../../thunks/column';
 import { useRef } from 'react';
@@ -41,17 +40,32 @@ export const Column = ({ boardId, column }: IColumnProps) => {
   });
 
   const [, dropRef] = useDrop({
-    accept: 'column',
-    async drop(item: IColumnProps) {
-      if (item.column.id === column.id) {
-        return;
+    accept: ['column', 'task'],
+    async drop(item: IColumnProps | ITaskProps) {
+      if ((item as IColumnProps).column) {
+        if ((item as IColumnProps).column.id === column.id) {
+          return;
+        } else {
+          const newColumn = {
+            title: (item as IColumnProps).column.title,
+            order: column.order,
+          };
+          const { id } = (item as IColumnProps).column;
+          await dispatch(updateColumn({ boardId, id, token, newColumn }));
+          await dispatch(getBoard({ boardId, token }));
+        }
       } else {
-        const newColumn = {
-          title: item.column.title,
-          order: column.order,
+        const newTask = {
+          title: (item as ITaskProps).task.title,
+          order: (item as ITaskProps).task.order,
+          description: (item as ITaskProps).task.description,
+          userId: (item as ITaskProps).task.userId,
+          boardId,
+          columnId: column.id,
         };
-        const { id } = item.column;
-        await dispatch(updateColumn({ boardId, id, token, newColumn }));
+        const { id } = (item as ITaskProps).task;
+        const oldColumnId = (item as ITaskProps).columnId;
+        await dispatch(updateTask({ boardId, oldColumnId, id, token, newTask }));
         await dispatch(getBoard({ boardId, token }));
       }
     },
@@ -62,7 +76,7 @@ export const Column = ({ boardId, column }: IColumnProps) => {
   const onAddTask = async (boardId: string, columnId: string) => {
     if (token && boardId) {
       const newTask = {
-        title: 'task8',
+        title: 'task2',
         description: 'desc1',
         userId: userId,
       };
