@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-
-import { IUser } from '../pages/UpdateUserPage/UpdateUserPage';
+import jwt_decode from 'jwt-decode';
+import { IUser, IUserFromToken } from '../pages/UpdateUserPage/UpdateUserPage';
 import { authUser, registerUser, updateUser, deleteUser } from '../thunks/user';
 
 export type UserState = {
@@ -66,6 +66,8 @@ const userReducer = createSlice({
         toast.error(action.error.message);
       })
       .addCase(authUser.fulfilled, (state, action) => {
+        const decodedToken: IUserFromToken = jwt_decode(action.payload.token as string);
+        state.userInfo.name = decodedToken.login;
         toast.success(messagesForUser.auth);
         state.token = action.payload;
       })
