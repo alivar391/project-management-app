@@ -36,14 +36,14 @@ export const updateTask = createAsyncThunk(
   'tasks/update',
   async (params: {
     boardId: string;
-    columnId: string;
+    oldColumnId: string;
     id: string;
     token: string;
     newTask: INewTask;
   }) => {
     try {
       const response = await fetch(
-        `${BASE_URL}/boards/${params.boardId}/columns/${params.columnId}/tasks/${params.id}`,
+        `${BASE_URL}/boards/${params.boardId}/columns/${params.oldColumnId}/tasks/${params.id}`,
         {
           method: 'PUT',
           body: JSON.stringify(params.newTask),

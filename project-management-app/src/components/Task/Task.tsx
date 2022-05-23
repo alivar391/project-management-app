@@ -17,7 +17,7 @@ export const Task = ({ boardId, columnId, task }: ITaskProps) => {
   const dispatch = useAppDispatch();
   const token = localStorage.getItem('token') as string;
   const { id } = task;
-  const ref = useRef<HTMLLIElement>(null);
+  const refTask = useRef<HTMLLIElement>(null);
 
   const [{ opacity }, dragRef] = useDrag({
     type: 'task',
@@ -39,16 +39,17 @@ export const Task = ({ boardId, columnId, task }: ITaskProps) => {
           description: item.task.description,
           userId: item.task.userId,
           boardId,
-          columnId: item.columnId,
+          columnId: columnId,
         };
         const { id } = item.task;
-        await dispatch(updateTask({ boardId, columnId, id, token, newTask }));
+        const oldColumnId = item.columnId;
+        await dispatch(updateTask({ boardId, oldColumnId, id, token, newTask }));
         await dispatch(getBoard({ boardId, token }));
       }
     },
   });
 
-  dragRef(dropRef(ref));
+  dragRef(dropRef(refTask));
 
   const onDeleteTask = async () => {
     //confirm Modal
@@ -61,7 +62,7 @@ export const Task = ({ boardId, columnId, task }: ITaskProps) => {
       key={task.id}
       className="task_title"
       id={`task-${task.order}`}
-      ref={ref}
+      ref={refTask}
       style={{ opacity }}
     >
       <div className="delete-task" onClick={onDeleteTask}></div>

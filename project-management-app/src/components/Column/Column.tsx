@@ -30,7 +30,7 @@ export const Column = ({ boardId, column }: IColumnProps) => {
     }
   };
 
-  const ref = useRef<HTMLLIElement>(null);
+  const refColumn = useRef<HTMLLIElement>(null);
 
   const [{ opacity }, dragRef] = useDrag({
     type: 'column',
@@ -57,12 +57,12 @@ export const Column = ({ boardId, column }: IColumnProps) => {
     },
   });
 
-  dragRef(dropRef(ref));
+  dragRef(dropRef(refColumn));
 
   const onAddTask = async (boardId: string, columnId: string) => {
     if (token && boardId) {
       const newTask = {
-        title: 'task1',
+        title: 'task8',
         description: 'desc1',
         userId: userId,
       };
@@ -73,7 +73,7 @@ export const Column = ({ boardId, column }: IColumnProps) => {
 
   return (
     <>
-      <li key={id} className="column" id={`column-${order}`} ref={ref} style={{ opacity }}>
+      <li key={id} className="column" id={`column-${order}`} ref={refColumn} style={{ opacity }}>
         <h3>{title}</h3>
         <div className="delete-column" onClick={() => onDeleteColumn(id)}></div>
         <ul className="tasks">
