@@ -41,5 +41,20 @@
     "Diana Byben": "Диана Бубен",
     "Frontend Developer": "Фронт-энд разработчик",
     "Anastasia Arzhanik": "Анастасия Аржаник"
+  },
+  "mainPage" : {
+    "Good nigth": "Доброй ночи",
+    "Good morning": "Доброе утро",
+    "Good afternoon": "Добрый день",
+    "Good evening": "Добрый вечер",
+    "Create board": "Создать доску",
+    "No boards yet,": "Еще нет досок,",
+    "create a new one": "создай новую",
+    "Create a board": "Создать доску",
+    "Create": "Создать"
+  },
+  "modal" : {
+    "Back": "Назад",
+    "Title": "Заголовок:"
   }
 }

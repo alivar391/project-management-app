@@ -3,7 +3,8 @@ import { useAppSelector } from '../store/hooks';
 
 export const RequireAuth = ({ children }: { children: JSX.Element }) => {
   const location = useLocation();
-  const token = useAppSelector((state) => state.userInfo.token.token);
+  // const token = useAppSelector((state) => state.userInfo.token.token);
+  const token = localStorage.getItem('token') as string;
   if (!token) {
     return <Navigate to="/welcome" state={{ from: location }} />;
   }

@@ -41,5 +41,20 @@
     "Diana Byben": "Diana Byben",
     "Frontend Developer": "Frontend Developer",
     "Anastasia Arzhanik": "Anastasia Arzhanik"
+  },
+  "mainPage" : {
+    "Good nigth": "Good nigth",
+    "Good morning": "Good morning",
+    "Good afternoon": "Good afternoon",
+    "Good evening": "Good evening",
+    "Create board": "Create board",
+    "No boards yet,": "No boards yet,",
+    "create a new one": "create a new one",
+    "Create a board": "Create a board",
+    "Create": "Create"
+  },
+  "modal" : {
+    "Back": "Back",
+    "Title": "Title:"
   }
 }
