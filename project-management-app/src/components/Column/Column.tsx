@@ -54,10 +54,11 @@ export const Column = ({ boardId, column }: IColumnProps) => {
           await dispatch(updateColumn({ boardId, id, token, newColumn }));
           await dispatch(getBoard({ boardId, token }));
         }
-      } else {
+      } else if ((item as ITaskProps).task && column.tasks.length === 0) {
+        const order = column.tasks.length > 0 ? (item as ITaskProps).task.order : 1;
         const newTask = {
           title: (item as ITaskProps).task.title,
-          order: (item as ITaskProps).task.order,
+          order,
           description: (item as ITaskProps).task.description,
           userId: (item as ITaskProps).task.userId,
           boardId,
