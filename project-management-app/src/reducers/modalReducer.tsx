@@ -11,7 +11,7 @@ interface IModalState {
   name: string;
   text: string;
   title: string;
-  confirmFunction: (info: IInfo) => void;
+  confirmFunction: (info: IInfo) => void | (() => void);
   changingInfo: {
     id: string;
     title: string;
