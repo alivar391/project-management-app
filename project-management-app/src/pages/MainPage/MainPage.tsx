@@ -28,7 +28,7 @@ export type IOpenModalFunction = (
 export function MainPage() {
   const dispatch = useAppDispatch();
   const { boards, isLoading } = useAppSelector((store) => store.boards);
-  const { name } = useAppSelector((store) => store.userInfo.userInfo);
+  const userName = useAppSelector((state) => state.userInfo.userInfo.login);
 
   useEffect(() => {
     dispatch(getBoards());
@@ -67,7 +67,8 @@ export function MainPage() {
       <div className="main">
         <div className="main__header">
           <span className="main__title">
-            {getTimeOfDay(new Date().getHours())}, {name || 'user'}!
+            {getTimeOfDay(new Date().getHours())},{' '}
+            {`${userName![0].toUpperCase()}${userName?.slice(1)}` || 'user'}!
           </span>
           <Button
             className="main__btn"
