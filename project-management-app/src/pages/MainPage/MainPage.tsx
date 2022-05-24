@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '../../components/Button/Button';
 import { Spinner } from '../../components/Spinner/Spinner';
 import { getTimeOfDay } from '../../helpers/helpers';
@@ -27,8 +28,8 @@ export type IOpenModalFunction = (
 export function MainPage() {
   const dispatch = useAppDispatch();
   const { boards, isLoading } = useAppSelector((store) => store.boards);
-  const { name } = useAppSelector((store) => store.userInfo.userInfo);
-
+  const { login } = useAppSelector((store) => store.userInfo.userInfo);
+  const { t } = useTranslation();
   useEffect(() => {
     dispatch(getBoards());
   }, []);
@@ -66,13 +67,21 @@ export function MainPage() {
       <div className="main">
         <div className="main__header">
           <span className="main__title">
-            {getTimeOfDay(new Date().getHours())}, {name || 'user'}!
+            {t(`mainPage.${getTimeOfDay(new Date().getHours())}`)}
+            {`, ${login}`}
           </span>
           <Button
             className="main__btn"
-            onClick={() => openModal('FormModal', 'Create a board', createNewBoard, 'Create')}
+            onClick={() =>
+              openModal(
+                'FormModal',
+                t('mainPage.Create a board'),
+                createNewBoard,
+                t('mainPage.Create')
+              )
+            }
           >
-            Create board
+            {t('mainPage.Create board')}
           </Button>
         </div>
         <div className="main__cont">
@@ -82,11 +91,18 @@ export function MainPage() {
             makeBoards(boards)
           ) : (
             <p>
-              No boards yet,
+              {t('mainPage.No boards yet,')}
               <span
-                onClick={() => openModal('FormModal', 'Create a board', createNewBoard, 'Create')}
+                onClick={() =>
+                  openModal(
+                    'FormModal',
+                    t('mainPage.Create a board'),
+                    createNewBoard,
+                    t('mainPage.Create')
+                  )
+                }
               >
-                create a new one
+                {t('mainPage.create a new one')}
               </span>
               ?
             </p>

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { toggleActive } from '../../../reducers/modalReducer';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { Button } from '../../Button/Button';
@@ -10,6 +11,7 @@ export const ConfirmModal = () => {
     confirmFunction('', changingInfo.id);
     dispatch(toggleActive());
   };
+  const { t } = useTranslation();
 
   return (
     <div className="modal__cont" onClick={(e) => e.stopPropagation()}>
@@ -18,7 +20,7 @@ export const ConfirmModal = () => {
         {text}
       </Button>
       <Button className="btn__modal" onClick={() => dispatch(toggleActive())}>
-        Back
+        {t('modal.Back')}
       </Button>
     </div>
   );
