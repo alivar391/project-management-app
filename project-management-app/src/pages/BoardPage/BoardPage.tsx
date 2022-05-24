@@ -4,6 +4,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useParams } from 'react-router';
 import { Button } from '../../components/Button/Button';
 import { Column } from '../../components/Column/Column';
+import { Spinner } from '../../components/Spinner/Spinner';
 import { IColumn } from '../../reducers/oneBoardReducer';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getBoard } from '../../thunks/board';
@@ -14,7 +15,7 @@ export function BoardPage() {
   const { boardId } = useParams();
   const token = localStorage.getItem('token') as string;
   const dispatch = useAppDispatch();
-  const board = useAppSelector((state) => state.oneBoard.board);
+  const { board, isLoading } = useAppSelector((state) => state.oneBoard);
 
   useEffect(() => {
     if (token && boardId) {
@@ -50,9 +51,7 @@ export function BoardPage() {
 
   return (
     <div className="board-page__inner">
-      <div className="content-board">
-        <Board />
-      </div>
+      <div className="content-board">{isLoading ? <Spinner /> : <Board />}</div>
       <Button onClick={onAddColumn} className={'btn-add-column'}>
         Add Column
       </Button>

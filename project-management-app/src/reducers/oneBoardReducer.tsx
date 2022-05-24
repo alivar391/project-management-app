@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getBoard } from '../thunks/board';
-import { addTask, deleteTask } from '../thunks/task';
+import { addTask, deleteTask, updateTask } from '../thunks/task';
 
 export type ITask = {
   id: string;
@@ -23,6 +23,7 @@ export type BoardState = {
     title: string;
     columns: IColumn[];
   };
+  isLoading: boolean;
 };
 
 const initialState: BoardState = {
@@ -31,6 +32,7 @@ const initialState: BoardState = {
     title: '',
     columns: [],
   },
+  isLoading: false,
 };
 
 const oneBoardReducer = createSlice({
@@ -41,10 +43,27 @@ const oneBoardReducer = createSlice({
     builder
       .addCase(getBoard.fulfilled, (state, action) => {
         state.board = action.payload;
+        state.isLoading = false;
       })
-      .addCase(getBoard.rejected, (state, action) => {})
+      .addCase(getBoard.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(getBoard.rejected, (state, action) => {
+        state.isLoading = false;
+      })
       .addCase(addTask.fulfilled, (state, action) => {})
-      .addCase(addTask.rejected, (state, action) => {})
+      .addCase(addTask.rejected, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(updateTask.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(updateTask.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(updateTask.rejected, (state, action) => {
+        state.isLoading = false;
+      })
       .addCase(deleteTask.fulfilled, (state, action) => {})
       .addCase(deleteTask.rejected, (_, action) => {});
   },
