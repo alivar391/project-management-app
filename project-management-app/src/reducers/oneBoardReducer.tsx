@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getBoard } from '../thunks/board';
+import { updateColumn } from '../thunks/column';
 import { addTask, deleteTask, updateTask } from '../thunks/task';
 
 export type ITask = {
@@ -53,6 +54,15 @@ const oneBoardReducer = createSlice({
       })
       .addCase(addTask.fulfilled, (state, action) => {})
       .addCase(addTask.rejected, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(updateColumn.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(updateColumn.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(updateColumn.rejected, (state, action) => {
         state.isLoading = false;
       })
       .addCase(updateTask.fulfilled, (state, action) => {

@@ -27,8 +27,8 @@
   background-image: url('./../../../public/assets/svg/delete.svg');
   background-repeat: no-repeat;
   background-size: cover;
-  right: 14px;
-  top: 10px;
+  right: 9px;
+  top: 20px;
   cursor: pointer;
 }
 .btn-add-column {
@@ -51,3 +51,7 @@
 .tasks::-webkit-scrollbar-thumb:hover {
   background: rgb(230, 244, 245);
 } 
+.column__header {
+  display: flex;
+  justify-content: space-between;
+}

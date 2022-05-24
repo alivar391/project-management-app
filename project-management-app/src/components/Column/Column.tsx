@@ -6,9 +6,10 @@ import jwt_decode from 'jwt-decode';
 import { ITaskProps, Task } from '../Task/Task';
 import { IUserFromToken } from '../../pages/UpdateUserPage/UpdateUserPage';
 import { deleteColumn, updateColumn } from '../../thunks/column';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { DragSourceMonitor, useDrag, useDrop } from 'react-dnd';
 import './column.css';
+import { InputTitle } from './titleColumn/TitleColumn';
 
 type IColumnProps = {
   boardId: string;
@@ -21,6 +22,7 @@ export const Column = ({ boardId, column }: IColumnProps) => {
   const token = localStorage.getItem('token') as string;
   const decodedToken: IUserFromToken = jwt_decode(token as string);
   const userId = decodedToken.userId;
+  const [isInput, setIsInput] = useState(false);
 
   const onDeleteColumn = async (columnId: string) => {
     if (token && boardId) {
@@ -89,8 +91,14 @@ export const Column = ({ boardId, column }: IColumnProps) => {
   return (
     <>
       <li key={id} className="column" id={`column-${order}`} ref={refColumn} style={{ opacity }}>
-        <h3>{title}</h3>
-        <div className="delete-column" onClick={() => onDeleteColumn(id)}></div>
+        <div className="column__header">
+          {isInput ? (
+            <InputTitle setIsInput={setIsInput} column={column} boardId={boardId} />
+          ) : (
+            <h3 onClick={() => setIsInput(true)}>{title}</h3>
+          )}
+          <div className="delete-column" onClick={() => onDeleteColumn(id)}></div>
+        </div>
         <ul className="tasks">
           {tasks.length > 0
             ? tasks.map((task: ITask) => {
