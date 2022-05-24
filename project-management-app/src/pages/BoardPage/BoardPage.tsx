@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
 import { Button } from '../../components/Button/Button';
 import { Column } from '../../components/Column/Column';
@@ -26,6 +27,7 @@ export function BoardPage() {
   const token = localStorage.getItem('token') as string;
   const dispatch = useAppDispatch();
   const board = useAppSelector((state) => state.oneBoard.board);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (token && boardId) {
@@ -106,7 +108,7 @@ export function BoardPage() {
         }
         className={'btn-add-column'}
       >
-        Add Column
+        {t('boardPage.Add Column')}
       </Button>
     </>
   );

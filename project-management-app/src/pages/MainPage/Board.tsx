@@ -4,6 +4,7 @@ import { deleteBoard, updateBoard } from '../../thunks/boards';
 import { IOpenModalFunction } from './MainPage';
 import { Link } from 'react-router-dom';
 import { IInfo } from '../../reducers/modalReducer';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   board: IBoard;
@@ -12,6 +13,7 @@ interface IProps {
 
 export function Board({ board, openModal }: IProps) {
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   function updateNewBoard({ title, id }: IInfo) {
     const board = {
@@ -33,7 +35,15 @@ export function Board({ board, openModal }: IProps) {
       <div className="board__buttns">
         <span
           className="icon-button"
-          onClick={() => openModal('FormModal', 'Change a board', updateNewBoard, 'Update', board)}
+          onClick={() =>
+            openModal(
+              'FormModal',
+              t('board.Change a board'),
+              updateNewBoard,
+              t('board.Update'),
+              board
+            )
+          }
         >
           <img src="./../assets/jpg/pencil.png" alt="icon-file" />
         </span>
@@ -42,9 +52,9 @@ export function Board({ board, openModal }: IProps) {
           onClick={() =>
             openModal(
               'ConfirmModal',
-              'Do you realy want to delete a board?',
+              t('board.Do you realy want to delete a board?'),
               deleteNewBoard,
-              'Ok',
+              t('board.Ok'),
               board
             )
           }

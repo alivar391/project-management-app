@@ -16,6 +16,7 @@ import {
   setModalInfo,
   toggleActive,
 } from '../../reducers/modalReducer';
+import { useTranslation } from 'react-i18next';
 
 type IColumnProps = {
   boardId: string;
@@ -31,6 +32,7 @@ export const Column = ({ boardId, columnId, tasks, title, order }: IColumnProps)
   const decodedToken: IUserFromToken = jwt_decode(token as string);
   const userId = decodedToken.userId;
   const boards = useAppSelector((state) => state.oneBoard.board);
+  const { t } = useTranslation();
 
   function openModal(
     modalName: string,
@@ -103,7 +105,7 @@ export const Column = ({ boardId, columnId, tasks, title, order }: IColumnProps)
             : null}
         </ul>
         <div onClick={() => openModal('BigFormModal', 'Create a new task', onAddTask, 'Create')}>
-          Add Task
+          {t('column.Add Task')}
         </div>
       </li>
     </>
