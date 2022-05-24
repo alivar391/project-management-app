@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import update from 'immutability-helper';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useParams } from 'react-router';
@@ -15,12 +16,17 @@ export function BoardPage() {
   const token = localStorage.getItem('token') as string;
   const dispatch = useAppDispatch();
   const board = useAppSelector((state) => state.oneBoard.board);
+  const [columns, setColumns] = useState(board.columns);
 
   useEffect(() => {
     if (token && boardId) {
       dispatch(getBoard({ boardId, token }));
     }
   }, []);
+
+  useEffect(() => {
+    setColumns(board.columns);
+  }, [board]);
 
   const onAddColumn = async () => {
     const newColumn = {
@@ -37,9 +43,7 @@ export function BoardPage() {
       return (
         <DndProvider backend={HTML5Backend}>
           <ul className="columns">
-            {board.columns.map((column: IColumn) => {
-              return <Column key={column.id} boardId={boardId} column={column} />;
-            })}
+            {columns.map((column: IColumn, index: number) => rendercolumn(column, index))}
           </ul>
         </DndProvider>
       );
@@ -47,6 +51,30 @@ export function BoardPage() {
       return null;
     }
   };
+
+  const moveColumn = useCallback((dragIndex: number, hoverIndex: number) => {
+    console.log('move', dragIndex, hoverIndex);
+    setColumns((columns: IColumn[]) =>
+      update(columns, {
+        $splice: [
+          [dragIndex, 1],
+          [hoverIndex, 0, columns[dragIndex] as IColumn],
+        ],
+      })
+    );
+  }, []);
+
+  const rendercolumn = useCallback((column: IColumn, index: number) => {
+    return (
+      <Column
+        key={column.id}
+        boardId={boardId as string}
+        column={column}
+        index={index}
+        moveColumn={moveColumn}
+      />
+    );
+  }, []);
 
   return (
     <div className="board-page__inner">
