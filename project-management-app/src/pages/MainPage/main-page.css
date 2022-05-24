@@ -1,7 +1,7 @@
 .main {
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(to top, #eaf3ff, #5f9fee);
+  background: linear-gradient(to top, #eaf3ff, #83b4f0);
   font-size: 23px;
   font-family: monospace;
   font-weight: 600;
@@ -15,7 +15,6 @@
   align-items: center;
   min-height: 100px;
   padding: 10px;
-  background-color: #454b4d27;
 }
 
 @media (max-width: 600px) {

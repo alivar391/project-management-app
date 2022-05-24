@@ -17,7 +17,7 @@ export const Task = ({ boardId, columnId, task }: ITaskProps) => {
   const onDeleteTask = async () => {
     //confirm Modal
     await dispatch(deleteTask({ boardId, columnId, id, token }));
-    dispatch(getBoard({ boardId, token }));
+    dispatch(getBoard({ boardId }));
   };
   return (
     <li key={task.id} className="task_title" id={`task-${task.order}`}>

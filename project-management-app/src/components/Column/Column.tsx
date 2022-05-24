@@ -36,7 +36,7 @@ export const Column = ({ boardId, columnId, tasks, title, order }: IColumnProps)
   const onDeleteColumn = async (columnId: string) => {
     if (token && boardId) {
       await dispatch(deleteColumn({ boardId, columnId, token }));
-      dispatch(getBoard({ boardId, token }));
+      dispatch(getBoard({ boardId }));
     }
   };
 
@@ -50,7 +50,7 @@ export const Column = ({ boardId, columnId, tasks, title, order }: IColumnProps)
         userId: userId,
       };
       await dispatch(addTask({ boardId, columnId, token, newTask }));
-      dispatch(getBoard({ boardId, token }));
+      dispatch(getBoard({ boardId }));
     }
   };
 
