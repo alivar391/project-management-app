@@ -56,5 +56,17 @@
   "modal" : {
     "Back": "Back",
     "Title": "Title:"
+  },
+  "board" : {
+    "Change a board": "Change a board",
+    "Update": "Update",
+    "Do you realy want to delete a board?": "Do you realy want to delete a board?",
+    "Ok": "Ok"
+  },
+  "boardPage" : {
+    "Add Column": "Add Column"
+  },
+  "column" : {
+    "Add Task": "Add Task"
   }
 }

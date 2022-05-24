@@ -56,5 +56,17 @@
   "modal" : {
     "Back": "Назад",
     "Title": "Заголовок:"
+  },
+  "board" : {
+    "Change a board": "Изменить доску",
+    "Update": "Изменить",
+    "Do you realy want to delete a board?": "Вы действительно хотите удалить доску?",
+    "Ok": "Да"
+  },
+  "boardPage" : {
+    "Add Column": "Добавить колонку"
+  },
+  "column" : {
+    "Add Task": "Добавить таск"
   }
 }

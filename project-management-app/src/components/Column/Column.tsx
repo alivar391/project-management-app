@@ -7,6 +7,7 @@ import { Task } from '../Task/Task';
 import './column.css';
 import { IUserFromToken } from '../../pages/UpdateUserPage/UpdateUserPage';
 import { deleteColumn } from '../../thunks/column';
+import { useTranslation } from 'react-i18next';
 
 type IColumnProps = {
   boardId: string;
@@ -22,6 +23,7 @@ export const Column = ({ boardId, columnId, tasks, title, order }: IColumnProps)
   const decodedToken: IUserFromToken = jwt_decode(token as string);
   const userId = decodedToken.userId;
   const boards = useAppSelector((state) => state.oneBoard.board);
+  const { t } = useTranslation();
 
   const getMaxOrderTask = (columnId: string) => {
     let max = 0;
@@ -66,7 +68,7 @@ export const Column = ({ boardId, columnId, tasks, title, order }: IColumnProps)
               })
             : null}
         </ul>
-        <div onClick={() => onAddTask(boardId, columnId)}>Add Task</div>
+        <div onClick={() => onAddTask(boardId, columnId)}>{t('column.Add Task')}</div>
       </li>
     </>
   );
