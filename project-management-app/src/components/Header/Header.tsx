@@ -26,7 +26,7 @@ export function Header() {
 
   const logoutUser = () => {
     dispatch(setToken({ token: null }));
-    localStorage.setItem('token', '');
+    localStorage.clear();
     navigate('/welcome', { replace: true });
   };
 
