@@ -1,11 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+export type IInfo = {
+  id: string;
+  title?: string;
+};
+
 interface IModalState {
   activeModal: boolean;
   name: string;
   text: string;
   title: string;
-  confirmFunction: (title: string, id: string) => void;
+  confirmFunction: (info: IInfo) => void;
   changingInfo: {
     id: string;
     title: string;

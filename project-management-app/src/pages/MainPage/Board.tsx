@@ -3,6 +3,7 @@ import { useAppDispatch } from '../../store/hooks';
 import { deleteBoard, updateBoard } from '../../thunks/boards';
 import { IOpenModalFunction } from './MainPage';
 import { Link } from 'react-router-dom';
+import { IInfo } from '../../reducers/modalReducer';
 
 interface IProps {
   board: IBoard;
@@ -12,16 +13,16 @@ interface IProps {
 export function Board({ board, openModal }: IProps) {
   const dispatch = useAppDispatch();
 
-  function updateNewBoard(title: string, id: string) {
+  function updateNewBoard({ title, id }: IInfo) {
     const board = {
-      title,
+      title: title || '',
       id,
     };
     dispatch(updateBoard(board));
   }
 
-  function deleteNewBoard(title = '', id: string) {
-    dispatch(deleteBoard(id));
+  function deleteNewBoard(info: IInfo) {
+    dispatch(deleteBoard(info.id));
   }
 
   return (

@@ -7,6 +7,7 @@ import {
   changeModalName,
   changeModalText,
   changeModalTitle,
+  IInfo,
   setModalInfo,
   toggleActive,
 } from '../../reducers/modalReducer';
@@ -35,7 +36,7 @@ export function BoardPage() {
   function openModal(
     modalName: string,
     modalTitle: string,
-    confirmFunction: (title: string, id: string) => void,
+    confirmFunction: (info: IInfo) => void,
     modalButtonTxt = 'Ok',
     info: IBoardInfo | null = null
   ) {
@@ -56,14 +57,14 @@ export function BoardPage() {
     return max;
   }
 
-  const onAddColumn = async (title: string, id: string) => {
+  const onAddColumn = async ({ title, id }: IInfo) => {
     const max = countOrder();
     const boardId = id;
     const newColumn = {
-      title,
+      title: title || '',
       order: max + 1,
     };
-    await dispatch(addColumn({ id, newColumn }));
+    await dispatch(addColumn({ boardId, newColumn }));
     if (token && boardId) {
       await dispatch(getBoard({ boardId }));
     }

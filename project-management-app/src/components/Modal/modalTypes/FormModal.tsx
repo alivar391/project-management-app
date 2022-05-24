@@ -23,7 +23,11 @@ export const FormModal = () => {
   });
 
   const onSubmit: SubmitHandler<IBoard> = (data: IBoard) => {
-    confirmFunction(data.title, changingInfo.id);
+    const info = {
+      title: data.title,
+      id: changingInfo.id,
+    };
+    confirmFunction(info);
     closingModal();
   };
 

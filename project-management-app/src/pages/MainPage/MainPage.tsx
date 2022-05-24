@@ -8,6 +8,7 @@ import {
   changeModalName,
   changeModalText,
   changeModalTitle,
+  IInfo,
   setModalInfo,
   toggleActive,
 } from '../../reducers/modalReducer';
@@ -19,7 +20,7 @@ import './main-page.css';
 export type IOpenModalFunction = (
   modalName: string,
   modalTitle: string,
-  confirmFunction: (title: string, id: string) => void,
+  confirmFunction: (info: IInfo) => void,
   modalButtonTxt: string,
   info: IBoard | null
 ) => void;
@@ -42,7 +43,7 @@ export function MainPage() {
   function openModal(
     modalName: string,
     modalTitle: string,
-    confirmFunction: (title: string, id: string) => void,
+    confirmFunction: (info: IInfo) => void,
     modalButtonTxt = 'Ok',
     info: IBoard | null = null
   ) {
@@ -54,9 +55,9 @@ export function MainPage() {
     if (info) dispatch(setModalInfo(info));
   }
 
-  function createNewBoard(title: string) {
+  function createNewBoard({ title }: IInfo) {
     const board = {
-      title,
+      title: title || '',
     };
     dispatch(createBoard(board));
   }

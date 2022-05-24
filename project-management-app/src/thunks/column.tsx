@@ -8,9 +8,9 @@ export type INewColumn = {
 
 export const addColumn = createAsyncThunk(
   'column/add',
-  async (params: { id?: string; newColumn: INewColumn }) => {
+  async (params: { boardId?: string; newColumn: INewColumn }) => {
     try {
-      const response = await fetch(`${BASE_URL}/boards/${params.id}/columns`, {
+      const response = await fetch(`${BASE_URL}/boards/${params.boardId}/columns`, {
         method: 'POST',
         body: JSON.stringify(params.newColumn),
         headers: {
@@ -35,7 +35,7 @@ export const deleteColumn = createAsyncThunk(
         {
           method: 'DELETE',
           headers: {
-            Authorization: `Bearer ${params.token}`,
+            Authorization: `Bearer ${TOKEN}`,
           },
         }
       );
