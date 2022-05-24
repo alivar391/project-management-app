@@ -89,7 +89,11 @@ export const Column = ({ boardId, column }: IColumnProps) => {
   return (
     <>
       <li key={id} className="column" id={`column-${order}`} ref={refColumn} style={{ opacity }}>
-        <h3>{title}</h3>
+        <h3>
+          {title}
+          {'__'}
+          {order}
+        </h3>
         <div className="delete-column" onClick={() => onDeleteColumn(id)}></div>
         <ul className="tasks">
           {tasks.length > 0

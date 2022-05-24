@@ -67,6 +67,8 @@ export const Task = ({ boardId, columnId, task }: ITaskProps) => {
     >
       <div className="delete-task" onClick={onDeleteTask}></div>
       {task.title}
+      {'__'}
+      {task.order}
     </li>
   );
 };
