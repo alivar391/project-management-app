@@ -4,6 +4,7 @@ import { getBoards, createBoard, updateBoard, deleteBoard } from '../thunks/boar
 export interface IBoard {
   id: string | undefined;
   title: string;
+  description?: string;
 }
 
 export interface INewBoard {

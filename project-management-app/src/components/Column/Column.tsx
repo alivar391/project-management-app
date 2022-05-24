@@ -65,13 +65,13 @@ export const Column = ({ boardId, columnId, tasks, title, order }: IColumnProps)
     }
   };
 
-  const onAddTask = async (boardId: string, columnId: string) => {
+  const onAddTask = async ({ title, description }: IInfo) => {
     const maxOrder = getMaxOrderTask(columnId);
     if (token && boardId) {
       const newTask = {
-        title: 'task1',
+        title: title || '',
         order: maxOrder + 1,
-        description: 'desc1',
+        description: description || 'No description',
         userId: userId,
       };
       await dispatch(addTask({ boardId, columnId, token, newTask }));
@@ -102,7 +102,9 @@ export const Column = ({ boardId, columnId, tasks, title, order }: IColumnProps)
               })
             : null}
         </ul>
-        <div onClick={() => onAddTask(boardId, columnId)}>Add Task</div>
+        <div onClick={() => openModal('BigFormModal', 'Create a new task', onAddTask, 'Create')}>
+          Add Task
+        </div>
       </li>
     </>
   );

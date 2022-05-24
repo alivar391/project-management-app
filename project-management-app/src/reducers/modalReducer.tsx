@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export type IInfo = {
   id: string;
   title?: string;
+  description?: string;
 };
 
 interface IModalState {
