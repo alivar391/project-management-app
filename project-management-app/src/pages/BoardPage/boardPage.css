@@ -1,6 +1,6 @@
 .board-page__inner {
     min-height: calc(100vh - 120px);
-    background: linear-gradient(to top, #eaf3ff, #5f9fee);
+    background-image: url('./../../../public/assets/jpg/board3.png');
 }
 .content-board {
     max-width: 1600px;
