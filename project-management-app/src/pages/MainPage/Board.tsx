@@ -3,6 +3,7 @@ import { useAppDispatch } from '../../store/hooks';
 import { deleteBoard, updateBoard } from '../../thunks/boards';
 import { IOpenModalFunction } from './MainPage';
 import { Link } from 'react-router-dom';
+import { IInfo } from '../../reducers/modalReducer';
 import { useTranslation } from 'react-i18next';
 
 interface IProps {
@@ -14,17 +15,17 @@ export function Board({ board, openModal }: IProps) {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
-  function updateNewBoard(title: string, description: string, id: string) {
+  function updateNewBoard({ title, id, description }: IInfo) {
     const board = {
-      title,
-      description,
+      title: title || '',
+      description: description || 'No description',
       id,
     };
     dispatch(updateBoard(board));
   }
 
-  function deleteNewBoard(title = '', id: string) {
-    dispatch(deleteBoard(id));
+  function deleteNewBoard(info: IInfo) {
+    dispatch(deleteBoard(info.id));
   }
 
   return (

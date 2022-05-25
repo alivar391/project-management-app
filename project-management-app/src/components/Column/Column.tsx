@@ -5,6 +5,16 @@ import { addTask, updateTask } from '../../thunks/task';
 import jwt_decode from 'jwt-decode';
 import { ITaskProps, Task } from '../Task/Task';
 import { IUserFromToken } from '../../pages/UpdateUserPage/UpdateUserPage';
+import { deleteColumn } from '../../thunks/column';
+import {
+  changeModalFunction,
+  changeModalName,
+  changeModalText,
+  changeModalTitle,
+  IInfo,
+  setModalInfo,
+  toggleActive,
+} from '../../reducers/modalReducer';
 import { deleteColumn, updateColumn } from '../../thunks/column';
 import { useRef, useState } from 'react';
 import { DragSourceMonitor, useDrag, useDrop } from 'react-dnd';
@@ -26,10 +36,26 @@ export const Column = ({ boardId, column }: IColumnProps) => {
   const [isInput, setIsInput] = useState(false);
   const { t } = useTranslation();
 
-  const onDeleteColumn = async (columnId: string) => {
+  function openModal(
+    modalName: string,
+    modalTitle: string,
+    confirmFunction: (info: IInfo) => void,
+    modalButtonTxt = 'Ok',
+    info: IInfo | null = null
+  ) {
+    dispatch(changeModalName(modalName));
+    dispatch(changeModalTitle(modalTitle));
+    dispatch(changeModalText(modalButtonTxt));
+    dispatch(changeModalFunction(confirmFunction));
+    dispatch(toggleActive());
+    if (info) dispatch(setModalInfo(info));
+  }
+
+  const onDeleteColumn = async ({ id }: IInfo) => {
+    const columnId = id;
     if (token && boardId) {
       await dispatch(deleteColumn({ boardId, columnId, token }));
-      dispatch(getBoard({ boardId, token }));
+      dispatch(getBoard({ boardId }));
     }
   };
 
@@ -78,15 +104,15 @@ export const Column = ({ boardId, column }: IColumnProps) => {
 
   dragRef(dropRef(refColumn));
 
-  const onAddTask = async (boardId: string, columnId: string) => {
+  const onAddTask = async ({ title, description }: IInfo) => {
     if (token && boardId) {
       const newTask = {
-        title: 'task2',
-        description: 'desc1',
+        title: title || '',
+        description: description || 'No description',
         userId: userId,
       };
       await dispatch(addTask({ boardId, columnId, token, newTask }));
-      dispatch(getBoard({ boardId, token }));
+      dispatch(getBoard({ boardId }));
     }
   };
 
@@ -99,7 +125,17 @@ export const Column = ({ boardId, column }: IColumnProps) => {
           ) : (
             <h3 onClick={() => setIsInput(true)}>{title}</h3>
           )}
-          <div className="delete-column" onClick={() => onDeleteColumn(id)}></div>
+          <div className="delete-column" 
+            onClick={() =>
+              openModal(
+                'ConfirmModal',
+                'Do you realy want to delete a column?',
+                onDeleteColumn,
+                'Ok',
+                { id: columnId }
+              )
+            }
+           ></div>
         </div>
         <ul className="tasks">
           {tasks.length > 0
@@ -108,7 +144,9 @@ export const Column = ({ boardId, column }: IColumnProps) => {
               })
             : null}
         </ul>
-        <div onClick={() => onAddTask(boardId, id)}>{t('column.Add Task')}</div>
+        <div onClick={() => openModal('BigFormModal', 'Create a new task', onAddTask, 'Create')}>
+          {t('column.Add Task')}
+        </div>
       </li>
     </>
   );

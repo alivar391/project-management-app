@@ -5,12 +5,25 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
 import { Button } from '../../components/Button/Button';
 import { Column } from '../../components/Column/Column';
+import {
+  changeModalFunction,
+  changeModalName,
+  changeModalText,
+  changeModalTitle,
+  IInfo,
+  setModalInfo,
+  toggleActive,
+} from '../../reducers/modalReducer';
 import { Spinner } from '../../components/Spinner/Spinner';
 import { IColumn } from '../../reducers/oneBoardReducer';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getBoard } from '../../thunks/board';
 import { addColumn } from '../../thunks/column';
 import './boardPage.css';
+
+interface IBoardInfo {
+  id: string | undefined;
+}
 
 export function BoardPage() {
   const { boardId } = useParams();
@@ -21,17 +34,32 @@ export function BoardPage() {
 
   useEffect(() => {
     if (token && boardId) {
-      dispatch(getBoard({ boardId, token }));
+      dispatch(getBoard({ boardId }));
     }
   }, []);
 
-  const onAddColumn = async () => {
+  function openModal(
+    modalName: string,
+    modalTitle: string,
+    confirmFunction: (info: IInfo) => void,
+    modalButtonTxt = 'Ok',
+    info: IBoardInfo | null = null
+  ) {
+    dispatch(changeModalName(modalName));
+    dispatch(changeModalTitle(modalTitle));
+    dispatch(changeModalText(modalButtonTxt));
+    dispatch(changeModalFunction(confirmFunction));
+    dispatch(toggleActive());
+    if (info) dispatch(setModalInfo(info));
+  }
+  
+  const onAddColumn = async ({ title, id }: IInfo) => {
+    const boardId = id;
     const newColumn = {
-      title: 'Done1',
-    };
+      title: title || '',
     if (token && boardId) {
-      await dispatch(addColumn({ boardId, token, newColumn }));
-      await dispatch(getBoard({ boardId, token }));
+      await dispatch(addColumn({ boardId, newColumn }));
+      await dispatch(getBoard({ boardId }));
     }
   };
 
@@ -54,7 +82,11 @@ export function BoardPage() {
   return (
     <div className="board-page__inner">
       <div className="content-board">{isLoading ? <Spinner /> : <Board />}</div>
-      <Button onClick={onAddColumn} className={'btn-add-column'}>
+      <Button 
+        onClick={() =>
+          openModal('FormModal', 'Create a new column', onAddColumn, 'Create', { id: boardId })
+        }
+        className={'btn-add-column'}>
         {t('boardPage.Add Column')}
       </Button>
     </div>

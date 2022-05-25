@@ -1,5 +1,4 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
 import { IBoard } from '../../../reducers/boardsReducer';
 import {
   changeModalFunction,
@@ -12,10 +11,9 @@ import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { Button } from '../../Button/Button';
 import Input from '../../Input/Input';
 
-export const FormModal = () => {
+export const BigFormModal = () => {
   const dispatch = useAppDispatch();
   const { text, title, confirmFunction, changingInfo } = useAppSelector((state) => state.modal);
-  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -27,8 +25,8 @@ export const FormModal = () => {
   const onSubmit: SubmitHandler<IBoard> = (data: IBoard) => {
     const info = {
       title: data.title,
-      description: data.description,
       id: changingInfo.id,
+      description: data.description,
     };
     confirmFunction(info);
     closingModal();
@@ -52,16 +50,13 @@ export const FormModal = () => {
             minLength: { value: 3, message: 'Too short title' },
           })}
           nameInput={'title'}
-          textLabel={t('modal.Title')}
+          textLabel={'Title:'}
           datatestId={'input-title'}
           type={'text'}
           errors={errors}
         />
         <Input
-          register={register('description', {
-            required: 'Requered',
-            minLength: { value: 3, message: 'Too short title' },
-          })}
+          register={register('description')}
           nameInput={'description'}
           textLabel={'Description:'}
           datatestId={'input-description'}
@@ -77,7 +72,7 @@ export const FormModal = () => {
         </Button>
       </form>
       <Button data-testid="button-close-form" className="btn__modal" onClick={() => closingModal()}>
-        {t('modal.Back')}
+        Back
       </Button>
     </div>
   );

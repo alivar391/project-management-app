@@ -9,6 +9,7 @@ import {
   changeModalName,
   changeModalText,
   changeModalTitle,
+  IInfo,
   setModalInfo,
   toggleActive,
 } from '../../reducers/modalReducer';
@@ -20,7 +21,7 @@ import './main-page.css';
 export type IOpenModalFunction = (
   modalName: string,
   modalTitle: string,
-  confirmFunction: (title: string, description: string, id: string) => void,
+  confirmFunction: (info: IInfo) => void,
   modalButtonTxt: string,
   info: IBoard | null
 ) => void;
@@ -28,7 +29,7 @@ export type IOpenModalFunction = (
 export function MainPage() {
   const dispatch = useAppDispatch();
   const { boards, isLoading } = useAppSelector((store) => store.boards);
-  const { login } = useAppSelector((store) => store.userInfo.userInfo);
+  const userName = useAppSelector((state) => state.userInfo.userInfo.login);
   const { t } = useTranslation();
   useEffect(() => {
     dispatch(getBoards());
@@ -43,7 +44,7 @@ export function MainPage() {
   function openModal(
     modalName: string,
     modalTitle: string,
-    confirmFunction: (title: string, description: string, id: string) => void,
+    confirmFunction: (info: IInfo) => void,
     modalButtonTxt = 'Ok',
     info: IBoard | null = null
   ) {
@@ -55,10 +56,10 @@ export function MainPage() {
     if (info) dispatch(setModalInfo(info));
   }
 
-  function createNewBoard(title: string, description: string) {
+  function createNewBoard({ title, description }: IInfo) {
     const board = {
-      title,
-      description,
+      title: title || '',
+      description: description || 'No description',
     };
     dispatch(createBoard(board));
   }
@@ -70,7 +71,7 @@ export function MainPage() {
           <div className="main__header-inner">
             <span className="main__title">
               {t(`mainPage.${getTimeOfDay(new Date().getHours())}`)}
-              {`, ${login}`}
+            {`, ${userName![0].toUpperCase()}${userName?.slice(1)}` || 'user'}!
             </span>
             <Button
               className="main__btn"

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { BASE_URL } from '../constants/constants';
+import { BASE_URL, TOKEN } from '../constants/constants';
 
 export type INewColumn = {
   title: string;
@@ -8,14 +8,14 @@ export type INewColumn = {
 
 export const addColumn = createAsyncThunk(
   'column/add',
-  async (params: { boardId: string; token: string; newColumn: INewColumn }) => {
+  async (params: { boardId?: string; newColumn: INewColumn }) => {
     try {
       const response = await fetch(`${BASE_URL}/boards/${params.boardId}/columns`, {
         method: 'POST',
         body: JSON.stringify(params.newColumn),
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${params.token}`,
+          Authorization: `Bearer ${TOKEN}`,
         },
       });
       const data = await response.json();
@@ -54,7 +54,7 @@ export const deleteColumn = createAsyncThunk(
         {
           method: 'DELETE',
           headers: {
-            Authorization: `Bearer ${params.token}`,
+            Authorization: `Bearer ${TOKEN}`,
           },
         }
       );

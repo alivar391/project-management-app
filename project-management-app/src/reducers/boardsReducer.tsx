@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { getBoards, createBoard, updateBoard, deleteBoard } from '../thunks/boards';
 
 export interface IBoard {
-  id: string;
+  id: string | undefined;
   title: string;
   description: string;
 }

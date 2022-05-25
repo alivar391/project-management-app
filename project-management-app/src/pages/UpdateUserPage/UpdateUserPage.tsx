@@ -8,6 +8,14 @@ import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router';
 import { Button } from '../../components/Button/Button';
 import { useTranslation } from 'react-i18next';
+import {
+  changeModalFunction,
+  changeModalName,
+  changeModalText,
+  changeModalTitle,
+  setModalInfo,
+  toggleActive,
+} from '../../reducers/modalReducer';
 
 export type IForm = {
   name: string;
@@ -57,8 +65,7 @@ export const UpdateUserPage = () => {
     }
   };
 
-  const onDelete = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
+  const onDelete = () => {
     const token = tokenUser as string;
     if (token) {
       const decodedToken: IUserFromToken = jwt_decode(token as string);
@@ -68,6 +75,21 @@ export const UpdateUserPage = () => {
       toast.error('Invalid token, login and try again');
     }
   };
+
+  function openModal(
+    modalName: string,
+    modalTitle: string,
+    confirmFunction: (e: MouseEvent) => void,
+    modalButtonTxt = 'Ok',
+    info = null
+  ) {
+    dispatch(changeModalName(modalName));
+    dispatch(changeModalTitle(modalTitle));
+    dispatch(changeModalText(modalButtonTxt));
+    dispatch(changeModalFunction(confirmFunction));
+    dispatch(toggleActive());
+    if (info) dispatch(setModalInfo(info));
+  }
 
   return (
     <div className="container-form form-update">
@@ -114,7 +136,13 @@ export const UpdateUserPage = () => {
           autoComplete="off"
         />
         <div className="buttons-form-update">
-          <Button className={'btn-warn'} onClick={onDelete}>
+          <Button
+            className={'btn-warn'}
+            onClick={(e) => {
+              e.preventDefault();
+              openModal('ConfirmModal', 'Do you realy want to delete a user?', onDelete, 'Ok');
+            }}
+          >
             {t('updateUserPage.Delete User')}
           </Button>
           <Button onClick={handleSubmit(onSubmit)}>{t('updateUserPage.Update info')}</Button>
