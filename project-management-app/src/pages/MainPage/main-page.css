@@ -1,20 +1,23 @@
 .main {
   width: 100%;
-  min-height: 100vh;
-  background: linear-gradient(to top, #eaf3ff, #83b4f0);
+  min-height: calc(100vh - 120px);
+  background: linear-gradient(to top, #eaf3ff, #5f9fee);
   font-size: 23px;
   font-family: monospace;
   font-weight: 600;
   letter-spacing: 2px;
   color: #fff;
 }
-
 .main__header {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
   min-height: 100px;
   padding: 10px;
+}
+.main__header-inner {
+  max-width: 70%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
 }
 
 @media (max-width: 600px) {
@@ -35,6 +38,8 @@
   gap: 100px 30px;
   justify-content: space-between;
   padding: 20px 10px;
+  max-width: 70%;
+  margin: 0 auto;
 }
 
 .main__cont span {

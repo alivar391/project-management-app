@@ -15,9 +15,10 @@ export function Board({ board, openModal }: IProps) {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
-  function updateNewBoard({ title, id }: IInfo) {
+  function updateNewBoard({ title, id, description }: IInfo) {
     const board = {
       title: title || '',
+      description: description || 'No description',
       id,
     };
     dispatch(updateBoard(board));

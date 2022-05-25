@@ -8,9 +8,8 @@
 }
 .welcome__page {
     margin: 0 auto;
-    min-height: calc(100vh - 60px);
+    min-height: calc(100vh - 120px);
     max-width: 70%;
-    padding-top: 90px;
 }
 .welcome__title {
     font-size: 72px;

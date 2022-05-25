@@ -1,10 +1,9 @@
-import { ITask } from '../../reducers/oneBoardReducer';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { IColumn, ITask } from '../../reducers/oneBoardReducer';
+import { useAppDispatch } from '../../store/hooks';
 import { getBoard } from '../../thunks/board';
-import { addTask } from '../../thunks/task';
+import { addTask, updateTask } from '../../thunks/task';
 import jwt_decode from 'jwt-decode';
-import { Task } from '../Task/Task';
-import './column.css';
+import { ITaskProps, Task } from '../Task/Task';
 import { IUserFromToken } from '../../pages/UpdateUserPage/UpdateUserPage';
 import { deleteColumn } from '../../thunks/column';
 import {
@@ -16,22 +15,25 @@ import {
   setModalInfo,
   toggleActive,
 } from '../../reducers/modalReducer';
+import { deleteColumn, updateColumn } from '../../thunks/column';
+import { useRef, useState } from 'react';
+import { DragSourceMonitor, useDrag, useDrop } from 'react-dnd';
+import { InputTitle } from './titleColumn/TitleColumn';
 import { useTranslation } from 'react-i18next';
+import './column.css';
 
 type IColumnProps = {
   boardId: string;
-  columnId: string;
-  title: string;
-  tasks: ITask[];
-  order: number;
+  column: IColumn;
 };
 
-export const Column = ({ boardId, columnId, tasks, title, order }: IColumnProps) => {
+export const Column = ({ boardId, column }: IColumnProps) => {
   const dispatch = useAppDispatch();
+  const { id, title, order, tasks } = column;
   const token = localStorage.getItem('token') as string;
   const decodedToken: IUserFromToken = jwt_decode(token as string);
   const userId = decodedToken.userId;
-  const boards = useAppSelector((state) => state.oneBoard.board);
+  const [isInput, setIsInput] = useState(false);
   const { t } = useTranslation();
 
   function openModal(
@@ -49,16 +51,6 @@ export const Column = ({ boardId, columnId, tasks, title, order }: IColumnProps)
     if (info) dispatch(setModalInfo(info));
   }
 
-  const getMaxOrderTask = (columnId: string) => {
-    let max = 0;
-    const needsCol = boards.columns.find((column) => column.id === columnId);
-    if (needsCol && needsCol.tasks.length > 0) {
-      const maxTask = needsCol.tasks.reduce((acc, curr) => (acc.order > curr.order ? acc : curr));
-      max = maxTask.order;
-    }
-    return max;
-  };
-
   const onDeleteColumn = async ({ id }: IInfo) => {
     const columnId = id;
     if (token && boardId) {
@@ -67,12 +59,55 @@ export const Column = ({ boardId, columnId, tasks, title, order }: IColumnProps)
     }
   };
 
+  const refColumn = useRef<HTMLLIElement>(null);
+
+  const [{ opacity }, dragRef] = useDrag({
+    type: 'column',
+    item: { column, boardId },
+    collect: (monitor: DragSourceMonitor) => ({
+      opacity: monitor.isDragging() ? 0.5 : 1,
+    }),
+  });
+
+  const [, dropRef] = useDrop({
+    accept: ['column', 'task'],
+    async drop(item: IColumnProps | ITaskProps) {
+      if ((item as IColumnProps).column) {
+        if ((item as IColumnProps).column.id === column.id) {
+          return;
+        } else {
+          const newColumn = {
+            title: (item as IColumnProps).column.title,
+            order: column.order,
+          };
+          const { id } = (item as IColumnProps).column;
+          await dispatch(updateColumn({ boardId, id, token, newColumn }));
+          await dispatch(getBoard({ boardId, token }));
+        }
+      } else if ((item as ITaskProps).task && column.tasks.length === 0) {
+        const order = column.tasks.length > 0 ? (item as ITaskProps).task.order : 1;
+        const newTask = {
+          title: (item as ITaskProps).task.title,
+          order,
+          description: (item as ITaskProps).task.description,
+          userId: (item as ITaskProps).task.userId,
+          boardId,
+          columnId: column.id,
+        };
+        const { id } = (item as ITaskProps).task;
+        const oldColumnId = (item as ITaskProps).columnId;
+        await dispatch(updateTask({ boardId, oldColumnId, id, token, newTask }));
+        await dispatch(getBoard({ boardId, token }));
+      }
+    },
+  });
+
+  dragRef(dropRef(refColumn));
+
   const onAddTask = async ({ title, description }: IInfo) => {
-    const maxOrder = getMaxOrderTask(columnId);
     if (token && boardId) {
       const newTask = {
         title: title || '',
-        order: maxOrder + 1,
         description: description || 'No description',
         userId: userId,
       };
@@ -83,24 +118,29 @@ export const Column = ({ boardId, columnId, tasks, title, order }: IColumnProps)
 
   return (
     <>
-      <li key={columnId} className="column" id={`column-${order}`}>
-        <h3>{title}</h3>
-        <div
-          className="delete-column"
-          onClick={() =>
-            openModal(
-              'ConfirmModal',
-              'Do you realy want to delete a column?',
-              onDeleteColumn,
-              'Ok',
-              { id: columnId }
-            )
-          }
-        ></div>
+      <li key={id} className="column" id={`column-${order}`} ref={refColumn} style={{ opacity }}>
+        <div className="column__header">
+          {isInput ? (
+            <InputTitle setIsInput={setIsInput} column={column} boardId={boardId} />
+          ) : (
+            <h3 onClick={() => setIsInput(true)}>{title}</h3>
+          )}
+          <div className="delete-column" 
+            onClick={() =>
+              openModal(
+                'ConfirmModal',
+                'Do you realy want to delete a column?',
+                onDeleteColumn,
+                'Ok',
+                { id: columnId }
+              )
+            }
+           ></div>
+        </div>
         <ul className="tasks">
           {tasks.length > 0
             ? tasks.map((task: ITask) => {
-                return <Task key={task.id} boardId={boardId} columnId={columnId} task={task} />;
+                return <Task key={task.id} boardId={boardId} columnId={id} task={task} />;
               })
             : null}
         </ul>

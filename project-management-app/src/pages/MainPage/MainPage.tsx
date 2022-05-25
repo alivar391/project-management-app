@@ -56,9 +56,10 @@ export function MainPage() {
     if (info) dispatch(setModalInfo(info));
   }
 
-  function createNewBoard({ title }: IInfo) {
+  function createNewBoard({ title, description }: IInfo) {
     const board = {
       title: title || '',
+      description: description || 'No description',
     };
     dispatch(createBoard(board));
   }
@@ -67,23 +68,25 @@ export function MainPage() {
     <div>
       <div className="main">
         <div className="main__header">
-          <span className="main__title">
-            {t(`mainPage.${getTimeOfDay(new Date().getHours())}`)}
-            {, `${userName![0].toUpperCase()}${userName?.slice(1)}` || 'user'}!
-          </span>
-          <Button
-            className="main__btn"
-            onClick={() =>
-              openModal(
-                'FormModal',
-                t('mainPage.Create a board'),
-                createNewBoard,
-                t('mainPage.Create')
-              )
-            }
-          >
-            {t('mainPage.Create board')}
-          </Button>
+          <div className="main__header-inner">
+            <span className="main__title">
+              {t(`mainPage.${getTimeOfDay(new Date().getHours())}`)}
+            {`, ${userName![0].toUpperCase()}${userName?.slice(1)}` || 'user'}!
+            </span>
+            <Button
+              className="main__btn"
+              onClick={() =>
+                openModal(
+                  'FormModal',
+                  t('mainPage.Create a board'),
+                  createNewBoard,
+                  t('mainPage.Create')
+                )
+              }
+            >
+              {t('mainPage.Create board')}
+            </Button>
+          </div>
         </div>
         <div className="main__cont">
           {isLoading ? (

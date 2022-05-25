@@ -21,8 +21,8 @@ export const registerUser = createAsyncThunk('user/register', async (user: IUser
     }
     const data = await response.json();
     return data;
-  } catch {
-    throw new Error('Error, please try again later');
+  } catch (err) {
+    throw new Error((err as Error).message);
   }
 });
 
@@ -40,8 +40,8 @@ export const authUser = createAsyncThunk('user/auth', async (login: ILogin) => {
     }
     const data = await response.json();
     return data;
-  } catch {
-    throw new Error('Error, please try again later');
+  } catch (err) {
+    throw new Error((err as Error).message);
   }
 });
 
@@ -62,8 +62,8 @@ export const updateUser = createAsyncThunk(
       }
       const data = await response.json();
       return data;
-    } catch {
-      throw new Error('Error, please try again later');
+    } catch (err) {
+      throw new Error((err as Error).message);
     }
   }
 );

@@ -1,10 +1,31 @@
+.board-page__inner {
+    min-height: calc(100vh - 120px);
+    background-image: url('./../../../public/assets/jpg/board3.png');
+}
 .content-board {
     max-width: 1600px;
     margin: 0 auto;
-    margin-top: 50px;
+    padding-top: 50px;
     overflow: auto;
 }
 .columns {
     display: flex;
     justify-content: space-between;
 }
+
+.content-board::-webkit-scrollbar-thumb {
+    background-image: -webkit-gradient(linear-gradient(to right, #04befe, #3f86ed, #25aae1, #4481eb));
+    border-radius: 15px;
+    max-width: 15px;
+    background: #25aae1;
+}
+.content-board::-webkit-scrollbar {
+    height: 12px;
+}
+.content-board::-webkit-scrollbar-track {
+    background: rgb(12, 12, 12);
+    border-radius: 10px;
+}
+.content-board::-webkit-scrollbar-thumb:hover {
+    background: rgb(230, 244, 245);
+} 
