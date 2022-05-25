@@ -107,8 +107,8 @@ export const Column = ({ boardId, column }: IColumnProps) => {
     const columnId = id;
     if (token && boardId) {
       const newTask = {
-        title: 'task2',
-        description: 'desc1',
+        title: title || '',
+        description: description || 'No description',
         userId: userId,
       };
       await dispatch(addTask({ boardId, columnId, token, newTask }));
