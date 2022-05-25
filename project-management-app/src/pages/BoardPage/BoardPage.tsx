@@ -1,8 +1,11 @@
 import { useEffect } from 'react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
 import { Button } from '../../components/Button/Button';
 import { Column } from '../../components/Column/Column';
+import { Spinner } from '../../components/Spinner/Spinner';
 import { IColumn } from '../../reducers/oneBoardReducer';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getBoard } from '../../thunks/board';
@@ -13,7 +16,7 @@ export function BoardPage() {
   const { boardId } = useParams();
   const token = localStorage.getItem('token') as string;
   const dispatch = useAppDispatch();
-  const board = useAppSelector((state) => state.oneBoard.board);
+  const { board, isLoading } = useAppSelector((state) => state.oneBoard);
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -23,17 +26,11 @@ export function BoardPage() {
   }, []);
 
   const onAddColumn = async () => {
-    let max = 0;
-    if (board.columns.length > 0) {
-      const maxOrder = board.columns.reduce((acc, curr) => (acc.order > curr.order ? acc : curr));
-      max = maxOrder.order;
-    }
     const newColumn = {
       title: 'Done1',
-      order: max + 1,
     };
-    await dispatch(addColumn({ boardId, token, newColumn }));
     if (token && boardId) {
+      await dispatch(addColumn({ boardId, token, newColumn }));
       await dispatch(getBoard({ boardId, token }));
     }
   };
@@ -41,22 +38,13 @@ export function BoardPage() {
   const Board = () => {
     if (boardId && board.columns.length > 0) {
       return (
-        <>
+        <DndProvider backend={HTML5Backend}>
           <ul className="columns">
             {board.columns.map((column: IColumn) => {
-              return (
-                <Column
-                  key={column.id}
-                  title={column.title}
-                  boardId={boardId}
-                  columnId={column.id}
-                  tasks={column.tasks}
-                  order={column.order}
-                />
-              );
+              return <Column key={column.id} boardId={boardId} column={column} />;
             })}
           </ul>
-        </>
+        </DndProvider>
       );
     } else {
       return null;
@@ -64,13 +52,11 @@ export function BoardPage() {
   };
 
   return (
-    <>
-      <div className="content-board">
-        <Board />
-      </div>
+    <div className="board-page__inner">
+      <div className="content-board">{isLoading ? <Spinner /> : <Board />}</div>
       <Button onClick={onAddColumn} className={'btn-add-column'}>
         {t('boardPage.Add Column')}
       </Button>
-    </>
+    </div>
   );
 }

@@ -13,7 +13,9 @@
 }
 
 .header.active {
-  height: 50px;
+  height: 60px;
+  background-image: linear-gradient(to left, #04befe, #220311, #25aae1, #01348b);
+  opacity: 0.8;
 }
 
 .header__button-block {
@@ -98,6 +100,7 @@
   position: relative;
   outline: none;
   width: 50px;
+  margin-top: 7px;
 }
 
 .header__change-lang:after {

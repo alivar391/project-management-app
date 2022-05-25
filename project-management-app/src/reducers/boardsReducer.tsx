@@ -4,10 +4,12 @@ import { getBoards, createBoard, updateBoard, deleteBoard } from '../thunks/boar
 export interface IBoard {
   id: string;
   title: string;
+  description: string;
 }
 
 export interface INewBoard {
   title: string;
+  description: string;
 }
 
 export type StateType = {

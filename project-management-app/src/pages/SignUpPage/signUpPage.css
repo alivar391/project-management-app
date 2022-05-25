@@ -6,9 +6,9 @@
   justify-content: space-between;
   flex-wrap: wrap;
   max-width: 1200px;
-  margin: 0px auto;
+  margin: 50px auto;
   text-align: left;
-  min-height: calc(100vh - 60px);
+  min-height: calc(100vh - 220px);
 }
 
 .container-img-register{

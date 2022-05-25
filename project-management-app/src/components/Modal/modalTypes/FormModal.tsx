@@ -25,7 +25,7 @@ export const FormModal = () => {
   });
 
   const onSubmit: SubmitHandler<IBoard> = (data: IBoard) => {
-    confirmFunction(data.title, changingInfo.id);
+    confirmFunction(data.title, data.description, changingInfo.id);
     closingModal();
   };
 
@@ -49,6 +49,17 @@ export const FormModal = () => {
           nameInput={'title'}
           textLabel={t('modal.Title')}
           datatestId={'input-title'}
+          type={'text'}
+          errors={errors}
+        />
+        <Input
+          register={register('description', {
+            required: 'Requered',
+            minLength: { value: 3, message: 'Too short title' },
+          })}
+          nameInput={'description'}
+          textLabel={'Description:'}
+          datatestId={'input-description'}
           type={'text'}
           errors={errors}
         />

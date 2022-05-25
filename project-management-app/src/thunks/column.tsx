@@ -3,15 +3,34 @@ import { BASE_URL } from '../constants/constants';
 
 export type INewColumn = {
   title: string;
-  order: number;
+  order?: number;
 };
 
 export const addColumn = createAsyncThunk(
   'column/add',
-  async (params: { boardId?: string; token: string; newColumn: INewColumn }) => {
+  async (params: { boardId: string; token: string; newColumn: INewColumn }) => {
     try {
       const response = await fetch(`${BASE_URL}/boards/${params.boardId}/columns`, {
         method: 'POST',
+        body: JSON.stringify(params.newColumn),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${params.token}`,
+        },
+      });
+      const data = await response.json();
+      return data;
+    } catch {
+      throw new Error('Error, please try again later');
+    }
+  }
+);
+export const updateColumn = createAsyncThunk(
+  'column/update',
+  async (params: { boardId: string; id: string; token: string; newColumn: INewColumn }) => {
+    try {
+      const response = await fetch(`${BASE_URL}/boards/${params.boardId}/columns/${params.id}`, {
+        method: 'PUT',
         body: JSON.stringify(params.newColumn),
         headers: {
           'Content-Type': 'application/json',
