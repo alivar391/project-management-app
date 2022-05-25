@@ -69,7 +69,7 @@ export const Task = ({ boardId, columnId, task }: ITaskProps) => {
         const { id } = item.task;
         const oldColumnId = item.columnId;
         await dispatch(updateTask({ boardId, oldColumnId, id, token, newTask }));
-        await dispatch(getBoard({ boardId, token }));
+        await dispatch(getBoard({ boardId }));
       }
     },
   });
@@ -89,11 +89,14 @@ export const Task = ({ boardId, columnId, task }: ITaskProps) => {
       ref={refTask}
       style={{ opacity }}
     >
-      <div className="delete-task" 
+      <div
+        className="delete-task"
         onClick={() =>
           openModal('ConfirmModal', 'Do you realy want to delete this task?', onDeleteTask, 'Ok', {
             id,
-          })></div>
+          })
+        }
+      ></div>
       {task.title}
     </li>
   );

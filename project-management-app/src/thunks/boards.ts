@@ -49,7 +49,7 @@ export const updateBoard = createAsyncThunk('boards/updateBoard', async (board: 
   try {
     const response = await fetch(`${BASE_URL}/boards/${board.id}`, {
       method: 'PUT',
-      body: JSON.stringify({ title: board.title }),
+      body: JSON.stringify({ title: board.title, description: board.description }),
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${TOKEN}`,

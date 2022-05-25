@@ -71,7 +71,7 @@ export function MainPage() {
           <div className="main__header-inner">
             <span className="main__title">
               {t(`mainPage.${getTimeOfDay(new Date().getHours())}`)}
-            {`, ${userName![0].toUpperCase()}${userName?.slice(1)}` || 'user'}!
+              {/* {`, ${userName![0].toUpperCase()}${userName?.slice(1)}` || 'user'}! */}
             </span>
             <Button
               className="main__btn"

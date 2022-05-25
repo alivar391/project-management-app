@@ -5,7 +5,6 @@ import { addTask, updateTask } from '../../thunks/task';
 import jwt_decode from 'jwt-decode';
 import { ITaskProps, Task } from '../Task/Task';
 import { IUserFromToken } from '../../pages/UpdateUserPage/UpdateUserPage';
-import { deleteColumn } from '../../thunks/column';
 import {
   changeModalFunction,
   changeModalName,
@@ -39,7 +38,7 @@ export const Column = ({ boardId, column }: IColumnProps) => {
   function openModal(
     modalName: string,
     modalTitle: string,
-    confirmFunction: (info: IInfo) => void,
+    confirmFunction: (info: IInfo) => Promise<void>,
     modalButtonTxt = 'Ok',
     info: IInfo | null = null
   ) {
@@ -82,7 +81,7 @@ export const Column = ({ boardId, column }: IColumnProps) => {
           };
           const { id } = (item as IColumnProps).column;
           await dispatch(updateColumn({ boardId, id, token, newColumn }));
-          await dispatch(getBoard({ boardId, token }));
+          await dispatch(getBoard({ boardId }));
         }
       } else if ((item as ITaskProps).task && column.tasks.length === 0) {
         const order = column.tasks.length > 0 ? (item as ITaskProps).task.order : 1;
@@ -97,7 +96,7 @@ export const Column = ({ boardId, column }: IColumnProps) => {
         const { id } = (item as ITaskProps).task;
         const oldColumnId = (item as ITaskProps).columnId;
         await dispatch(updateTask({ boardId, oldColumnId, id, token, newTask }));
-        await dispatch(getBoard({ boardId, token }));
+        await dispatch(getBoard({ boardId }));
       }
     },
   });
@@ -105,6 +104,7 @@ export const Column = ({ boardId, column }: IColumnProps) => {
   dragRef(dropRef(refColumn));
 
   const onAddTask = async ({ title, description }: IInfo) => {
+    const columnId = id;
     if (token && boardId) {
       const newTask = {
         title: title || '',
@@ -125,17 +125,18 @@ export const Column = ({ boardId, column }: IColumnProps) => {
           ) : (
             <h3 onClick={() => setIsInput(true)}>{title}</h3>
           )}
-          <div className="delete-column" 
+          <div
+            className="delete-column"
             onClick={() =>
               openModal(
                 'ConfirmModal',
                 'Do you realy want to delete a column?',
                 onDeleteColumn,
                 'Ok',
-                { id: columnId }
+                { id: id }
               )
             }
-           ></div>
+          ></div>
         </div>
         <ul className="tasks">
           {tasks.length > 0
