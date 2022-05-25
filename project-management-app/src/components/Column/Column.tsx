@@ -8,8 +8,9 @@ import { IUserFromToken } from '../../pages/UpdateUserPage/UpdateUserPage';
 import { deleteColumn, updateColumn } from '../../thunks/column';
 import { useRef, useState } from 'react';
 import { DragSourceMonitor, useDrag, useDrop } from 'react-dnd';
-import './column.css';
 import { InputTitle } from './titleColumn/TitleColumn';
+import { useTranslation } from 'react-i18next';
+import './column.css';
 
 type IColumnProps = {
   boardId: string;
@@ -23,6 +24,7 @@ export const Column = ({ boardId, column }: IColumnProps) => {
   const decodedToken: IUserFromToken = jwt_decode(token as string);
   const userId = decodedToken.userId;
   const [isInput, setIsInput] = useState(false);
+  const { t } = useTranslation();
 
   const onDeleteColumn = async (columnId: string) => {
     if (token && boardId) {
@@ -106,7 +108,7 @@ export const Column = ({ boardId, column }: IColumnProps) => {
               })
             : null}
         </ul>
-        <div onClick={() => onAddTask(boardId, id)}>Add Task</div>
+        <div onClick={() => onAddTask(boardId, id)}>{t('column.Add Task')}</div>
       </li>
     </>
   );

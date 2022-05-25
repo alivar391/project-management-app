@@ -1,4 +1,5 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { IBoard } from '../../../reducers/boardsReducer';
 import {
   changeModalFunction,
@@ -14,6 +15,7 @@ import Input from '../../Input/Input';
 export const FormModal = () => {
   const dispatch = useAppDispatch();
   const { text, title, confirmFunction, changingInfo } = useAppSelector((state) => state.modal);
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -45,7 +47,7 @@ export const FormModal = () => {
             minLength: { value: 3, message: 'Too short title' },
           })}
           nameInput={'title'}
-          textLabel={'Title:'}
+          textLabel={t('modal.Title')}
           datatestId={'input-title'}
           type={'text'}
           errors={errors}
@@ -70,7 +72,7 @@ export const FormModal = () => {
         </Button>
       </form>
       <Button data-testid="button-close-form" className="btn__modal" onClick={() => closingModal()}>
-        Back
+        {t('modal.Back')}
       </Button>
     </div>
   );

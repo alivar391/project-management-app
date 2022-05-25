@@ -29,5 +29,44 @@
     "Password": "Password",
     "Delete User": "Delete User",
     "Update info": "Update info"
+  },
+  "welcomePage" : {
+    "Productivity Planner": "Productivity Planner",
+    "Set goals and actually conquer them": "Set goals and actually conquer them",
+    "description": "The key to achieving your goals is to break them down into bite-sized action steps. Want to make $5k/month… what products or services are you going to offer? Want 1000 Instagram followers… how are you going to connect with them? Start with your yearly goals and then break them down into quarters, months, weeks, and days, all with checklists to keep you on track.",
+    "About us": "About us",
+    "Anton Tananka": "Anton Tananka",
+    "Team-lead": "Team-lead",
+    "More in CV": "More in CV",
+    "Diana Byben": "Diana Byben",
+    "Frontend Developer": "Frontend Developer",
+    "Anastasia Arzhanik": "Anastasia Arzhanik"
+  },
+  "mainPage" : {
+    "Good nigth": "Good nigth",
+    "Good morning": "Good morning",
+    "Good afternoon": "Good afternoon",
+    "Good evening": "Good evening",
+    "Create board": "Create board",
+    "No boards yet,": "No boards yet,",
+    "create a new one": "create a new one",
+    "Create a board": "Create a board",
+    "Create": "Create"
+  },
+  "modal" : {
+    "Back": "Back",
+    "Title": "Title:"
+  },
+  "board" : {
+    "Change a board": "Change a board",
+    "Update": "Update",
+    "Do you realy want to delete a board?": "Do you realy want to delete a board?",
+    "Ok": "Ok"
+  },
+  "boardPage" : {
+    "Add Column": "Add Column"
+  },
+  "column" : {
+    "Add Task": "Add Task"
   }
 }

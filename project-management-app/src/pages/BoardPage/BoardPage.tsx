@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
 import { Button } from '../../components/Button/Button';
 import { Column } from '../../components/Column/Column';
@@ -16,6 +17,7 @@ export function BoardPage() {
   const token = localStorage.getItem('token') as string;
   const dispatch = useAppDispatch();
   const { board, isLoading } = useAppSelector((state) => state.oneBoard);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (token && boardId) {
@@ -53,7 +55,7 @@ export function BoardPage() {
     <div className="board-page__inner">
       <div className="content-board">{isLoading ? <Spinner /> : <Board />}</div>
       <Button onClick={onAddColumn} className={'btn-add-column'}>
-        Add Column
+        {t('boardPage.Add Column')}
       </Button>
     </div>
   );
