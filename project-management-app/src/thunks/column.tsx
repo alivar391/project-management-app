@@ -15,7 +15,7 @@ export const addColumn = createAsyncThunk(
         body: JSON.stringify(params.newColumn),
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${TOKEN}`,
+          Authorization: `Bearer ${TOKEN()}`,
         },
       });
       const data = await response.json();
@@ -54,7 +54,7 @@ export const deleteColumn = createAsyncThunk(
         {
           method: 'DELETE',
           headers: {
-            Authorization: `Bearer ${TOKEN}`,
+            Authorization: `Bearer ${TOKEN()}`,
           },
         }
       );

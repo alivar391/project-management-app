@@ -1,15 +1,22 @@
+import jwt_decode from 'jwt-decode';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { setToken } from '../../reducers/userReducer';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import './header.css';
 import { useTranslation } from 'react-i18next';
+import { TOKEN } from '../../constants/constants';
+import { IUserFromToken } from '../../pages/UpdateUserPage/UpdateUserPage';
 
 export function Header() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const token = useAppSelector((state) => state.userInfo.token.token);
-  const userName = useAppSelector((state) => state.userInfo.userInfo.login);
+  const token = TOKEN() as string;
+  let userName = 'user';
+  if (token) {
+    const decodedToken: IUserFromToken = jwt_decode(token);
+    userName = decodedToken.login;
+  }
   const [scroll, setScroll] = useState(false);
   const changeStyle = () => {
     if (window.scrollY >= 70) {
@@ -44,7 +51,7 @@ export function Header() {
         </span>
       </Link>
       <div className="header__button-block">
-        {!token && (
+        {!TOKEN() && (
           <div>
             <Link to="/signin">
               <span className="header__action-button">
@@ -61,7 +68,7 @@ export function Header() {
             </Link>
           </div>
         )}
-        {token && (
+        {TOKEN() && (
           <div className="header__user-name-block">
             <Link to="/update-user">
               <span className="header__action-button  header__username">
