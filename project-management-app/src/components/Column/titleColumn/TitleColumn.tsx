@@ -23,7 +23,7 @@ export const InputTitle = ({ setIsInput, column, boardId }: IProps) => {
     };
     await dispatch(updateColumn({ boardId, id, token, newColumn }));
     setIsInput(false);
-    dispatch(getBoard({ boardId, token }));
+    dispatch(getBoard({ boardId }));
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

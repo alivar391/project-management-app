@@ -52,11 +52,12 @@ export function BoardPage() {
     dispatch(toggleActive());
     if (info) dispatch(setModalInfo(info));
   }
-  
+
   const onAddColumn = async ({ title, id }: IInfo) => {
     const boardId = id;
     const newColumn = {
       title: title || '',
+    };
     if (token && boardId) {
       await dispatch(addColumn({ boardId, newColumn }));
       await dispatch(getBoard({ boardId }));
@@ -82,11 +83,12 @@ export function BoardPage() {
   return (
     <div className="board-page__inner">
       <div className="content-board">{isLoading ? <Spinner /> : <Board />}</div>
-      <Button 
+      <Button
         onClick={() =>
           openModal('FormModal', 'Create a new column', onAddColumn, 'Create', { id: boardId })
         }
-        className={'btn-add-column'}>
+        className={'btn-add-column'}
+      >
         {t('boardPage.Add Column')}
       </Button>
     </div>
