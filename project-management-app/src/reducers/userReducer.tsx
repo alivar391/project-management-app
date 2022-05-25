@@ -80,15 +80,15 @@ const userReducer = createSlice({
       })
       .addCase(updateUser.rejected, (state, action) => {
         toast.error(action.error.message);
-      })
-      .addCase(deleteUser.fulfilled, (state, action) => {
-        toast.success(messagesForUser.deleteUser);
-        state.token.token = null;
-        state.userInfo = { id: null, login: null, password: null, name: null };
-      })
-      .addCase(deleteUser.rejected, (state, action) => {
-        toast.error(action.error.message);
       });
+    // .addCase(deleteUser.fulfilled, (state, action) => {
+    //   toast.success(messagesForUser.deleteUser);
+    //   state.token.token = null;
+    //   state.userInfo = { id: null, login: null, password: null, name: null };
+    // })
+    // .addCase(deleteUser.rejected, (state, action) => {
+    //   toast.error(action.error.message);
+    // });
   },
 });
 

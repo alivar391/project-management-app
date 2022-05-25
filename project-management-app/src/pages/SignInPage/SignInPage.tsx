@@ -40,7 +40,7 @@ export const SignInPage = () => {
       localStorage.setItem('token', token);
       setTimeout(() => {
         navigate('/', { replace: true });
-      }, 4000);
+      }, 3000);
     }
   }, [token]);
 

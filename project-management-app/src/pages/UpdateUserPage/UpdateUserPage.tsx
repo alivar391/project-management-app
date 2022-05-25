@@ -16,6 +16,7 @@ import {
   setModalInfo,
   toggleActive,
 } from '../../reducers/modalReducer';
+import { TOKEN } from '../../constants/constants';
 
 export type IForm = {
   name: string;
@@ -37,7 +38,8 @@ export type IUserFromToken = {
 };
 
 export const UpdateUserPage = () => {
-  const tokenUser = useAppSelector((state) => state.userInfo.token.token);
+  // const tokenUser = useAppSelector((state) => state.userInfo.token.token);
+  const token = TOKEN() as string;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const {
@@ -55,7 +57,6 @@ export const UpdateUserPage = () => {
       login: data.login,
       password: data.password,
     };
-    const token = tokenUser as string;
     if (token) {
       const decodedToken: IUserFromToken = jwt_decode(token as string);
       const userId = decodedToken.userId;
@@ -66,11 +67,10 @@ export const UpdateUserPage = () => {
   };
 
   const onDelete = () => {
-    const token = tokenUser as string;
     if (token) {
       const decodedToken: IUserFromToken = jwt_decode(token as string);
       const userId = decodedToken.userId;
-      dispatch(deleteUser({ userId, token }));
+      dispatch(deleteUser({ userId }));
     } else {
       toast.error('Invalid token, login and try again');
     }
