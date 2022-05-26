@@ -9,7 +9,7 @@ export const getBoard = createAsyncThunk('board/get', async (params: { boardId: 
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${TOKEN}`,
+        Authorization: `Bearer ${TOKEN()}`,
       },
     });
     const data = await response.json();

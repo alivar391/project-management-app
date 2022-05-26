@@ -38,7 +38,9 @@ export const SignInPage = () => {
   useEffect(() => {
     if (token) {
       localStorage.setItem('token', token);
-      navigate('/', { replace: true });
+      setTimeout(() => {
+        navigate('/', { replace: true });
+      }, 3000);
     }
   }, [token]);
 

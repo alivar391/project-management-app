@@ -3,10 +3,12 @@ import Input from '../../components/Input/Input';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import jwt_decode from 'jwt-decode';
 import { deleteUser, updateUser } from '../../thunks/user';
-import './updateUserPage.css';
+import { setSuccesDelete } from '../../reducers/userReducer';
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router';
+import { useEffect } from 'react';
 import { Button } from '../../components/Button/Button';
+import { TOKEN } from '../../constants/constants';
 import { useTranslation } from 'react-i18next';
 import {
   changeModalFunction,
@@ -16,6 +18,7 @@ import {
   setModalInfo,
   toggleActive,
 } from '../../reducers/modalReducer';
+import './updateUserPage.css';
 
 export type IForm = {
   name: string;
@@ -37,9 +40,11 @@ export type IUserFromToken = {
 };
 
 export const UpdateUserPage = () => {
-  const tokenUser = useAppSelector((state) => state.userInfo.token.token);
+  // const tokenUser = useAppSelector((state) => state.userInfo.token.token);
+  const token = TOKEN() as string;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const succesDelete = useAppSelector((state) => state.userInfo.succesDelete);
   const {
     register,
     handleSubmit,
@@ -49,13 +54,19 @@ export const UpdateUserPage = () => {
   });
   const { t } = useTranslation();
 
+  useEffect(() => {
+    if (succesDelete) {
+      navigate('/', { replace: true });
+      dispatch(setSuccesDelete(false));
+    }
+  }, [succesDelete]);
+
   const onSubmit: SubmitHandler<IForm> = (data) => {
     const newUser = {
       name: data.name,
       login: data.login,
       password: data.password,
     };
-    const token = tokenUser as string;
     if (token) {
       const decodedToken: IUserFromToken = jwt_decode(token as string);
       const userId = decodedToken.userId;
@@ -65,12 +76,11 @@ export const UpdateUserPage = () => {
     }
   };
 
-  const onDelete = () => {
-    const token = tokenUser as string;
+  const onDelete = async () => {
     if (token) {
       const decodedToken: IUserFromToken = jwt_decode(token as string);
       const userId = decodedToken.userId;
-      dispatch(deleteUser({ userId, token }));
+      await dispatch(deleteUser({ userId }));
     } else {
       toast.error('Invalid token, login and try again');
     }

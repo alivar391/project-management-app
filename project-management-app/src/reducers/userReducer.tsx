@@ -16,6 +16,7 @@ export type UserState = {
   };
   users: IUser[];
   succesRegister: boolean;
+  succesDelete: boolean;
 };
 
 const initialState: UserState = {
@@ -30,6 +31,7 @@ const initialState: UserState = {
   },
   users: [],
   succesRegister: false,
+  succesDelete: false,
 };
 
 const messagesForUser = {
@@ -50,6 +52,9 @@ const userReducer = createSlice({
     },
     setSuccesRegister(state, action) {
       state.succesRegister = action.payload;
+    },
+    setSuccesDelete(state, action) {
+      state.succesDelete = action.payload;
     },
     setToken(state, action) {
       state.token = action.payload;
@@ -80,17 +85,17 @@ const userReducer = createSlice({
       })
       .addCase(updateUser.rejected, (state, action) => {
         toast.error(action.error.message);
-      })
-      .addCase(deleteUser.fulfilled, (state, action) => {
-        toast.success(messagesForUser.deleteUser);
-        state.token.token = null;
-        state.userInfo = { id: null, login: null, password: null, name: null };
-      })
-      .addCase(deleteUser.rejected, (state, action) => {
-        toast.error(action.error.message);
       });
+    // .addCase(deleteUser.fulfilled, (state, action) => {
+    //   toast.success(messagesForUser.deleteUser);
+    //   state.token.token = null;
+    //   state.userInfo = { id: null, login: null, password: null, name: null };
+    // })
+    // .addCase(deleteUser.rejected, (state, action) => {
+    //   toast.error(action.error.message);
+    // });
   },
 });
 
 export default userReducer.reducer;
-export const { setUserInfo, setSuccesRegister, setToken } = userReducer.actions;
+export const { setUserInfo, setSuccesRegister, setSuccesDelete, setToken } = userReducer.actions;
