@@ -59,7 +59,7 @@
 }
 .tasks::-webkit-scrollbar-thumb:hover {
   background: rgb(230, 244, 245);
-} 
+}
 .column__header {
   display: flex;
   justify-content: space-between;
