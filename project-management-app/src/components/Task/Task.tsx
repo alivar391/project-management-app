@@ -15,6 +15,7 @@ import { getBoard } from '../../thunks/board';
 import { deleteTask, updateTask } from '../../thunks/task';
 
 import './task.css';
+import { useTranslation } from 'react-i18next';
 
 export type ITaskProps = {
   boardId: string;
@@ -26,6 +27,7 @@ export const Task = ({ boardId, columnId, task }: ITaskProps) => {
   const dispatch = useAppDispatch();
   const token = localStorage.getItem('token') as string;
   const { id } = task;
+  const { t } = useTranslation();
 
   function openModal(
     modalName: string,
@@ -92,9 +94,13 @@ export const Task = ({ boardId, columnId, task }: ITaskProps) => {
       <div
         className="delete-task"
         onClick={() =>
-          openModal('ConfirmModal', 'Do you realy want to delete this task?', onDeleteTask, 'Ok', {
-            id,
-          })
+          openModal(
+            'ConfirmModal',
+            t('Task.Do you really want to delete this task?'),
+            onDeleteTask,
+            t('Task.Ok'),
+            { id }
+          )
         }
       ></div>
       {task.title}

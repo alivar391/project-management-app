@@ -49,7 +49,7 @@ export const FormModal = () => {
         <Input
           register={register('title', {
             required: 'Requered',
-            minLength: { value: 3, message: 'Too short title' },
+            minLength: { value: 3, message: t('modal.Too short title') },
           })}
           nameInput={'title'}
           textLabel={t('modal.Title')}
@@ -60,10 +60,10 @@ export const FormModal = () => {
         <Input
           register={register('description', {
             required: 'Requered',
-            minLength: { value: 3, message: 'Too short title' },
+            minLength: { value: 3, message: t('modal.Too short title') },
           })}
           nameInput={'description'}
-          textLabel={'Description:'}
+          textLabel={t('modal.Description')}
           datatestId={'input-description'}
           type={'text'}
           errors={errors}

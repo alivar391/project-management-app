@@ -55,18 +55,36 @@
   },
   "modal" : {
     "Back": "Назад",
-    "Title": "Заголовок:"
+    "Title": "Заголовок:",
+    "Description": "Описание:",
+    "Too short title": "Необходимо более двух символов"
   },
   "board" : {
     "Change a board": "Изменить доску",
     "Update": "Изменить",
-    "Do you realy want to delete a board?": "Вы действительно хотите удалить доску?",
+    "Do you really want to delete a board?": "Вы действительно хотите удалить доску?",
     "Ok": "Да"
   },
   "boardPage" : {
-    "Add Column": "Добавить колонку"
+    "Add Column": "Добавить колонку",
+    "Create a new column": "Создать колонку",
+    "Create": "Создать"
   },
   "column" : {
-    "Add Task": "Добавить таск"
+    "Add Task": "Добавить таск",
+    "Create a new task": "Создать новый таск",
+    "Create": "Создать",
+    "Do you really want to delete a column?": "Вы действительно хотите удалить колонку?",
+    "Ok": "Да"
+  },
+  "BigFormModal" : {
+    "Title": "Заголовок:",
+    "Description": "Описание:",
+    "Too short title": "Необходимо более двух символов",
+    "Back": "Назад"
+  },
+  "Task" : {
+    "Do you really want to delete this task?": "Вы действительно хотите удалить этот таск?",
+    "Ok": "Да"
   }
 }

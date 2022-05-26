@@ -131,9 +131,9 @@ export const Column = ({ boardId, column }: IColumnProps) => {
             onClick={() =>
               openModal(
                 'ConfirmModal',
-                'Do you realy want to delete a column?',
+                t('column.Do you really want to delete a column?'),
                 onDeleteColumn,
-                'Ok',
+                t('column.Ok'),
                 { id: id }
               )
             }
