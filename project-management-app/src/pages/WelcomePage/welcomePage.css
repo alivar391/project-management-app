@@ -27,11 +27,91 @@
     flex-wrap: wrap;
     font-size: 40px;
     font-weight: 500;
-}
-.welcome__desc {
     padding-top: 50px;
     font-size:30px;
 }
+
+.welcome__rs-info {
+    padding: 40px 0;
+}
+.welcome__rs-info-title {
+    font-size: 60px;
+}
+.welcome__rs-info-subtitle {
+    font-size: 20px;
+    padding: 20px 0;
+}
+.welcome__rs-info-btn {
+    text-decoration: none;
+    padding-top: 12px;
+    margin-bottom: 30px;
+}
+.welcome__rs-info h4 {
+    font-size: 36px; 
+    margin: 10px 0; 
+}
+.rss-bold 
+{
+    font-weight: 600;
+}
+.rss-event {
+    margin-bottom: 20px;
+}
+.rss-advantages {
+    max-width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.rss-advantage__card {
+    max-width: 40%;
+    padding: 10px;
+    box-shadow: inset 2px 2px 2px rgb(0 0 0 / 10%);
+    border-radius: 4px;
+    background-color: #f1f8fc;
+    margin-bottom: 20px;
+}
+.rss-icon {
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+}
+.rss-info__block {
+    display: flex;
+}
+.rss-info__block p {
+    max-width: 70%;
+    margin: auto;
+}
+.rss-free {
+    background-image: url('../../../public/assets/png/money.png');
+}
+.rss-time {
+    background-image: url('../../../public/assets/png/alarm-clock.png');
+}
+.rss-everyone {
+    background-image: url('../../../public/assets/png/teamwork.png');
+}
+
+.rss-materials {
+    background-image: url('../../../public/assets/png/folder.png');
+}
+.rss-chat {
+    background-image: url('../../../public/assets/png/mouse.png');
+}
+.rss-certificate {
+    background-image: url('../../../public/assets/png/documents.png');
+}
+
+
+
+
+
+
+
+
+
+
 .welcome__about h6 {
     margin-top: 20px;
 }
