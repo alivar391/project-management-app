@@ -22,12 +22,12 @@
   padding: 0;
   overflow: auto;
   overflow-y: auto;
-  max-height: 58vh;
+  max-height: 45vh;
 }
 
 @media (max-width: 570px) {
   .tasks {
-    max-height: 55vh;
+    max-height: 35vh;
   }
 }
 
