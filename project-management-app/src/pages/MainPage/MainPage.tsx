@@ -16,7 +16,10 @@ import {
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { createBoard, getBoards } from '../../thunks/boards';
 import { Board } from './Board';
+import { TOKEN } from '../../constants/constants';
+import jwt_decode from 'jwt-decode';
 import './main-page.css';
+import { IUserFromToken } from '../UpdateUserPage/UpdateUserPage';
 
 export type IOpenModalFunction = (
   modalName: string,
@@ -29,7 +32,12 @@ export type IOpenModalFunction = (
 export function MainPage() {
   const dispatch = useAppDispatch();
   const { boards, isLoading } = useAppSelector((store) => store.boards);
-  const userName = useAppSelector((state) => state.userInfo.userInfo.login);
+  const token = TOKEN() as string;
+  let userName = 'user';
+  if (token) {
+    const decodedToken: IUserFromToken = jwt_decode(token);
+    userName = decodedToken.login;
+  }
   const { t } = useTranslation();
   useEffect(() => {
     dispatch(getBoards());
@@ -71,7 +79,7 @@ export function MainPage() {
           <div className="main__header-inner">
             <span className="main__title">
               {t(`mainPage.${getTimeOfDay(new Date().getHours())}`)}
-              {/* {`, ${userName![0].toUpperCase()}${userName?.slice(1)}` || 'user'}! */}
+              {`, ${userName}` || 'user'}!
             </span>
             <Button
               className="main__btn"

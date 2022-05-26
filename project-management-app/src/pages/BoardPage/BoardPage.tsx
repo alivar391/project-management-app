@@ -85,7 +85,13 @@ export function BoardPage() {
       <div className="content-board">{isLoading ? <Spinner /> : <Board />}</div>
       <Button
         onClick={() =>
-          openModal('FormModal', 'Create a new column', onAddColumn, 'Create', { id: boardId })
+          openModal(
+            'FormModal',
+            t('boardPage.Create a new column'),
+            onAddColumn,
+            t('boardPage.Create'),
+            { id: boardId }
+          )
         }
         className={'btn-add-column'}
       >

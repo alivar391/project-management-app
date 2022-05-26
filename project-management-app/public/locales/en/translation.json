@@ -55,18 +55,36 @@
   },
   "modal" : {
     "Back": "Back",
-    "Title": "Title:"
+    "Title": "Title:",
+    "Description": "Description:",
+    "Too short title": "Too short title"
   },
   "board" : {
     "Change a board": "Change a board",
     "Update": "Update",
-    "Do you realy want to delete a board?": "Do you realy want to delete a board?",
+    "Do you really want to delete a board?": "Do you really want to delete a board?",
     "Ok": "Ok"
   },
   "boardPage" : {
-    "Add Column": "Add Column"
+    "Add Column": "Add Column",
+    "Create a new column": "Create a new column",
+    "Create": "Create"
   },
   "column" : {
-    "Add Task": "Add Task"
+    "Add Task": "Add Task",
+    "Create a new task": "Create a new task",
+    "Create": "Create",
+    "Do you really want to delete a column?": "Do you really want to delete a column?",
+    "Ok": "Ok"
+  },
+  "BigFormModal" : {
+    "Title": "Title:",
+    "Description": "Description:",
+    "Too short title": "Too short title",
+    "Back": "Back"
+  },
+  "Task" : {
+    "Do you really want to delete this task?": "Do you really want to delete this task?",
+    "Ok": "Ok"
   }
 }
