@@ -10,24 +10,33 @@
   margin: 20px;
 }
 .column h3 {
-  padding: 5px 0;
+  padding: 10px 0;
   cursor: grab;
+  margin: auto;
+  height: 100%;
 }
 
 .tasks {
   padding: 0;
-  max-height: 70vh;
   overflow: auto;
+  overflow-y: auto;
+  max-height: 58vh;
+}
+
+@media (max-width: 570px) {
+  .tasks {
+    max-height: 55vh;
+  }
 }
 
 .delete-column {
   width: 20px;
   height: 20px;
   position: absolute;
-  background-image: url('./../../../public/assets/svg/delete.svg');
+  background-image: url('./../../../public/assets/jpg/trash.png');
   background-repeat: no-repeat;
   background-size: cover;
-  right: 9px;
+  right: 10px;
   top: 20px;
   cursor: pointer;
 }
@@ -50,7 +59,7 @@
 }
 .tasks::-webkit-scrollbar-thumb:hover {
   background: rgb(230, 244, 245);
-} 
+}
 .column__header {
   display: flex;
   justify-content: space-between;

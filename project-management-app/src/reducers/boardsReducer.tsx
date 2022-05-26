@@ -34,7 +34,7 @@ const boardReduser = createSlice({
     [getBoards.pending.type]: (state: StateType) => {
       state.isLoading = true;
     },
-    [getBoards.rejected.type]: (state: StateType, action) => {
+    [getBoards.rejected.type]: (state: StateType) => {
       state.isLoading = false;
     },
     [createBoard.fulfilled.type]: (state: StateType, action) => {
@@ -44,7 +44,7 @@ const boardReduser = createSlice({
     [createBoard.pending.type]: (state: StateType) => {
       state.isLoading = true;
     },
-    [createBoard.rejected.type]: (state: StateType, action) => {
+    [createBoard.rejected.type]: (state: StateType) => {
       state.isLoading = false;
     },
     [updateBoard.fulfilled.type]: (state: StateType, action) => {
@@ -55,7 +55,7 @@ const boardReduser = createSlice({
     [updateBoard.pending.type]: (state: StateType) => {
       state.isLoading = true;
     },
-    [updateBoard.rejected.type]: (state: StateType, action) => {
+    [updateBoard.rejected.type]: (state: StateType) => {
       state.isLoading = false;
     },
     [deleteBoard.fulfilled.type]: (state: StateType, action) => {
@@ -65,7 +65,7 @@ const boardReduser = createSlice({
     [deleteBoard.pending.type]: (state: StateType) => {
       state.isLoading = true;
     },
-    [deleteBoard.rejected.type]: (state: StateType, action) => {
+    [deleteBoard.rejected.type]: (state: StateType) => {
       state.isLoading = false;
     },
   },

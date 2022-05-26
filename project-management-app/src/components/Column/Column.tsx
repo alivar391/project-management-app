@@ -20,6 +20,7 @@ import { DragSourceMonitor, useDrag, useDrop } from 'react-dnd';
 import { InputTitle } from './titleColumn/TitleColumn';
 import { useTranslation } from 'react-i18next';
 import './column.css';
+import { Button } from '../Button/Button';
 
 type IColumnProps = {
   boardId: string;
@@ -68,7 +69,7 @@ export const Column = ({ boardId, column }: IColumnProps) => {
     }),
   });
 
-  const [, dropRef] = useDrop({
+  const [{ isOver, canDrop }, dropRef] = useDrop({
     accept: ['column', 'task'],
     async drop(item: IColumnProps | ITaskProps) {
       if ((item as IColumnProps).column) {
@@ -99,7 +100,22 @@ export const Column = ({ boardId, column }: IColumnProps) => {
         await dispatch(getBoard({ boardId }));
       }
     },
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop(),
+    }),
   });
+
+  const isActive = isOver && canDrop;
+  let backgroundColor = '#a7d1f8';
+  let border = '1px solid #a7d1f8';
+  if (isActive) {
+    backgroundColor = '#4ea1f0';
+    border = '1px dashed black';
+  } else if (canDrop) {
+    backgroundColor = '#85bff5';
+    border = '1px solid #85bff5';
+  }
 
   dragRef(dropRef(refColumn));
 
@@ -118,7 +134,13 @@ export const Column = ({ boardId, column }: IColumnProps) => {
 
   return (
     <>
-      <li key={id} className="column" id={`column-${order}`} ref={refColumn} style={{ opacity }}>
+      <li
+        key={id}
+        className="column"
+        id={`column-${order}`}
+        ref={refColumn}
+        style={{ opacity, backgroundColor, border }}
+      >
         <div className="column__header">
           {isInput ? (
             <InputTitle setIsInput={setIsInput} column={column} boardId={boardId} />
@@ -145,13 +167,13 @@ export const Column = ({ boardId, column }: IColumnProps) => {
               })
             : null}
         </ul>
-        <div
+        <Button
           onClick={() =>
             openModal('BigFormModal', t('column.Create a new task'), onAddTask, t('column.Create'))
           }
         >
           {t('column.Add Task')}
-        </div>
+        </Button>
       </li>
     </>
   );

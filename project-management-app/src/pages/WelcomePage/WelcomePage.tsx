@@ -26,9 +26,7 @@ export function WelcomePage() {
               <div className="team__info">
                 <h6>{t('welcomePage.Diana Byben')}</h6>
                 <p>{t('welcomePage.Frontend Developer')}</p>
-                <a href="https://dianabyben-cv.netlify.app/portfolio">
-                  {t('welcomePage.More in CV')}
-                </a>
+                <a href="https://dianabyben-cv.netlify.app">{t('welcomePage.More in CV')}</a>
               </div>
             </div>
             <div className="card__team">

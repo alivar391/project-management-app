@@ -1,23 +1,24 @@
 .task_title {
-    background: #011936;
-    color: #f4fffd;
-    border-radius: 5px;
-    cursor: grab;
-    margin: 15px;
-    list-style: none;
-    padding: 15px;
-    position: relative;
-  }
-  
+  background: #011936;
+  color: #f4fffd;
+  border-radius: 5px;
+  cursor: grab;
+  margin: 15px;
+  list-style: none;
+  padding: 15px;
+  position: relative;
+  transition: 1;
+}
+
 .delete-task {
-    background-image: url('./../../../public/assets/svg/delete.svg');
-    fill: white;
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
+  background-image: url('./../../../public/assets/svg/delete.svg');
+  fill: white;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  cursor: pointer;
 }
