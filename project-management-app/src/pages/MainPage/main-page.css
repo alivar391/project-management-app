@@ -62,14 +62,13 @@
   height: 200px;
   border-radius: 5px;
   background-color: rgb(238, 255, 255);
-  background-image: url('../../../public/assets/jpg/board.jpg');
+  background-image: url('../../../public/assets/jpg/board.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   color: #2b3c50;
   text-decoration: none;
   font-size: 20px;
-  opacity: 0.9;
   transition: 1s;
 }
 
