@@ -54,7 +54,7 @@ export const Task = ({ boardId, columnId, task }: ITaskProps) => {
     }),
   });
 
-  const [, dropRef] = useDrop({
+  const [{ isOver, canDrop }, dropRef] = useDrop({
     accept: 'task',
     async drop(item: ITaskProps) {
       if (item.task.id === task.id) {
@@ -74,7 +74,19 @@ export const Task = ({ boardId, columnId, task }: ITaskProps) => {
         await dispatch(getBoard({ boardId }));
       }
     },
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop(),
+    }),
   });
+
+  const isActive = isOver && canDrop;
+  let backgroundColor = '#011936';
+  if (isActive) {
+    backgroundColor = '#0360d1';
+  } else if (canDrop) {
+    backgroundColor = '#033777';
+  }
 
   dragRef(dropRef(refTask));
 
@@ -89,7 +101,7 @@ export const Task = ({ boardId, columnId, task }: ITaskProps) => {
       className="task_title"
       id={`task-${task.order}`}
       ref={refTask}
-      style={{ opacity }}
+      style={{ opacity, backgroundColor }}
     >
       <div
         className="delete-task"
