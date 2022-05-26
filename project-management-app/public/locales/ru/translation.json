@@ -2,7 +2,8 @@
   "header": {
     "login": "Вход",
     "signup": "Регистрация",
-    "logout": "Выход"
+    "logout": "Выход",
+    "Go to main Page": "На главную"
   },
   "signInPage" : {
     "Log In": "Вход",
@@ -28,7 +29,10 @@
     "Name": "Имя",
     "Password": "Пароль",
     "Delete User": "Удалить",
-    "Update info": "Обновить"
+    "Update info": "Обновить",
+    "Required": "Заполните поле",
+    "Do you really want to delete a user?": "Вы действительно хотите удалить пользователя?",
+    "Ok": "Да"
   },
   "welcomePage" : {
     "Productivity Planner": "Планировщик задач",

@@ -48,7 +48,7 @@ export function Header() {
             alt="home-button"
             className="header__icon"
           />
-          {TOKEN() && <div className="link__board"> Go to main Page</div>}
+          {TOKEN() && <div className="link__board"> {t('header.Go to main Page')}</div>}
         </div>
       </Link>
       <div className="header__button-block">

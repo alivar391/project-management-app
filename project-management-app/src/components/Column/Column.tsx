@@ -167,7 +167,11 @@ export const Column = ({ boardId, column }: IColumnProps) => {
               })
             : null}
         </ul>
-        <Button onClick={() => openModal('BigFormModal', 'Create a new task', onAddTask, 'Create')}>
+        <Button
+          onClick={() =>
+            openModal('BigFormModal', t('column.Create a new task'), onAddTask, t('column.Create'))
+          }
+        >
           {t('column.Add Task')}
         </Button>
       </li>
