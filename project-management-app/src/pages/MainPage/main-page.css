@@ -41,6 +41,11 @@
   max-width: 70%;
   margin: 0 auto;
 }
+@media (max-width: 1000px) {
+  .main__cont {
+    justify-content: center;
+  }
+}
 
 .main__cont span {
   margin-left: 7px;
