@@ -76,7 +76,7 @@
   transform: translateY(-5px);
   box-shadow: 0 5px 10px 1px;
 }
-.board__title {
+.board__title, .board__description  {
   margin: 0 auto;
   padding: 20px 0;
   opacity: 0.9;
@@ -84,6 +84,10 @@
   background-color: rgba(255, 255, 255, 0.6);
   overflow-wrap: break-word;
   overflow: hidden;
+}
+.board__description {
+  padding: 0;
+  font-size: 14px;
 }
 
 .board__buttns {

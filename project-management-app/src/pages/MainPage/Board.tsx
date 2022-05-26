@@ -32,6 +32,7 @@ export function Board({ board, openModal }: IProps) {
     <div className="board">
       <Link to={`/${board.id}`} className="board__view">
         <p className="board__title">{board.title}</p>
+        <p className="board__description">{board.description}</p>
       </Link>
       <div className="board__buttns">
         <span
