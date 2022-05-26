@@ -130,9 +130,9 @@ export const Column = ({ boardId, column }: IColumnProps) => {
             onClick={() =>
               openModal(
                 'ConfirmModal',
-                'Do you realy want to delete a column?',
+                t('column.Do you really want to delete a column?'),
                 onDeleteColumn,
-                'Ok',
+                t('column.Ok'),
                 { id: id }
               )
             }
@@ -145,7 +145,11 @@ export const Column = ({ boardId, column }: IColumnProps) => {
               })
             : null}
         </ul>
-        <div onClick={() => openModal('BigFormModal', 'Create a new task', onAddTask, 'Create')}>
+        <div
+          onClick={() =>
+            openModal('BigFormModal', t('column.Create a new task'), onAddTask, t('column.Create'))
+          }
+        >
           {t('column.Add Task')}
         </div>
       </li>

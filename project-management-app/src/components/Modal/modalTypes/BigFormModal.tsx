@@ -1,4 +1,5 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { IBoard } from '../../../reducers/boardsReducer';
 import {
   changeModalFunction,
@@ -21,6 +22,7 @@ export const BigFormModal = () => {
   } = useForm<IBoard>({
     mode: 'onChange',
   });
+  const { t } = useTranslation();
 
   const onSubmit: SubmitHandler<IBoard> = (data: IBoard) => {
     const info = {
@@ -47,10 +49,10 @@ export const BigFormModal = () => {
         <Input
           register={register('title', {
             required: 'Requered',
-            minLength: { value: 3, message: 'Too short title' },
+            minLength: { value: 3, message: t('BigFormModal.Too short title') },
           })}
           nameInput={'title'}
-          textLabel={'Title:'}
+          textLabel={t('BigFormModal.Title')}
           datatestId={'input-title'}
           type={'text'}
           errors={errors}
@@ -58,7 +60,7 @@ export const BigFormModal = () => {
         <Input
           register={register('description')}
           nameInput={'description'}
-          textLabel={'Description:'}
+          textLabel={t('BigFormModal.Description')}
           datatestId={'input-description'}
           type={'text'}
           errors={errors}
@@ -72,7 +74,7 @@ export const BigFormModal = () => {
         </Button>
       </form>
       <Button data-testid="button-close-form" className="btn__modal" onClick={() => closingModal()}>
-        Back
+        {t('BigFormModal.Back')}
       </Button>
     </div>
   );
