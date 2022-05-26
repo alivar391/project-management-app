@@ -108,12 +108,13 @@ export const Column = ({ boardId, column }: IColumnProps) => {
 
   const isActive = isOver && canDrop;
   let backgroundColor = '#a7d1f8';
-  let border = 'none';
+  let border = '1px solid #a7d1f8';
   if (isActive) {
     backgroundColor = '#4ea1f0';
     border = '1px dashed black';
   } else if (canDrop) {
     backgroundColor = '#85bff5';
+    border = '1px solid #85bff5';
   }
 
   dragRef(dropRef(refColumn));
