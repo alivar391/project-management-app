@@ -42,7 +42,9 @@ export const SignUpPage = () => {
 
   useEffect(() => {
     if (succesRegister) {
-      navigate('/signin', { replace: true });
+      setTimeout(() => {
+        navigate('/signin', { replace: true });
+      }, 3000);
     }
   }, [succesRegister]);
 
