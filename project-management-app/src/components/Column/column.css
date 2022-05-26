@@ -22,9 +22,6 @@
   overflow-y: auto;
   max-height: 58vh;
 }
-.tasks button {
-  margin-top: 10px;
-}
 
 @media (max-width: 570px) {
   .tasks {

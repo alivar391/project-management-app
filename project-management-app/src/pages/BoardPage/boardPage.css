@@ -18,6 +18,9 @@
 .columns {
     display: flex;
 }
+.columns button {
+    margin-top: 10px;
+}
 
 .content-board::-webkit-scrollbar-thumb {
     background-image: -webkit-gradient(linear-gradient(to right, #04befe, #3f86ed, #25aae1, #4481eb));
