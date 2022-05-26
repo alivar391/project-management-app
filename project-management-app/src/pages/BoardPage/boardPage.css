@@ -3,14 +3,13 @@
     background-image: url('./../../../public/assets/jpg/board3.png');
 }
 .content-board {
-    max-width: 1600px;
+    max-width: 1100px;
     margin: 0 auto;
     padding-top: 50px;
     overflow: auto;
 }
 .columns {
     display: flex;
-    justify-content: space-between;
 }
 
 .content-board::-webkit-scrollbar-thumb {
