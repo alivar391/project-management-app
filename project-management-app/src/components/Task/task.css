@@ -8,7 +8,10 @@
     padding: 15px;
     position: relative;
   }
-  
+.task_title-text {
+  max-width: 135px;
+  overflow-wrap: break-word;
+}
 .delete-task {
     background-image: url('./../../../public/assets/svg/delete.svg');
     fill: white;

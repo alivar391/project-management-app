@@ -103,7 +103,7 @@ export const Task = ({ boardId, columnId, task }: ITaskProps) => {
           )
         }
       ></div>
-      {task.title}
+      <div className="task_title-text">{task.title}</div>
     </li>
   );
 };
