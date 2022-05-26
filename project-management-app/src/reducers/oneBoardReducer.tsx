@@ -46,36 +46,36 @@ const oneBoardReducer = createSlice({
         state.board = action.payload;
         state.isLoading = false;
       })
-      .addCase(getBoard.pending, (state, action) => {
+      .addCase(getBoard.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getBoard.rejected, (state, action) => {
+      .addCase(getBoard.rejected, (state) => {
         state.isLoading = false;
       })
-      .addCase(addTask.fulfilled, (state, action) => {})
-      .addCase(addTask.rejected, (state, action) => {
+      .addCase(addTask.fulfilled, () => {})
+      .addCase(addTask.rejected, (state) => {
         state.isLoading = false;
       })
-      .addCase(updateColumn.fulfilled, (state, action) => {
+      .addCase(updateColumn.fulfilled, (state) => {
         state.isLoading = false;
       })
-      .addCase(updateColumn.pending, (state, action) => {
+      .addCase(updateColumn.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(updateColumn.rejected, (state, action) => {
+      .addCase(updateColumn.rejected, (state) => {
         state.isLoading = false;
       })
-      .addCase(updateTask.fulfilled, (state, action) => {
+      .addCase(updateTask.fulfilled, (state) => {
         state.isLoading = false;
       })
-      .addCase(updateTask.pending, (state, action) => {
+      .addCase(updateTask.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(updateTask.rejected, (state, action) => {
+      .addCase(updateTask.rejected, (state) => {
         state.isLoading = false;
       })
-      .addCase(deleteTask.fulfilled, (state, action) => {})
-      .addCase(deleteTask.rejected, (_, action) => {});
+      .addCase(deleteTask.fulfilled, () => {})
+      .addCase(deleteTask.rejected, () => {});
   },
 });
 

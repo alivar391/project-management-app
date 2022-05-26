@@ -2,7 +2,7 @@ import jwt_decode from 'jwt-decode';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { setToken } from '../../reducers/userReducer';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { useAppDispatch } from '../../store/hooks';
 import './header.css';
 import { useTranslation } from 'react-i18next';
 import { TOKEN } from '../../constants/constants';
