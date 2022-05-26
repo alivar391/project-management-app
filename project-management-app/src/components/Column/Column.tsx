@@ -20,6 +20,7 @@ import { DragSourceMonitor, useDrag, useDrop } from 'react-dnd';
 import { InputTitle } from './titleColumn/TitleColumn';
 import { useTranslation } from 'react-i18next';
 import './column.css';
+import { Button } from '../Button/Button';
 
 type IColumnProps = {
   boardId: string;
@@ -145,13 +146,9 @@ export const Column = ({ boardId, column }: IColumnProps) => {
               })
             : null}
         </ul>
-        <div
-          onClick={() =>
-            openModal('BigFormModal', t('column.Create a new task'), onAddTask, t('column.Create'))
-          }
-        >
+        <Button onClick={() => openModal('BigFormModal', 'Create a new task', onAddTask, 'Create')}>
           {t('column.Add Task')}
-        </div>
+        </Button>
       </li>
     </>
   );

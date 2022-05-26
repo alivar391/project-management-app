@@ -42,13 +42,14 @@ export function Header() {
   return (
     <header className={!scroll ? 'header' : 'header active'}>
       <Link to="/">
-        <span className="header__home-button">
+        <div className="header__home-button">
           <img
             src="./../assets/png/home-icon-silhouette.png"
             alt="home-button"
             className="header__icon"
           />
-        </span>
+          {TOKEN() && <div className="link__board"> Go to main Page</div>}
+        </div>
       </Link>
       <div className="header__button-block">
         {!TOKEN() && (
