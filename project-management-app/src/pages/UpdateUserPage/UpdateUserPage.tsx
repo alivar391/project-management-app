@@ -3,10 +3,12 @@ import Input from '../../components/Input/Input';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import jwt_decode from 'jwt-decode';
 import { deleteUser, updateUser } from '../../thunks/user';
-import './updateUserPage.css';
+import { setSuccesDelete } from '../../reducers/userReducer';
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router';
+import { useEffect } from 'react';
 import { Button } from '../../components/Button/Button';
+import { TOKEN } from '../../constants/constants';
 import { useTranslation } from 'react-i18next';
 import {
   changeModalFunction,
@@ -16,7 +18,7 @@ import {
   setModalInfo,
   toggleActive,
 } from '../../reducers/modalReducer';
-import { TOKEN } from '../../constants/constants';
+import './updateUserPage.css';
 
 export type IForm = {
   name: string;
@@ -42,6 +44,7 @@ export const UpdateUserPage = () => {
   const token = TOKEN() as string;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const succesDelete = useAppSelector((state) => state.userInfo.succesDelete);
   const {
     register,
     handleSubmit,
@@ -50,6 +53,13 @@ export const UpdateUserPage = () => {
     mode: 'onChange',
   });
   const { t } = useTranslation();
+
+  useEffect(() => {
+    if (succesDelete) {
+      navigate('/', { replace: true });
+      dispatch(setSuccesDelete(false));
+    }
+  }, [succesDelete]);
 
   const onSubmit: SubmitHandler<IForm> = (data) => {
     const newUser = {
@@ -66,11 +76,11 @@ export const UpdateUserPage = () => {
     }
   };
 
-  const onDelete = () => {
+  const onDelete = async () => {
     if (token) {
       const decodedToken: IUserFromToken = jwt_decode(token as string);
       const userId = decodedToken.userId;
-      dispatch(deleteUser({ userId }));
+      await dispatch(deleteUser({ userId }));
     } else {
       toast.error('Invalid token, login and try again');
     }

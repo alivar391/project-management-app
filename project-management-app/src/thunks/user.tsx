@@ -3,6 +3,7 @@ import { BASE_URL } from '../constants/constants';
 import { IUser } from '../pages/SignUpPage/SignUpPage';
 import { TOKEN } from '../constants/constants';
 import { toast } from 'react-toastify';
+import { setSuccesDelete, setToken } from '../reducers/userReducer';
 
 export interface ILogin {
   login: string;
@@ -70,24 +71,28 @@ export const updateUser = createAsyncThunk(
   }
 );
 
-export const deleteUser = createAsyncThunk('user/delete', async (params: { userId: string }) => {
-  try {
-    const response = await fetch(`${BASE_URL}/users/${params.userId}`, {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${TOKEN()}`,
-      },
-    });
-    if (response.status === 204) {
-      toast.success('User deleted successfully');
-      localStorage.clear();
-      location.assign('http://localhost:3000/');
-    } else {
-      toast.error('Error, please try again later');
+export const deleteUser = createAsyncThunk(
+  'user/delete',
+  async (params: { userId: string }, { dispatch }) => {
+    try {
+      const response = await fetch(`${BASE_URL}/users/${params.userId}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${TOKEN()}`,
+        },
+      });
+      if (response.status === 204) {
+        toast.success('User deleted successfully');
+        localStorage.clear();
+        dispatch(setSuccesDelete(true));
+        dispatch(setToken({ token: null }));
+      } else {
+        toast.error('Error, please try again later');
+      }
+      const data = await response.json();
+      return data;
+    } catch (err) {
+      throw new Error('Error, please try again later');
     }
-    const data = await response.json();
-    return data;
-  } catch (err) {
-    throw new Error('Error, please try again later');
   }
-});
+);
