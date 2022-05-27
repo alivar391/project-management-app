@@ -13,9 +13,10 @@ import { ITask } from '../../reducers/oneBoardReducer';
 import { useAppDispatch } from '../../store/hooks';
 import { getBoard } from '../../thunks/board';
 import { deleteTask, updateTask } from '../../thunks/task';
-
+import jwt_decode from 'jwt-decode';
 import './task.css';
 import { useTranslation } from 'react-i18next';
+import { IUserFromToken } from '../../pages/UpdateUserPage/UpdateUserPage';
 
 export type ITaskProps = {
   boardId: string;
@@ -95,6 +96,22 @@ export const Task = ({ boardId, columnId, task }: ITaskProps) => {
     dispatch(getBoard({ boardId }));
   };
 
+  const onUpdateTask = async ({ id, title, description }: IInfo) => {
+    const token = localStorage.getItem('token') as string;
+    const decodedToken: IUserFromToken = jwt_decode(token as string);
+    const userId = decodedToken.userId;
+    const newTask = {
+      title: title || '',
+      order: task.order,
+      userId,
+      boardId,
+      columnId,
+      description: description || '',
+    };
+    await dispatch(updateTask({ boardId, oldColumnId: columnId, id, token, newTask }));
+    await dispatch(getBoard({ boardId }));
+  };
+
   return (
     <li
       key={task.id}
@@ -102,6 +119,9 @@ export const Task = ({ boardId, columnId, task }: ITaskProps) => {
       id={`task-${task.order}`}
       ref={refTask}
       style={{ opacity, backgroundColor }}
+      /* onClick={() =>
+        openModal('FormModal', t('Task.Change a task'), onUpdateTask, t('board.Update'), task)
+      } */
     >
       <div
         className="delete-task"

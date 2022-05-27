@@ -110,6 +110,7 @@
   },
   "Task" : {
     "Do you really want to delete this task?": "Do you really want to delete this task?",
-    "Ok": "Ok"
+    "Ok": "Ok",
+    "Change a task": "Change a task"
   }
 }
