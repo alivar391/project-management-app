@@ -23,7 +23,7 @@
   padding: 0;
   overflow: auto;
   overflow-y: auto;
-  max-height: 40vh;
+  max-height: 45vh;
 }
 
 @media (max-width: 570px) {
@@ -43,9 +43,7 @@
   top: 20px;
   cursor: pointer;
 }
-.btn-add-column {
-  margin-top: 50px;
-}
+
 .tasks::-webkit-scrollbar-thumb {
   background-image: -webkit-gradient(linear-gradient(to right, #04befe, #3f86ed, #25aae1, #4481eb));
   border-radius: 15px;
