@@ -11,10 +11,11 @@ export function WelcomePage() {
         </h3>
         <div className="welcome__desc">{t('welcomePage.description')}</div>
         <div className="welcome__rs-info">
+          <h2 className="welcome__about-project-title">{t('welcomePage.About Project Title')}</h2>
+          <div className="welcome__about-project">{t('welcomePage.About Project')}</div>
           <h2 className="welcome__rs-info-title">
             {t('welcomePage.RSS.Online course Development with React')}
           </h2>
-          <div className="welcome__about-project">{t('welcomePage.About Project')}</div>
           <h3 className="welcome__rs-info-subtitle">
             {t('welcomePage.RSS.Free course from The Rolling Scopes community')}
           </h3>
@@ -34,9 +35,9 @@ export function WelcomePage() {
           </p>
           <div className="rss-advantages">
             <div className="rss-advantage__card">
-              <h5 className="">{t('welcomePage.RSS.Free education')}</h5>
+              <div className="rss-icon rss-free"></div>
               <div className="rss-info__block">
-                <div className="rss-icon rss-free"></div>
+                <h5 className="rss-advantage__card-title">{t('welcomePage.RSS.Free education')}</h5>
                 <p>
                   {t('welcomePage.RSS.Principle')}
                   {t('welcomePage.RSS.We share our knowledge')}
@@ -44,30 +45,30 @@ export function WelcomePage() {
               </div>
             </div>
             <div className="rss-advantage__card">
-              <h5>{t('welcomePage.RSS.Training term')}</h5>
+              <div className="rss-icon rss-time"></div>
               <div className="rss-info__block">
-                <div className="rss-icon rss-time"></div>
+                <h5 className="rss-advantage__card-title">{t('welcomePage.RSS.Training term')}</h5>
                 <p>{t('welcomePage.RSS.Webinars are held')}</p>
               </div>
             </div>
             <div className="rss-advantage__card">
-              <h5>{t('welcomePage.RSS.For everyone')}</h5>
+              <div className="rss-icon rss-everyone"></div>
               <div className="rss-info__block">
-                <div className="rss-icon rss-everyone"></div>
+                <h5 className="rss-advantage__card-title">{t('welcomePage.RSS.For everyone')}</h5>
                 <p>{t('welcomePage.RSS.Everyone')}</p>
               </div>
             </div>
             <div className="rss-advantage__card">
-              <h5>{t('welcomePage.RSS.Certificate')}</h5>
+              <div className="rss-icon rss-certificate"></div>
               <div className="rss-info__block">
-                <div className="rss-icon rss-certificate"></div>
+                <h5 className="rss-advantage__card-title">{t('welcomePage.RSS.Certificate')}</h5>
                 <p>{t('welcomePage.RSS.Certificate of successful')}</p>
               </div>
             </div>
             <div className="rss-advantage__card">
-              <h5>{t('welcomePage.RSS.Materials')}</h5>
+              <div className="rss-icon rss-materials"></div>
               <div className="rss-info__block">
-                <div className="rss-icon rss-materials"></div>
+                <h5 className="rss-advantage__card-title">{t('welcomePage.RSS.Materials')}</h5>
                 <p>
                   {t('welcomePage.RSS.All materials')}
                   <a href="https://www.youtube.com/c/RollingScopesSchool"> YouTube</a> and
@@ -76,9 +77,9 @@ export function WelcomePage() {
               </div>
             </div>
             <div className="rss-advantage__card">
-              <h5>{t('welcomePage.RSS.Chat')}</h5>
+              <div className="rss-icon rss-chat"></div>
               <div className="rss-info__block">
-                <div className="rss-icon rss-chat"></div>
+                <h5 className="rss-advantage__card-title">{t('welcomePage.RSS.Chat')}</h5>
                 <p>
                   {t('welcomePage.RSS.Open chat')}
                   <a href="https://discord.gg/zyRcphs3px"> https://discord.gg/zyRcphs3px</a>
