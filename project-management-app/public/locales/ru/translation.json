@@ -41,11 +41,25 @@
     "Diana Byben": "Диана Бубен",
     "Frontend Developer": "Фронт-энд разработчик",
     "Anastasia Arzhanik": "Анастасия Аржаник",
+    "About Project":"Данный проект был сделан в рамках обучения на курсе React от сообщества The Rolling Scopes.",
     "RSS": {
       "Online course Development with React": "Онлайн-курс «Разработка на React»",
       "Free course from The Rolling Scopes community": "Бесплатный онлайн курс от RS School",
       "Who is this course for?": "Для кого этот курс?",
-      "The course is intended for RS School 2021Q3 students who have passed RS School stage #2, as well as for new students who have knowledge and practical experience in using the following technologies and tools": "Курс предназначен для студентов RS School набора 2021Q3, которые прошли RS School stage #2, а также для новых студентов, которые имеют знания и практический опыт использования следующих технологий и инструментов"
+      "The course is intended": "Курс предназначен для студентов RS School набора 2021Q3, которые прошли RS School stage #2, а также для новых студентов, которые имеют знания и практический опыт использования следующих технологий и инструментов",
+      "Free education": "Бесплатное обучение",
+      "Principle":"В RS School работает принцип 'Pay it forward'. ",
+      "We share our knowledge":"Мы бесплатно делимся с учащимися своими знаниями сейчас, надеясь, что в будущем они вернутся к нам в качестве менторов и точно так же передадут свои знания следующему поколению студентов.",
+      "Training term":"Срок обучения: 2 месяца",
+      "Webinars are held":"Вебинары проходят 2 раза в неделю в вечернее время. Запись вебинаров будет доступна на youtube школы.",
+      "For everyone":"Для всех желающих",
+      "Everyone":"В RS School может учиться каждый, независимо от возраста, профессиональной занятости и места жительства. Однако для успешного обучения необходимо иметь базовые знания.",
+      "Certificate":"Сертификат",
+      "Certificate of successful":"Сертификат об успешном прохождении курсов выдается всем прошедшим два этапа обучения.",
+      "Materials":"Материалы",
+      "All materials":"Все материалы будут размещаться в открытом доступе на YouTube и GitHub.",
+      "Chat":"Чат",
+      "Open chat":"Открытый чат для абитуриентов и учащихся:"
     }
   },
   "mainPage" : {

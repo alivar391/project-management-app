@@ -14,6 +14,7 @@ export function WelcomePage() {
           <h2 className="welcome__rs-info-title">
             {t('welcomePage.RSS.Online course Development with React')}
           </h2>
+          <div className="welcome__about-project">{t('welcomePage.About Project')}</div>
           <h3 className="welcome__rs-info-subtitle">
             {t('welcomePage.RSS.Free course from The Rolling Scopes community')}
           </h3>
@@ -25,9 +26,7 @@ export function WelcomePage() {
           </a>
           <h4>{t('welcomePage.RSS.Who is this course for?')}</h4>
           <p className="rss-event">
-            {t(
-              'welcomePage.RSS.The course is intended for RS School 2021Q3 students who have passed RS School stage #2, as well as for new students who have knowledge and practical experience in using the following technologies and tools'
-            )}{' '}
+            {t('welcomePage.RSS.The course is intended')}{' '}
             <span className="rss-bold">
               JavaScript, TypeScript, Git, GitHub, NPM, Webpack, CSS3 / HTML5, Chrome DevTools,
               Figma, REST API.
@@ -35,65 +34,53 @@ export function WelcomePage() {
           </p>
           <div className="rss-advantages">
             <div className="rss-advantage__card">
-              <h5 className="">Free education</h5>
+              <h5 className="">{t('welcomePage.RSS.Free education')}</h5>
               <div className="rss-info__block">
                 <div className="rss-icon rss-free"></div>
                 <p>
-                  The principle of &quot;Pay it forward&quot; works at RS School. We share our
-                  knowledge with students for free now, hoping that in the future they will return
-                  to us as mentors and pass on their knowledge to the next generation of students in
-                  the same way.
+                  {t('welcomePage.RSS.Principle')}
+                  {t('welcomePage.RSS.We share our knowledge')}
                 </p>
               </div>
             </div>
             <div className="rss-advantage__card">
-              <h5>Training term: 2 months</h5>
+              <h5>{t('welcomePage.RSS.Training term')}</h5>
               <div className="rss-info__block">
                 <div className="rss-icon rss-time"></div>
-                <p>
-                  Webinars are held 2 times a week in the evening. A recording of the webinars will
-                  be available on the school&lsquo;s YouTube channel.
-                </p>
+                <p>{t('welcomePage.RSS.Webinars are held')}</p>
               </div>
             </div>
             <div className="rss-advantage__card">
-              <h5>For everyone</h5>
+              <h5>{t('welcomePage.RSS.For everyone')}</h5>
               <div className="rss-info__block">
                 <div className="rss-icon rss-everyone"></div>
-                <p>
-                  Everyone can study at RS School, regardless of age, professional employment and
-                  place of residence. However, for successful learning, you need to have basic
-                  knowledge.
-                </p>
+                <p>{t('welcomePage.RSS.Everyone')}</p>
               </div>
             </div>
             <div className="rss-advantage__card">
-              <h5>Certificate</h5>
+              <h5>{t('welcomePage.RSS.Certificate')}</h5>
               <div className="rss-info__block">
                 <div className="rss-icon rss-certificate"></div>
-                <p>
-                  A certificate of successful completion of the course is issued to all who have
-                  passed the two stages of training.
-                </p>
+                <p>{t('welcomePage.RSS.Certificate of successful')}</p>
               </div>
             </div>
             <div className="rss-advantage__card">
-              <h5>Materials</h5>
+              <h5>{t('welcomePage.RSS.Materials')}</h5>
               <div className="rss-info__block">
                 <div className="rss-icon rss-materials"></div>
                 <p>
-                  All materials will be hosted in the public domain on
+                  {t('welcomePage.RSS.All materials')}
                   <a href="https://www.youtube.com/c/RollingScopesSchool"> YouTube</a> and
                   <a href="https://github.com/rolling-scopes-school/"> GitHub.</a>
                 </p>
               </div>
             </div>
             <div className="rss-advantage__card">
-              <h5>Chat</h5>
+              <h5>{t('welcomePage.RSS.Chat')}</h5>
               <div className="rss-info__block">
                 <div className="rss-icon rss-chat"></div>
                 <p>
-                  Open chat for applicants and students:
+                  {t('welcomePage.RSS.Open chat')}
                   <a href="https://discord.gg/zyRcphs3px"> https://discord.gg/zyRcphs3px</a>
                 </p>
               </div>
