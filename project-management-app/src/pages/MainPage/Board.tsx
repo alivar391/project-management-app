@@ -54,7 +54,7 @@ export function Board({ board, openModal }: IProps) {
           onClick={() =>
             openModal(
               'ConfirmModal',
-              t('board.Do you realy want to delete a board?'),
+              t('board.Do you really want to delete a board?'),
               deleteNewBoard,
               t('board.Ok'),
               board

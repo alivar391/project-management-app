@@ -2,7 +2,7 @@ import jwt_decode from 'jwt-decode';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { setToken } from '../../reducers/userReducer';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { useAppDispatch } from '../../store/hooks';
 import './header.css';
 import { useTranslation } from 'react-i18next';
 import { TOKEN } from '../../constants/constants';
@@ -48,7 +48,7 @@ export function Header() {
             alt="home-button"
             className="header__icon"
           />
-          {TOKEN() && <div className="link__board"> Go to main Page</div>}
+          {TOKEN() && <div className="link__board"> {t('header.Go to main Page')}</div>}
         </div>
       </Link>
       <div className="header__button-block">

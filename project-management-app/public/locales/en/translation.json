@@ -2,7 +2,8 @@
   "header": {
     "login": "Log in",
     "signup": "Sign up",
-    "logout": "Log out"
+    "logout": "Log out",
+    "Go to main Page": "Go to main Page"
   },
   "signInPage" : {
     "Log In": "Log in",
@@ -28,7 +29,10 @@
     "Name": "Name",
     "Password": "Password",
     "Delete User": "Delete User",
-    "Update info": "Update info"
+    "Update info": "Update info",
+    "Required": "Required",
+    "Do you really want to delete a user?": "Do you really want to delete a user?",
+    "Ok": "Ok"
   },
   "welcomePage" : {
     "Productivity Planner": "Productivity Planner",

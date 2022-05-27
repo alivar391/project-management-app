@@ -109,7 +109,7 @@ export const UpdateUserPage = () => {
         <div className="namesUser">
           <Input
             register={register('login', {
-              required: 'Requered',
+              required: t('updateUserPage.Required'),
               minLength: { value: 3, message: 'Too short name' },
             })}
             nameInput={'login'}
@@ -120,7 +120,7 @@ export const UpdateUserPage = () => {
           />
           <Input
             register={register('name', {
-              required: 'Requered',
+              required: t('updateUserPage.Required'),
               minLength: { value: 3, message: 'Too short name' },
             })}
             nameInput={'name'}
@@ -132,7 +132,7 @@ export const UpdateUserPage = () => {
         </div>
         <Input
           register={register('password', {
-            required: 'Requered',
+            required: t('updateUserPage.Required'),
             pattern: {
               value: /^(?=.{8,}$)(?=(?:.*?[A-Z]){2})(?=.*?[a-z])(?=(?:.*?[0-9]){2}).*$/,
               message: 'Must be contain 2numbers, 2lowercase, 2uppercase letters, min 8',
@@ -150,7 +150,12 @@ export const UpdateUserPage = () => {
             className={'btn-warn'}
             onClick={(e) => {
               e.preventDefault();
-              openModal('ConfirmModal', 'Do you realy want to delete a user?', onDelete, 'Ok');
+              openModal(
+                'ConfirmModal',
+                t('updateUserPage.Do you really want to delete a user?'),
+                onDelete,
+                t('updateUserPage.Ok')
+              );
             }}
           >
             {t('updateUserPage.Delete User')}
