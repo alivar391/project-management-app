@@ -23,7 +23,7 @@
   padding: 0;
   overflow: auto;
   overflow-y: auto;
-  max-height: 45vh;
+  max-height: 40vh;
 }
 
 @media (max-width: 570px) {
