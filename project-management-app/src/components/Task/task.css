@@ -8,6 +8,10 @@
   padding: 15px;
   position: relative;
   transition: 1;
+  }
+.task_title-text {
+  max-width: 135px;
+  overflow-wrap: break-word;
 }
 
 .delete-task {

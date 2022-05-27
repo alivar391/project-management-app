@@ -41,16 +41,21 @@ export function Header() {
 
   return (
     <header className={!scroll ? 'header' : 'header active'}>
-      <Link to="/">
-        <div className="header__home-button">
+      <div className="header__home-button">
+        <Link to="/welcome">
           <img
             src="./../assets/png/home-icon-silhouette.png"
             alt="home-button"
             className="header__icon"
           />
-          {TOKEN() && <div className="link__board"> {t('header.Go to main Page')}</div>}
-        </div>
-      </Link>
+        </Link>
+        {TOKEN() && (
+          <Link to="/">
+            <div className="link__board"> {t('header.Go to main Page')}</div>
+          </Link>
+        )}
+      </div>
+
       <div className="header__button-block">
         {!TOKEN() && (
           <div>

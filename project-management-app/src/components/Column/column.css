@@ -8,24 +8,27 @@
   height: 100%;
   position: relative;
   margin: 20px;
+  cursor: grab;
 }
 .column h3 {
   padding: 10px 0;
-  cursor: grab;
+  cursor: pointer;
   margin: auto;
   height: 100%;
+  max-width: 180px;
+  overflow-wrap: break-word;
 }
 
 .tasks {
   padding: 0;
   overflow: auto;
   overflow-y: auto;
-  max-height: 58vh;
+  max-height: 45vh;
 }
 
 @media (max-width: 570px) {
   .tasks {
-    max-height: 55vh;
+    max-height: 35vh;
   }
 }
 
@@ -40,9 +43,7 @@
   top: 20px;
   cursor: pointer;
 }
-.btn-add-column {
-  margin-top: 50px;
-}
+
 .tasks::-webkit-scrollbar-thumb {
   background-image: -webkit-gradient(linear-gradient(to right, #04befe, #3f86ed, #25aae1, #4481eb));
   border-radius: 15px;

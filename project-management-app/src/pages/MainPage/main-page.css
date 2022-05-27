@@ -62,14 +62,13 @@
   height: 200px;
   border-radius: 5px;
   background-color: rgb(238, 255, 255);
-  background-image: url('../../../public/assets/jpg/board.jpg');
+  background-image: url('../../../public/assets/jpg/board.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   color: #2b3c50;
   text-decoration: none;
   font-size: 20px;
-  opacity: 0.9;
   transition: 1s;
 }
 
@@ -77,12 +76,18 @@
   transform: translateY(-5px);
   box-shadow: 0 5px 10px 1px;
 }
-.board__title {
+.board__title, .board__description  {
   margin: 0 auto;
   padding: 20px 0;
   opacity: 0.9;
-  height: 100%;
-  background-color:rgba(255, 255, 255, 0.6);
+  max-height: 200px;
+  background-color: rgba(255, 255, 255, 0.6);
+  overflow-wrap: break-word;
+  overflow: hidden;
+}
+.board__description {
+  padding: 0;
+  font-size: 14px;
 }
 
 .board__buttns {
