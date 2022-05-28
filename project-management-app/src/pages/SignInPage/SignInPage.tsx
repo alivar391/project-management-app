@@ -22,7 +22,7 @@ export const SignInPage = () => {
   const token = useAppSelector((state) => state.userInfo.token.token);
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm<IUser>({
-    mode: 'onChange',
+    mode: 'onSubmit',
   });
   const { t } = useTranslation();
 
