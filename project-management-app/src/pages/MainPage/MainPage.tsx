@@ -20,6 +20,7 @@ import { TOKEN } from '../../constants/constants';
 import jwt_decode from 'jwt-decode';
 import './main-page.css';
 import { IUserFromToken } from '../UpdateUserPage/UpdateUserPage';
+import { ScrollButton } from '../../components/ScrollButton/ScrollBtn';
 
 export type IOpenModalFunction = (
   modalName: string,
@@ -97,6 +98,7 @@ export function MainPage() {
           </div>
         </div>
         <div className="main__cont">
+          <ScrollButton />
           {isLoading ? (
             <Spinner />
           ) : makeBoards(boards).length ? (
