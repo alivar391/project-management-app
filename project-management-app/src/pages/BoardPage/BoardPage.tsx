@@ -82,7 +82,6 @@ export function BoardPage() {
 
   return (
     <div className="board-page__inner">
-      <div className="content-board">{isLoading ? <Spinner /> : <Board />}</div>
       <Button
         onClick={() =>
           openModal(
@@ -97,6 +96,7 @@ export function BoardPage() {
       >
         {t('boardPage.Add Column')}
       </Button>
+      <div className="content-board">{isLoading ? <Spinner /> : <Board />}</div>
     </div>
   );
 }

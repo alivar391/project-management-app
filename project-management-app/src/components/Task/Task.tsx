@@ -125,15 +125,16 @@ export const Task = ({ boardId, columnId, task }: ITaskProps) => {
     >
       <div
         className="delete-task"
-        onClick={() =>
+        onClick={(e) => {
+          e.stopPropagation();
           openModal(
             'ConfirmModal',
             t('Task.Do you really want to delete this task?'),
             onDeleteTask,
             t('Task.Ok'),
             { id }
-          )
-        }
+          );
+        }}
       ></div>
       <div className="task_title-text">{task.title}</div>
     </li>

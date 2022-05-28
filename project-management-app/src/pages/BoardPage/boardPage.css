@@ -1,15 +1,14 @@
 .board-page__inner {
     max-height: calc(100vh - 120px);
     min-height: calc(100vh - 120px);
+    padding-top: 10px;
     background-image: url('./../../../public/assets/jpg/board3.png');
 }
-
 
 .content-board {
     max-width: 1100px;
     margin: 0 auto;
     max-height: calc(100vh - 120px);
-    padding-top: 30px;
     overflow: auto;
     margin-bottom: 10px;
 }
