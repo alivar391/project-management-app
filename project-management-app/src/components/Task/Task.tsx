@@ -119,9 +119,9 @@ export const Task = ({ boardId, columnId, task }: ITaskProps) => {
       id={`task-${task.order}`}
       ref={refTask}
       style={{ opacity, backgroundColor }}
-      /* onClick={() =>
-        openModal('FormModal', t('Task.Change a task'), onUpdateTask, t('board.Update'), task)
-      } */
+      onClick={() =>
+        openModal('UpdateModal', t('Task.Change a task'), onUpdateTask, t('board.Update'), task)
+      }
     >
       <div
         className="delete-task"
