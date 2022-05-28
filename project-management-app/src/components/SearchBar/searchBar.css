@@ -39,13 +39,22 @@
 .header-list {
     display: flex;
     justify-content: space-between;
-    color: black;
+    color: rgb(4, 1, 148);
+    border: 1px solid gray;
+    padding: 5px 0;
+    margin-top: 10px;
 }
+
 .list-content a {
     display: flex;
     justify-content: space-between;
+    text-decoration: none;
+    border-bottom: 1px solid gray;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    padding: 3px;
+    color: black;
 }
-
 .link {
     display: flex;
     justify-content: space-between;

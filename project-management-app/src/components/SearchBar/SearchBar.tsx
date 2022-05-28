@@ -66,18 +66,18 @@ export const SearchBar = () => {
               <div>{t('mainPage.Task title')}</div>
               <div>{t('mainPage.Task description')}</div>
             </div>
-            {filterTask.length > 0 ? (
-              filterTask.map((task: ITaskType) => (
-                <>
+            <div className="list">
+              {filterTask.length > 0 ? (
+                filterTask.map((task: ITaskType) => (
                   <Link to={task.boardId} key={task.id}>
                     <div>{task.title}</div>
                     <div>{task.description}</div>
                   </Link>
-                </>
-              ))
-            ) : (
-              <p>{t('mainPage.Task search')}</p>
-            )}
+                ))
+              ) : (
+                <p>{t('mainPage.Task search')}</p>
+              )}
+            </div>
             <span className="close" onClick={() => setVisible(false)}></span>
           </div>
         </div>
