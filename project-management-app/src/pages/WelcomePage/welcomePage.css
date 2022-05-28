@@ -192,7 +192,12 @@
     box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
     text-decoration: none;
     margin-top: 10px;
+    background-size: 300% 100%;
 } 
+.team__info a:hover {
+    background-position: 100% 0;
+    transition: all .4s ease-in-out;
+}
 @media (max-width: 768px) {
     .welcome__title, .welcome__about-project-title {
         font-size: 50px;  
