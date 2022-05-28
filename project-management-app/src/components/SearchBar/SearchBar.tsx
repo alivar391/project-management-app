@@ -1,4 +1,5 @@
 import { ChangeEvent, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getAllTask } from '../../thunks/task';
@@ -21,6 +22,7 @@ export const SearchBar = () => {
   const [searchValue, setSearchValue] = useState('');
   const [filterTask, setFilterTask] = useState<ITaskType[]>(tasks);
   const [isVisible, setVisible] = useState(false);
+  const { t } = useTranslation();
 
   const onSearch = async () => {
     await dispatch(getAllTask());
@@ -50,7 +52,7 @@ export const SearchBar = () => {
         <input
           className="input-search"
           name="search"
-          placeholder="Search"
+          placeholder={t('mainPage.Task placeholder')}
           onChange={(e) => handleChange(e)}
         ></input>
         <button className="btn-search btn" onClick={onSearch}>
@@ -61,8 +63,8 @@ export const SearchBar = () => {
         <div className="list-search">
           <div className="list-content">
             <div className="header-list">
-              <div>title</div>
-              <div>description</div>
+              <div>{t('mainPage.Task title')}</div>
+              <div>{t('mainPage.Task description')}</div>
             </div>
             {filterTask.length > 0 ? (
               filterTask.map((task: ITaskType) => (
@@ -74,7 +76,7 @@ export const SearchBar = () => {
                 </>
               ))
             ) : (
-              <p>Задач не найдено</p>
+              <p>{t('mainPage.Task search')}</p>
             )}
             <span className="close" onClick={() => setVisible(false)}></span>
           </div>
