@@ -21,9 +21,10 @@
 }
 
 @media (max-width: 600px) {
-  .main__header {
+  .main__header-inner {
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 10px;
   }
 }
