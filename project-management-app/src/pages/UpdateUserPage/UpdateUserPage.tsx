@@ -40,7 +40,6 @@ export type IUserFromToken = {
 };
 
 export const UpdateUserPage = () => {
-  // const tokenUser = useAppSelector((state) => state.userInfo.token.token);
   const token = TOKEN() as string;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();

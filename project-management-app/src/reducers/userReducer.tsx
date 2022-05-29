@@ -75,6 +75,7 @@ const userReducer = createSlice({
         state.userInfo.name = decodedToken.login;
         toast.success(messagesForUser.auth);
         state.token = action.payload;
+        localStorage.setItem('token', action.payload.token);
       })
       .addCase(authUser.rejected, (state, action) => {
         toast.error(action.error.message);
