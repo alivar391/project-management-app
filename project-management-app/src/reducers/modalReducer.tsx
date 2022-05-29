@@ -15,6 +15,7 @@ interface IModalState {
   changingInfo: {
     id: string;
     title: string;
+    description?: string;
   };
 }
 

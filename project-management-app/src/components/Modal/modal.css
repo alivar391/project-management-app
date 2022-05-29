@@ -22,6 +22,8 @@
     position: relative;
     top: 50%;
     transform: translateY(-50%);
+    cursor: auto;
+    overflow: hidden;
 }
 
 .modal__title {
@@ -40,6 +42,21 @@
     margin: 15px auto;
 }
 
+.modal__info {
+    width: 100%;
+    font-size: 30px;
+    font-family: monospace;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #4d6a8d;
+    cursor: pointer;
+}
+
+.modal__description {
+    margin: 20px 0;
+    font-size: 20px;
+}
+
 @media (max-width: 600px) {
     .modal__cont{
         width: 400px;
@@ -48,7 +65,7 @@
 
 @media (max-width: 450px) {
     .modal__cont{
-        width: 100%;
+        width: 95%;
     }
     .modal__title{
         font-size: 23px;
