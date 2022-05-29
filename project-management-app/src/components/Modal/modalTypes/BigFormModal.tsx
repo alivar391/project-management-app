@@ -20,7 +20,7 @@ export const BigFormModal = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IBoard>({
-    mode: 'onChange',
+    mode: 'onSubmit',
   });
   const { t } = useTranslation();
 

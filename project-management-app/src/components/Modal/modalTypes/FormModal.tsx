@@ -21,7 +21,7 @@ export const FormModal = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IBoard>({
-    mode: 'onChange',
+    mode: 'onSubmit',
   });
 
   const onSubmit: SubmitHandler<IBoard> = (data: IBoard) => {

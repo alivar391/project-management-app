@@ -50,7 +50,7 @@ export const UpdateUserPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IForm>({
-    mode: 'onChange',
+    mode: 'onSubmit',
   });
   const { t } = useTranslation();
 
