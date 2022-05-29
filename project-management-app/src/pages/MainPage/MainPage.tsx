@@ -19,6 +19,7 @@ import { Board } from './Board';
 import { TOKEN } from '../../constants/constants';
 import jwt_decode from 'jwt-decode';
 import { IUserFromToken } from '../UpdateUserPage/UpdateUserPage';
+import { ScrollButton } from '../../components/ScrollButton/ScrollBtn';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { getAllTask } from '../../thunks/task';
 import './main-page.css';
@@ -106,6 +107,7 @@ export function MainPage() {
         </div>
         <SearchBar />
         <div className="main__cont">
+          <ScrollButton />
           {isLoading ? (
             <Spinner />
           ) : makeBoards(boards).length ? (

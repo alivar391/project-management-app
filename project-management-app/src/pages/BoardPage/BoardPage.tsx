@@ -89,7 +89,6 @@ export function BoardPage() {
   if (boards.find((board: IBoard) => board.id === boardId)) {
     return (
       <div className="board-page__inner">
-        <div className="content-board">{isLoading ? <Spinner /> : <Board />}</div>
         <Button
           onClick={() =>
             openModal(
@@ -104,6 +103,7 @@ export function BoardPage() {
         >
           {t('boardPage.Add Column')}
         </Button>
+        <div className="content-board">{isLoading ? <Spinner /> : <Board />}</div>
       </div>
     );
   } else {

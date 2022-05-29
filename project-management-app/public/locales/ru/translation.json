@@ -114,6 +114,7 @@
   },
   "Task" : {
     "Do you really want to delete this task?": "Вы действительно хотите удалить этот таск?",
-    "Ok": "Да"
+    "Ok": "Да",
+    "Change a task": "Изменить задачу"
   }
 }
