@@ -71,7 +71,7 @@ export function MainPage() {
   function createNewBoard({ title, description }: IInfo) {
     const board = {
       title: title || '',
-      description: description || 'No description',
+      description: description || ' ',
     };
     dispatch(createBoard(board));
   }
@@ -88,7 +88,7 @@ export function MainPage() {
             className="main__btn"
             onClick={() =>
               openModal(
-                'FormModal',
+                'BigFormModal',
                 t('mainPage.Create a board'),
                 createNewBoard,
                 t('mainPage.Create')
@@ -112,7 +112,7 @@ export function MainPage() {
             <span
               onClick={() =>
                 openModal(
-                  'FormModal',
+                  'BigFormModal',
                   t('mainPage.Create a board'),
                   createNewBoard,
                   t('mainPage.Create')

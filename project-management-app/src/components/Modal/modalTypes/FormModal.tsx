@@ -57,17 +57,6 @@ export const FormModal = () => {
           type={'text'}
           errors={errors}
         />
-        <Input
-          register={register('description', {
-            required: 'Requered',
-            minLength: { value: 3, message: t('modal.Too short title') },
-          })}
-          nameInput={'description'}
-          textLabel={t('modal.Description')}
-          datatestId={'input-description'}
-          type={'text'}
-          errors={errors}
-        />
         <Button
           data-testid="button-submit-form"
           className="btn__modal"
