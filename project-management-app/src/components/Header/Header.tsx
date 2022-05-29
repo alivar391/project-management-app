@@ -2,7 +2,7 @@ import jwt_decode from 'jwt-decode';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { setToken } from '../../reducers/userReducer';
-import { useAppDispatch } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import './header.css';
 import { useTranslation } from 'react-i18next';
 import { TOKEN } from '../../constants/constants';
@@ -11,7 +11,8 @@ import { IUserFromToken } from '../../pages/UpdateUserPage/UpdateUserPage';
 export function Header() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const token = TOKEN() as string;
+  const tokenState = useAppSelector((state) => state.userInfo.token.token);
+  const token = (tokenState || TOKEN()) as string;
   let userName = 'user';
   if (token) {
     const decodedToken: IUserFromToken = jwt_decode(token);
