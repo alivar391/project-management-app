@@ -41,7 +41,6 @@ export const updateTask = createAsyncThunk(
     token: string;
     newTask: INewTask;
   }) => {
-    console.log(params, 'обновление таска', params.newTask);
     try {
       const response = await fetch(
         `${BASE_URL}/boards/${params.boardId}/columns/${params.oldColumnId}/tasks/${params.id}`,
