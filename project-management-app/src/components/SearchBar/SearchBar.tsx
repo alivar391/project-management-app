@@ -25,6 +25,7 @@ export const SearchBar = () => {
   const { t } = useTranslation();
 
   const onSearch = async () => {
+    if (!searchValue) return;
     await dispatch(getAllTask());
     const filterTask: ITaskType[] = [];
     if (tasks.length > 0) {
@@ -35,6 +36,7 @@ export const SearchBar = () => {
       });
       setFilterTask(filterTask);
       setVisible(true);
+      setSearchValue('');
     }
   };
 
@@ -53,6 +55,7 @@ export const SearchBar = () => {
           className="input-search"
           name="search"
           placeholder={t('mainPage.Task placeholder')}
+          value={searchValue}
           onChange={(e) => handleChange(e)}
         ></input>
         <button className="btn-search btn" onClick={onSearch}>
