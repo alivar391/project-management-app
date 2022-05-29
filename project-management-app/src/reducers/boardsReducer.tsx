@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getBoards, createBoard, updateBoard, deleteBoard } from '../thunks/boards';
+import { getAllTask } from '../thunks/task';
+import { ITask } from './oneBoardReducer';
 
 export interface IBoard {
   id: string | undefined;
@@ -14,11 +16,13 @@ export interface INewBoard {
 
 export type StateType = {
   boards: Array<IBoard>;
+  tasks: Array<ITask>;
   isLoading: boolean;
 };
 
 const initialState = {
   boards: [],
+  tasks: [],
   isLoading: false,
 };
 
@@ -66,6 +70,16 @@ const boardReduser = createSlice({
       state.isLoading = true;
     },
     [deleteBoard.rejected.type]: (state: StateType) => {
+      state.isLoading = false;
+    },
+    [getAllTask.fulfilled.type]: (state: StateType, action) => {
+      state.tasks = action.payload;
+      state.isLoading = false;
+    },
+    [getAllTask.pending.type]: (state: StateType) => {
+      state.isLoading = true;
+    },
+    [getAllTask.rejected.type]: (state: StateType) => {
       state.isLoading = false;
     },
   },

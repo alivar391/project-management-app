@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { BASE_URL } from '../constants/constants';
+import { BASE_URL, TOKEN } from '../constants/constants';
 
 export type INewTask = {
   title: string;
@@ -81,3 +81,18 @@ export const deleteTask = createAsyncThunk(
     }
   }
 );
+
+export const getAllTask = createAsyncThunk('tasks/all', async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/search/tasks`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${TOKEN()}`,
+      },
+    });
+    const data = await response.json();
+    return data;
+  } catch {
+    throw new Error('Error, please try again later');
+  }
+});

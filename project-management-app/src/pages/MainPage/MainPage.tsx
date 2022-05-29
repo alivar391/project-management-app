@@ -18,8 +18,10 @@ import { createBoard, getBoards } from '../../thunks/boards';
 import { Board } from './Board';
 import { TOKEN } from '../../constants/constants';
 import jwt_decode from 'jwt-decode';
-import './main-page.css';
 import { IUserFromToken } from '../UpdateUserPage/UpdateUserPage';
+import { SearchBar } from '../../components/SearchBar/SearchBar';
+import { getAllTask } from '../../thunks/task';
+import './main-page.css';
 
 export type IOpenModalFunction = (
   modalName: string,
@@ -41,6 +43,7 @@ export function MainPage() {
   const { t } = useTranslation();
   useEffect(() => {
     dispatch(getBoards());
+    dispatch(getAllTask());
   }, []);
 
   function makeBoards(boards: Array<IBoard>) {
@@ -96,6 +99,7 @@ export function MainPage() {
             </Button>
           </div>
         </div>
+        <SearchBar />
         <div className="main__cont">
           {isLoading ? (
             <Spinner />
