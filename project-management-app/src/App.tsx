@@ -47,6 +47,7 @@ function App() {
             />
             <Route path="update-user" element={<UpdateUserPage />} />
             <Route path="*" element={<Page404 />} />
+            <Route path="/404" element={<Page404 />} />
           </Route>
         </Routes>
       </ErrorBoundary>

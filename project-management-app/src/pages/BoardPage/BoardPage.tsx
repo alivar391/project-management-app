@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router';
+import { Navigate, useParams } from 'react-router';
 import { Button } from '../../components/Button/Button';
 import { Column } from '../../components/Column/Column';
 import {
@@ -19,6 +19,7 @@ import { IColumn } from '../../reducers/oneBoardReducer';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getBoard } from '../../thunks/board';
 import { addColumn } from '../../thunks/column';
+import { IBoard } from '../../reducers/boardsReducer';
 import './boardPage.css';
 
 interface IBoardInfo {
@@ -30,10 +31,11 @@ export function BoardPage() {
   const token = localStorage.getItem('token') as string;
   const dispatch = useAppDispatch();
   const { board, isLoading } = useAppSelector((state) => state.oneBoard);
+  const { boards } = useAppSelector((state) => state.boards);
   const { t } = useTranslation();
 
   useEffect(() => {
-    if (token && boardId) {
+    if (boards.find((board: IBoard) => board.id === boardId) && token && boardId) {
       dispatch(getBoard({ boardId }));
     }
   }, []);
@@ -80,23 +82,27 @@ export function BoardPage() {
     }
   };
 
-  return (
-    <div className="board-page__inner">
-      <div className="content-board">{isLoading ? <Spinner /> : <Board />}</div>
-      <Button
-        onClick={() =>
-          openModal(
-            'FormModal',
-            t('boardPage.Create a new column'),
-            onAddColumn,
-            t('boardPage.Create'),
-            { id: boardId }
-          )
-        }
-        className={'btn-add-column'}
-      >
-        {t('boardPage.Add Column')}
-      </Button>
-    </div>
-  );
+  if (boards.find((board: IBoard) => board.id === boardId)) {
+    return (
+      <div className="board-page__inner">
+        <div className="content-board">{isLoading ? <Spinner /> : <Board />}</div>
+        <Button
+          onClick={() =>
+            openModal(
+              'FormModal',
+              t('boardPage.Create a new column'),
+              onAddColumn,
+              t('boardPage.Create'),
+              { id: boardId }
+            )
+          }
+          className={'btn-add-column'}
+        >
+          {t('boardPage.Add Column')}
+        </Button>
+      </div>
+    );
+  } else {
+    return <Navigate to="/404" state={{ from: location }} />;
+  }
 }
