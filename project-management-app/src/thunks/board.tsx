@@ -12,6 +12,9 @@ export const getBoard = createAsyncThunk('board/get', async (params: { boardId: 
         Authorization: `Bearer ${TOKEN()}`,
       },
     });
+    if (response.status === 401) {
+      throw new Error(`Unauthorized!`);
+    }
     const data = await response.json();
     data.columns.sort((a: IColumn, b: IColumn) => (a.order > b.order ? 1 : -1));
     data.columns.forEach((column: IColumn) => {

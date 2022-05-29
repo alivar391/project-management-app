@@ -25,6 +25,7 @@ export type BoardState = {
     columns: IColumn[];
   };
   isLoading: boolean;
+  badToken: boolean;
 };
 
 const initialState: BoardState = {
@@ -34,6 +35,7 @@ const initialState: BoardState = {
     columns: [],
   },
   isLoading: false,
+  badToken: false,
 };
 
 const oneBoardReducer = createSlice({
@@ -51,6 +53,8 @@ const oneBoardReducer = createSlice({
       })
       .addCase(getBoard.rejected, (state) => {
         state.isLoading = false;
+        localStorage.clear();
+        state.badToken = true;
       })
       .addCase(addTask.fulfilled, () => {})
       .addCase(addTask.rejected, (state) => {
@@ -64,6 +68,8 @@ const oneBoardReducer = createSlice({
       })
       .addCase(updateColumn.rejected, (state) => {
         state.isLoading = false;
+        localStorage.clear();
+        state.badToken = true;
       })
       .addCase(updateTask.fulfilled, (state) => {
         state.isLoading = false;
@@ -73,6 +79,8 @@ const oneBoardReducer = createSlice({
       })
       .addCase(updateTask.rejected, (state) => {
         state.isLoading = false;
+        localStorage.clear();
+        state.badToken = true;
       })
       .addCase(deleteTask.fulfilled, () => {})
       .addCase(deleteTask.rejected, () => {});

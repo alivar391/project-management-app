@@ -18,12 +18,14 @@ export type StateType = {
   boards: Array<IBoard>;
   tasks: Array<ITask>;
   isLoading: boolean;
+  badToken: boolean;
 };
 
 const initialState = {
   boards: [],
   tasks: [],
   isLoading: false,
+  badToken: false,
 };
 
 const boardReduser = createSlice({
@@ -40,6 +42,8 @@ const boardReduser = createSlice({
     },
     [getBoards.rejected.type]: (state: StateType) => {
       state.isLoading = false;
+      localStorage.clear();
+      state.badToken = true;
     },
     [createBoard.fulfilled.type]: (state: StateType, action) => {
       state.boards.push(action.payload);
@@ -50,6 +54,8 @@ const boardReduser = createSlice({
     },
     [createBoard.rejected.type]: (state: StateType) => {
       state.isLoading = false;
+      localStorage.clear();
+      state.badToken = true;
     },
     [updateBoard.fulfilled.type]: (state: StateType, action) => {
       state.isLoading = false;
@@ -61,6 +67,8 @@ const boardReduser = createSlice({
     },
     [updateBoard.rejected.type]: (state: StateType) => {
       state.isLoading = false;
+      localStorage.clear();
+      state.badToken = true;
     },
     [deleteBoard.fulfilled.type]: (state: StateType, action) => {
       state.boards = [...action.payload];
@@ -71,6 +79,8 @@ const boardReduser = createSlice({
     },
     [deleteBoard.rejected.type]: (state: StateType) => {
       state.isLoading = false;
+      localStorage.clear();
+      state.badToken = true;
     },
     [getAllTask.fulfilled.type]: (state: StateType, action) => {
       state.tasks = action.payload;
@@ -81,6 +91,8 @@ const boardReduser = createSlice({
     },
     [getAllTask.rejected.type]: (state: StateType) => {
       state.isLoading = false;
+      localStorage.clear();
+      state.badToken = true;
     },
   },
 });

@@ -22,6 +22,7 @@ import { IUserFromToken } from '../UpdateUserPage/UpdateUserPage';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { getAllTask } from '../../thunks/task';
 import './main-page.css';
+import { Navigate } from 'react-router-dom';
 
 export type IOpenModalFunction = (
   modalName: string,
@@ -33,7 +34,7 @@ export type IOpenModalFunction = (
 
 export function MainPage() {
   const dispatch = useAppDispatch();
-  const { boards, isLoading } = useAppSelector((store) => store.boards);
+  const { boards, isLoading, badToken } = useAppSelector((store) => store.boards);
   const token = TOKEN() as string;
   let userName = 'user';
   if (token) {
@@ -44,7 +45,7 @@ export function MainPage() {
   useEffect(() => {
     dispatch(getBoards());
     dispatch(getAllTask());
-  }, []);
+  }, [badToken]);
 
   function makeBoards(boards: Array<IBoard>) {
     return boards.map((board: IBoard) => (
@@ -73,6 +74,10 @@ export function MainPage() {
       description: description || 'No description',
     };
     dispatch(createBoard(board));
+  }
+
+  if (badToken) {
+    return <Navigate to="/welcome" state={{ from: location }} />;
   }
 
   return (

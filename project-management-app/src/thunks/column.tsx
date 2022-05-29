@@ -18,6 +18,9 @@ export const addColumn = createAsyncThunk(
           Authorization: `Bearer ${TOKEN()}`,
         },
       });
+      if (response.status === 401) {
+        throw new Error(`Unauthorized!`);
+      }
       const data = await response.json();
       return data;
     } catch {
@@ -37,6 +40,9 @@ export const updateColumn = createAsyncThunk(
           Authorization: `Bearer ${params.token}`,
         },
       });
+      if (response.status === 401) {
+        throw new Error(`Unauthorized!`);
+      }
       const data = await response.json();
       return data;
     } catch {
@@ -58,6 +64,9 @@ export const deleteColumn = createAsyncThunk(
           },
         }
       );
+      if (response.status === 401) {
+        throw new Error(`Unauthorized!`);
+      }
       const data = await response.json();
       return data;
     } catch {

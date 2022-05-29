@@ -35,6 +35,9 @@ export const createBoard = createAsyncThunk('boards/createBoard', async (board: 
     if (response.status === 404) {
       throw new Error(`Board was not founded!`);
     }
+    if (response.status === 401) {
+      throw new Error(`Unauthorized!`);
+    }
     const data = await response.json();
     return data;
   } catch (err) {
@@ -54,6 +57,9 @@ export const updateBoard = createAsyncThunk('boards/updateBoard', async (board: 
     });
     if (response.status === 404) {
       throw new Error(`Board was not founded!`);
+    }
+    if (response.status === 401) {
+      throw new Error(`Unauthorized!`);
     }
     const data = await response.json();
     return data;
@@ -81,6 +87,9 @@ export const deleteBoard = createAsyncThunk('boards/deleteBoard', async (id: str
       });
       const data = await response.json();
       return data;
+    }
+    if (response.status === 401) {
+      throw new Error(`Unauthorized!`);
     }
   } catch (err) {
     throw new Error('Something go wrong');

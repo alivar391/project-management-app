@@ -25,6 +25,9 @@ export const addTask = createAsyncThunk(
           },
         }
       );
+      if (response.status === 401) {
+        throw new Error(`Unauthorized!`);
+      }
       const data = await response.json();
       return data;
     } catch {
@@ -53,6 +56,9 @@ export const updateTask = createAsyncThunk(
           },
         }
       );
+      if (response.status === 401) {
+        throw new Error(`Unauthorized!`);
+      }
       const data = await response.json();
       return data;
     } catch {
@@ -74,6 +80,9 @@ export const deleteTask = createAsyncThunk(
           },
         }
       );
+      if (response.status === 401) {
+        throw new Error(`Unauthorized!`);
+      }
       const data = await response.json();
       return data;
     } catch {
@@ -90,6 +99,9 @@ export const getAllTask = createAsyncThunk('tasks/all', async () => {
         Authorization: `Bearer ${TOKEN()}`,
       },
     });
+    if (response.status === 401) {
+      throw new Error(`Unauthorized!`);
+    }
     const data = await response.json();
     return data;
   } catch {

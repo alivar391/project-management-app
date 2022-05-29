@@ -30,7 +30,7 @@ export function BoardPage() {
   const { boardId } = useParams();
   const token = localStorage.getItem('token') as string;
   const dispatch = useAppDispatch();
-  const { board, isLoading } = useAppSelector((state) => state.oneBoard);
+  const { board, isLoading, badToken } = useAppSelector((state) => state.oneBoard);
   const { boards } = useAppSelector((state) => state.boards);
   const { t } = useTranslation();
 
@@ -81,6 +81,10 @@ export function BoardPage() {
       return null;
     }
   };
+
+  if (badToken) {
+    return <Navigate to="/welcome" state={{ from: location }} />;
+  }
 
   if (boards.find((board: IBoard) => board.id === boardId)) {
     return (
