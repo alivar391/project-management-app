@@ -35,7 +35,13 @@
 .list-search p {
     color: black;
 }
-
+.list div, .list p {
+    font-size: 12px;
+}
+.list p {
+   font-size: 14px; 
+   color: rgb(250, 109, 109)
+}
 .header-list {
     display: flex;
     justify-content: space-between;
