@@ -76,7 +76,11 @@
     "No boards yet,": "Еще нет досок,",
     "create a new one": "создай новую",
     "Create a board": "Создать доску",
-    "Create": "Создать"
+    "Create": "Создать",
+    "Task placeholder": "Поиск задач",
+    "Task title": "Название",
+    "Task description": "Описание",
+    "Task search": "Задач не найдено"
   },
   "modal" : {
     "Back": "Назад",

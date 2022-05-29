@@ -76,7 +76,11 @@
     "No boards yet,": "No boards yet,",
     "create a new one": "create a new one",
     "Create a board": "Create a board",
-    "Create": "Create"
+    "Create": "Create",
+    "Task placeholder": "Search task",
+    "Task title": "Title",
+    "Task description": "Description",
+    "Task search": "Tasks not found"
   },
   "modal" : {
     "Back": "Back",

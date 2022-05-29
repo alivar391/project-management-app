@@ -34,7 +34,7 @@ export const SignUpPage = () => {
     formState: { errors },
     watch,
   } = useForm<IForm>({
-    mode: 'onChange',
+    mode: 'onSubmit',
   });
 
   const password = useRef('');

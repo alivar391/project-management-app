@@ -18,7 +18,6 @@
 .header.active {
   height: 60px;
   background-image: linear-gradient(to left, #04befe, #002e69, #25aae1, #01348b);
-  opacity: 0.8;
   box-shadow:20px 20px 50px #01348b;
 }
 
@@ -78,21 +77,33 @@
   align-items: center;
   margin: 5px;
   padding: 10px;
-  background-color: #011936;
+  background-image: linear-gradient(to right, #001d3f, #1447a0, #010044, #0e53bb);
+  background-size: 300% 100%;
   border-radius: 5px;
+  transition: all .4s ease-in-out;
+}
+.header__action-button:hover {
+  background-position: 100% 0;
+  transition: all .4s ease-in-out;  
 }
 .header__action-button.header__username{
   background-color: transparent;
 }
 .link__board {
-  border-radius: 5px;
-  background-color: #011936;
   color: white;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-weight: 600;
   cursor: pointer;
   padding: 10px;
   font-size: 18px;
+  border-radius: 5px;
+  background-image: linear-gradient(to right, #001d3f, #1447a0, #010044, #0e53bb);
+  background-size: 300% 100%;
+  transition: all .4s ease-in-out;
+}
+.link__board:hover {
+  background-position: 100% 0;
+  transition: all .4s ease-in-out;  
 }
 @media (max-width: 400px) {
   .header__action-button {

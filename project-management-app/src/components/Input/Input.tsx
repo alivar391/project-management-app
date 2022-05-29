@@ -41,7 +41,7 @@ const Input = ({
         <span
           className="error-span"
           data-testid="error"
-          style={{ color: 'red', display: 'block', width: '70%' }}
+          style={{ color: 'red', display: 'inline-block', width: '70%' }}
         >
           {errors?.[nameInput]?.message}
           {errors?.[nameInput]?.type === 'validate' && 'Passwords do not match'}
