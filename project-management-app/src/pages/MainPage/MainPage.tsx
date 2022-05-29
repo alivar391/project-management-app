@@ -45,7 +45,7 @@ export function MainPage() {
   useEffect(() => {
     dispatch(getBoards());
     dispatch(getAllTask());
-  }, [badToken]);
+  }, []);
 
   function makeBoards(boards: Array<IBoard>) {
     return boards.map((board: IBoard) => (
