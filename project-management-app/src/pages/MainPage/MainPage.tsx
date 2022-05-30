@@ -72,7 +72,7 @@ export function MainPage() {
   function createNewBoard({ title, description }: IInfo) {
     const board = {
       title: title || '',
-      description: description || 'No description',
+      description: description || ' ',
     };
     dispatch(createBoard(board));
   }
@@ -82,55 +82,53 @@ export function MainPage() {
   }
 
   return (
-    <div>
-      <div className="main">
-        <div className="main__header">
-          <div className="main__header-inner">
-            <span className="main__title">
-              {t(`mainPage.${getTimeOfDay(new Date().getHours())}`)}
-              {`, ${userName}` || 'user'}!
-            </span>
-            <Button
-              className="main__btn"
+    <div className="main">
+      <div className="main__header">
+        <div className="main__header-inner">
+          <span className="main__title">
+            {t(`mainPage.${getTimeOfDay(new Date().getHours())}`)}
+            {`, ${userName}` || 'user'}!
+          </span>
+          <Button
+            className="main__btn"
+            onClick={() =>
+              openModal(
+                'BigFormModal',
+                t('mainPage.Create a board'),
+                createNewBoard,
+                t('mainPage.Create')
+              )
+            }
+          >
+            {t('mainPage.Create board')}
+          </Button>
+        </div>
+      </div>
+      <SearchBar />
+      <div className="main__cont">
+        <ScrollButton />
+        {isLoading ? (
+          <Spinner />
+        ) : makeBoards(boards).length ? (
+          makeBoards(boards)
+        ) : (
+          <p>
+            {t('mainPage.No boards yet,')}
+            <span
               onClick={() =>
                 openModal(
-                  'FormModal',
+                  'BigFormModal',
                   t('mainPage.Create a board'),
                   createNewBoard,
                   t('mainPage.Create')
                 )
               }
             >
-              {t('mainPage.Create board')}
-            </Button>
-          </div>
-        </div>
-        <SearchBar />
-        <div className="main__cont">
-          <ScrollButton />
-          {isLoading ? (
-            <Spinner />
-          ) : makeBoards(boards).length ? (
-            makeBoards(boards)
-          ) : (
-            <p>
-              {t('mainPage.No boards yet,')}
-              <span
-                onClick={() =>
-                  openModal(
-                    'FormModal',
-                    t('mainPage.Create a board'),
-                    createNewBoard,
-                    t('mainPage.Create')
-                  )
-                }
-              >
-                {t('mainPage.create a new one')}
-              </span>
-              ?
-            </p>
-          )}
-        </div>
+              {t('mainPage.create a new one')}
+            </span>
+            ?
+          </p>
+        )}
       </div>
     </div>
   );

@@ -18,7 +18,7 @@ export function Board({ board, openModal }: IProps) {
   function updateNewBoard({ title, id, description }: IInfo) {
     const board = {
       title: title || '',
-      description: description || 'No description',
+      description: description || ' ',
       id,
     };
     dispatch(updateBoard(board));
@@ -39,7 +39,7 @@ export function Board({ board, openModal }: IProps) {
           className="icon-button"
           onClick={() =>
             openModal(
-              'FormModal',
+              'BigFormModal',
               t('board.Change a board'),
               updateNewBoard,
               t('board.Update'),
