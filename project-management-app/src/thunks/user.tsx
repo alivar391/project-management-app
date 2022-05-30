@@ -3,7 +3,7 @@ import { BASE_URL } from '../constants/constants';
 import { IUser } from '../pages/SignUpPage/SignUpPage';
 import { TOKEN } from '../constants/constants';
 import { toast } from 'react-toastify';
-import { setSuccesDelete, setToken } from '../reducers/userReducer';
+import { setSuccesDelete, setToken, setUserInfo } from '../reducers/userReducer';
 
 export interface ILogin {
   login: string;
@@ -50,7 +50,7 @@ export const authUser = createAsyncThunk('user/auth', async (login: ILogin) => {
 
 export const updateUser = createAsyncThunk(
   'user/update',
-  async (params: { userId: string; newUser: IUser; token: string }) => {
+  async (params: { userId: string; newUser: IUser; token: string }, { dispatch }) => {
     try {
       const response = await fetch(`${BASE_URL}/users/${params.userId}`, {
         method: 'PUT',
@@ -62,6 +62,10 @@ export const updateUser = createAsyncThunk(
       });
       if (response.status === 404) {
         throw new Error('User was not founded!');
+      }
+      if (response.status === 200) {
+        dispatch(authUser({ login: params.newUser.login, password: params.newUser.password }));
+        dispatch(setUserInfo({ login: params.newUser.login, password: params.newUser.password }));
       }
       const data = await response.json();
       return data;

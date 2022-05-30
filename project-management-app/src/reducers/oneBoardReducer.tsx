@@ -25,6 +25,7 @@ export type BoardState = {
     columns: IColumn[];
   };
   isLoading: boolean;
+  badToken: boolean;
 };
 
 const initialState: BoardState = {
@@ -34,12 +35,18 @@ const initialState: BoardState = {
     columns: [],
   },
   isLoading: false,
+  badToken: false,
 };
 
 const oneBoardReducer = createSlice({
   name: 'oneBoard',
   initialState,
-  reducers: {},
+  reducers: {
+    setBadToken(state) {
+      state.badToken = true;
+      localStorage.clear();
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getBoard.fulfilled, (state, action) => {
@@ -80,3 +87,4 @@ const oneBoardReducer = createSlice({
 });
 
 export default oneBoardReducer.reducer;
+export const { setBadToken } = oneBoardReducer.actions;

@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 import { getBoards, createBoard, updateBoard, deleteBoard } from '../thunks/boards';
 import { getAllTask } from '../thunks/task';
 import { ITask } from './oneBoardReducer';
@@ -18,18 +19,26 @@ export type StateType = {
   boards: Array<IBoard>;
   tasks: Array<ITask>;
   isLoading: boolean;
+  badToken: boolean;
 };
 
 const initialState = {
   boards: [],
   tasks: [],
   isLoading: false,
+  badToken: false,
 };
 
 const boardReduser = createSlice({
   name: 'boards',
   initialState,
-  reducers: {},
+  reducers: {
+    setBadToken(state) {
+      toast.error('Token is not valid');
+      state.badToken = true;
+      localStorage.clear();
+    },
+  },
   extraReducers: {
     [getBoards.fulfilled.type]: (state: StateType, action) => {
       state.boards = [...action.payload];
@@ -86,3 +95,4 @@ const boardReduser = createSlice({
 });
 
 export default boardReduser.reducer;
+export const { setBadToken } = boardReduser.actions;

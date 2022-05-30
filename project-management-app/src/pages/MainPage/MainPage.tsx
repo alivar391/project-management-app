@@ -23,6 +23,7 @@ import { ScrollButton } from '../../components/ScrollButton/ScrollBtn';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { getAllTask } from '../../thunks/task';
 import './main-page.css';
+import { Navigate } from 'react-router-dom';
 
 export type IOpenModalFunction = (
   modalName: string,
@@ -34,7 +35,7 @@ export type IOpenModalFunction = (
 
 export function MainPage() {
   const dispatch = useAppDispatch();
-  const { boards, isLoading } = useAppSelector((store) => store.boards);
+  const { boards, isLoading, badToken } = useAppSelector((store) => store.boards);
   const token = TOKEN() as string;
   let userName = 'user';
   if (token) {
@@ -74,6 +75,10 @@ export function MainPage() {
       description: description || ' ',
     };
     dispatch(createBoard(board));
+  }
+
+  if (badToken) {
+    return <Navigate to="/welcome" state={{ from: location }} />;
   }
 
   return (
