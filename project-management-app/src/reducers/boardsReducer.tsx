@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 import { getBoards, createBoard, updateBoard, deleteBoard } from '../thunks/boards';
 import { getAllTask } from '../thunks/task';
 import { ITask } from './oneBoardReducer';
@@ -31,7 +32,13 @@ const initialState = {
 const boardReduser = createSlice({
   name: 'boards',
   initialState,
-  reducers: {},
+  reducers: {
+    setBadToken(state) {
+      toast.error('Token is not valid');
+      state.badToken = true;
+      localStorage.clear();
+    },
+  },
   extraReducers: {
     [getBoards.fulfilled.type]: (state: StateType, action) => {
       state.boards = [...action.payload];
@@ -42,8 +49,6 @@ const boardReduser = createSlice({
     },
     [getBoards.rejected.type]: (state: StateType) => {
       state.isLoading = false;
-      localStorage.clear();
-      state.badToken = true;
     },
     [createBoard.fulfilled.type]: (state: StateType, action) => {
       state.boards.push(action.payload);
@@ -54,8 +59,6 @@ const boardReduser = createSlice({
     },
     [createBoard.rejected.type]: (state: StateType) => {
       state.isLoading = false;
-      localStorage.clear();
-      state.badToken = true;
     },
     [updateBoard.fulfilled.type]: (state: StateType, action) => {
       state.isLoading = false;
@@ -67,8 +70,6 @@ const boardReduser = createSlice({
     },
     [updateBoard.rejected.type]: (state: StateType) => {
       state.isLoading = false;
-      localStorage.clear();
-      state.badToken = true;
     },
     [deleteBoard.fulfilled.type]: (state: StateType, action) => {
       state.boards = [...action.payload];
@@ -79,8 +80,6 @@ const boardReduser = createSlice({
     },
     [deleteBoard.rejected.type]: (state: StateType) => {
       state.isLoading = false;
-      localStorage.clear();
-      state.badToken = true;
     },
     [getAllTask.fulfilled.type]: (state: StateType, action) => {
       state.tasks = action.payload;
@@ -91,10 +90,9 @@ const boardReduser = createSlice({
     },
     [getAllTask.rejected.type]: (state: StateType) => {
       state.isLoading = false;
-      localStorage.clear();
-      state.badToken = true;
     },
   },
 });
 
 export default boardReduser.reducer;
+export const { setBadToken } = boardReduser.actions;

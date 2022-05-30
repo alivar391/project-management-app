@@ -41,7 +41,12 @@ const initialState: BoardState = {
 const oneBoardReducer = createSlice({
   name: 'oneBoard',
   initialState,
-  reducers: {},
+  reducers: {
+    setBadToken(state) {
+      state.badToken = true;
+      localStorage.clear();
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getBoard.fulfilled, (state, action) => {
@@ -53,8 +58,6 @@ const oneBoardReducer = createSlice({
       })
       .addCase(getBoard.rejected, (state) => {
         state.isLoading = false;
-        localStorage.clear();
-        state.badToken = true;
       })
       .addCase(addTask.fulfilled, () => {})
       .addCase(addTask.rejected, (state) => {
@@ -68,8 +71,6 @@ const oneBoardReducer = createSlice({
       })
       .addCase(updateColumn.rejected, (state) => {
         state.isLoading = false;
-        localStorage.clear();
-        state.badToken = true;
       })
       .addCase(updateTask.fulfilled, (state) => {
         state.isLoading = false;
@@ -79,8 +80,6 @@ const oneBoardReducer = createSlice({
       })
       .addCase(updateTask.rejected, (state) => {
         state.isLoading = false;
-        localStorage.clear();
-        state.badToken = true;
       })
       .addCase(deleteTask.fulfilled, () => {})
       .addCase(deleteTask.rejected, () => {});
@@ -88,3 +87,4 @@ const oneBoardReducer = createSlice({
 });
 
 export default oneBoardReducer.reducer;
+export const { setBadToken } = oneBoardReducer.actions;
