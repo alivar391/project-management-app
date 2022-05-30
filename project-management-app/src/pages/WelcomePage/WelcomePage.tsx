@@ -1,10 +1,12 @@
 import { useTranslation } from 'react-i18next';
+import { ScrollButton } from '../../components/ScrollButton/ScrollBtn';
 import './welcomePage.css';
 export function WelcomePage() {
   const { t } = useTranslation();
   return (
     <div className="welcome__page-bg">
       <div className="welcome__page">
+        <ScrollButton />
         <h1 className="welcome__title">{t('welcomePage.Productivity Planner')}</h1>
         <h3 className="welcome__subtitle">
           {t('welcomePage.Set goals and actually conquer them')}

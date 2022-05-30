@@ -10,8 +10,8 @@
 }
 .main__header {
   align-items: center;
-  min-height: 100px;
-  padding: 10px;
+  min-height: 80px;
+  padding: 20px 10px 0;
 }
 .main__header-inner {
   max-width: 70%;
@@ -49,11 +49,6 @@
   padding: 20px 10px;
   max-width: 70%;
   margin: 0 auto;
-}
-@media (max-width: 1000px) {
-  .main__cont {
-    justify-content: center;
-  }
 }
 
 .main__cont span {
@@ -127,10 +122,14 @@
   width: 25px;
 }
 
-@media (max-width: 706px) {
+@media (max-width: 1000px) {
   .main__cont {
     justify-content: center;
+    max-width: 90%;
   }
+}
+
+@media (max-width: 790px) {
   .board__view {
     width: 350px;
     height: 300px;
