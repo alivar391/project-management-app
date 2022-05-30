@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useTranslation } from 'react-i18next';
@@ -21,6 +21,7 @@ import { getBoard } from '../../thunks/board';
 import { addColumn } from '../../thunks/column';
 import { IBoard } from '../../reducers/boardsReducer';
 import './boardPage.css';
+import { getBoards } from '../../thunks/boards';
 
 interface IBoardInfo {
   id: string | undefined;
@@ -33,12 +34,18 @@ export function BoardPage() {
   const { board, isLoading, badToken } = useAppSelector((state) => state.oneBoard);
   const { boards } = useAppSelector((state) => state.boards);
   const { t } = useTranslation();
+  const [wrongRoute, setWrongRoute] = useState(false);
 
   useEffect(() => {
+    dispatch(getBoards());
+  }, []);
+
+  useEffect(() => {
+    if (boards.length === 0) return;
     if (boards.find((board: IBoard) => board.id === boardId) && token && boardId) {
       dispatch(getBoard({ boardId }));
-    }
-  }, []);
+    } else setWrongRoute(true);
+  }, [boards]);
 
   function openModal(
     modalName: string,
@@ -86,7 +93,7 @@ export function BoardPage() {
     return <Navigate to="/welcome" state={{ from: location }} />;
   }
 
-  if (boards.find((board: IBoard) => board.id === boardId)) {
+  if (!wrongRoute) {
     return (
       <div className="board-page__inner">
         <Button
